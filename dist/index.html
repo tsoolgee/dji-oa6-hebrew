@@ -1,0 +1,2168 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+<body>
+<title>אקשן 6 בעברית</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700;800&family=Saira+Extra+Condensed:wght@500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* פריסה: הסימולטור הוא הגיבור, פאנל הסבר צמוד לצידו, ומתחת מפת התפריטים המלאה. עולם אחד כהה, כמו גוף המצלמה. */
+:root{
+  --ink:#0d1316;        /* רקע הדף, פחם כחלחל */
+  --slab:#151e23;       /* משטחים */
+  --line:#26343c;
+  --body:#34444e;       /* גוף המצלמה */
+  --paper:#e8eef0;      /* טקסט */
+  --muted:#8c9ca5;
+  --ui:#ffcc00;         /* צבע הבחירה בממשק המצלמה */
+  --rec:#ff3b30;
+  --ok:#5fd18b; --mid:#e8b44a; --low:#e2786a;
+  --f-display:"Secular One","Assistant",system-ui,sans-serif;
+  --f-body:"Assistant",system-ui,"Segoe UI",Arial,sans-serif;
+  --f-cam:"Barlow Semi Condensed","Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--ink);color:var(--paper);direction:rtl}
+body{font-family:var(--f-body);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+button:focus-visible,input:focus-visible{outline:2px solid var(--ui);outline-offset:2px}
+.wrap{max-width:1180px;margin-inline:auto}
+small{font-size:.72em}
+
+/* כותרת */
+header.top{display:flex;align-items:center;gap:24px;padding-block:28px 12px;flex-wrap:wrap}
+header.top img{width:min(210px,40vw);filter:drop-shadow(0 18px 24px rgb(0 0 0/.55))}
+header.top .t{min-width:0;flex:1 1 320px}
+header.top .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--muted);direction:ltr;text-align:right}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,5.6vw,58px);line-height:1.05;margin:4px 0 8px;text-wrap:balance}
+h1 span{color:var(--ui)}
+header.top p{margin:0;color:var(--muted);max-width:62ch}
+
+/* אזור הסימולטור */
+.stage{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:28px;align-items:start;margin-top:18px}
+@media (max-width:900px){.stage{grid-template-columns:1fr}}
+.simcol{min-width:0;display:flex;flex-direction:column;gap:14px}
+
+/* גוף המצלמה, מבט מאחור */
+.cam{position:relative;width:100%;aspect-ratio:72.8/47.2;border-radius:9% / 13.5%;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(160deg,#4b4b4b 0%,#3a3a3a 38%,#2a2a2a 100%);
+  box-shadow:inset 0 2px 1px rgb(255 255 255/.18),inset 0 -6px 14px rgb(0 0 0/.45),0 30px 50px -20px rgb(0 0 0/.8);
+  padding:9.7% 18% 9.7% 4%;direction:ltr}
+.cam::after{content:"";position:absolute;inset:1.4%;border-radius:8% / 12.5%;border:1px solid rgb(255 255 255/.06);pointer-events:none}
+.bezel{container-type:inline-size;position:relative;width:100%;height:100%;background:#050708;border-radius:3.5% / 6%;padding:2% 2%;box-shadow:inset 0 0 0 1px #000,0 0 0 1px rgb(255 255 255/.05)}
+#screen{position:relative;width:100%;height:100%;overflow:hidden;border-radius:2.4% / 4.2%;background:#000;container-type:inline-size;
+  font-family:var(--f-cam);color:#fff;user-select:none;touch-action:none;-webkit-user-select:none}
+.phys{position:absolute;background:linear-gradient(#3d4c56,#222c32);box-shadow:inset 0 1px 0 rgb(255 255 255/.2),0 3px 6px rgb(0 0 0/.5)}
+.phys:active{filter:brightness(1.35)}
+.plab{font-family:var(--f-mono)}
+.brand{position:absolute;bottom:1.2%;left:6%;font-family:var(--f-cam);font-weight:600;font-size:clamp(7px,1.1vw,11px);letter-spacing:.3em;color:rgb(255 255 255/.28)}
+.hwlab{position:absolute;font-size:12px;color:var(--muted);white-space:nowrap;font-family:var(--f-body);direction:rtl}
+.hwlab.s{left:60%;top:-10%}
+.hwlab.q{left:-2%;top:42%;transform:translateX(-100%) translateX(8px);writing-mode:vertical-rl}
+@media (max-width:600px){.hwlab.q{display:none}}
+
+
+/* שתי הפנים של המצלמה */
+.djilogo{position:absolute;right:7.5%;top:50%;transform:translateY(-50%);font-family:var(--f-display);font-size:clamp(14px,2.6vw,24px);letter-spacing:-.02em;color:rgb(255 255 255/.28)}
+.battline{position:absolute;right:20.5%;top:8%;bottom:8%;width:1px;background:rgb(0 0 0/.35);box-shadow:1px 0 0 rgb(255 255 255/.06)}
+.camholder{width:100%;max-width:680px;margin-inline:auto}
+.bezel{display:grid;place-items:center}
+#scrwrap{position:relative;width:100%;aspect-ratio:712/400;max-height:100%}
+.sqb #scrwrap{aspect-ratio:1}
+#feed{position:absolute;left:0;top:0;width:100%;height:100%;display:block;transition:top .2s,height .2s}
+#ui{position:absolute;inset:0}
+#screen.lb16 #feed{top:21.875%;height:56.25%}
+.sh{left:60%;top:-3.6%;width:15%;height:5.2%;border-radius:40% 40% 10% 10%/100% 100% 20% 20%;background:linear-gradient(#e14a3f,#8e1e17)!important}
+.shf{left:20%;top:-3.6%;width:15%;height:5.2%;border-radius:40% 40% 10% 10%/100% 100% 20% 20%;background:linear-gradient(#e14a3f,#8e1e17)!important}
+.qsr{left:-1.7%;top:22%;width:2.6%;height:17%;border-radius:40% 0 0 40%/20% 0 0 20%}
+.qsf{right:-1.7%;top:22%;width:2.6%;height:17%;border-radius:0 40% 40% 0/0 20% 20% 0}
+.cam.front{padding:0}
+.fbez{position:absolute;left:8%;top:15%;width:31%;aspect-ratio:1}
+.bezel.sqb{border-radius:11%;padding:5%;--k:1.75}
+.lens{position:absolute;left:46%;top:22%;height:56%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,#1d2b36 0 44%,#0b1015 45% 54%,#3c4a54 55% 57%,#161e24 58% 68%,#56656f 69% 71%,#252e35 72% 100%);
+  box-shadow:0 6px 14px rgb(0 0 0/.5),inset 0 2px 2px rgb(255 255 255/.2)}
+.lens i{position:absolute;inset:22%;border-radius:50%;background:radial-gradient(circle at 36% 32%,rgb(160 200 255/.55) 0 6%,transparent 14%),radial-gradient(circle at 50% 50%,#0c1b2b 0 30%,#050a10 31% 60%,#10202e 61% 100%)}
+.lens span{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);font-family:var(--f-mono);font-size:clamp(6px,1vw,10px);color:rgb(255 255 255/.45);white-space:nowrap}
+.ctsens{position:absolute;left:33%;top:79%;width:3%;aspect-ratio:1;border-radius:50%;background:#0b0f12;box-shadow:inset 0 0 0 1px rgb(255 255 255/.15)}
+.flogo{position:absolute;left:8.4%;bottom:8%;font-family:var(--f-cam);font-weight:600;font-size:clamp(7px,1.2vw,12px);letter-spacing:.3em;color:rgb(255 255 255/.35)}
+.tools button span{white-space:nowrap}
+#infoT{display:none}
+
+/* מסך מלא: "בתוך המצלמה" */
+body.imm{overflow:hidden}
+body.imm header.top,body.imm .mapsec,body.imm footer,body.imm .opts{display:none}
+body.imm .stage{position:fixed;inset:0;z-index:40;margin:0;background:#000;display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 28px) 16px calc(env(safe-area-inset-bottom,0px) + 8px)}
+body.imm .simcol{width:min(100%,calc((100dvh - 120px) * 1.542));gap:10px}
+body.imm .camholder{max-width:none}
+body.imm .hwlab{display:none}
+body.imm #infoT{display:flex}
+body.imm #info{position:fixed;left:16px;bottom:16px;top:auto;width:min(420px,calc(100% - 32px));max-height:42dvh;overflow:auto;z-index:45;background:rgb(21 30 35/.95)}
+body.imm.noinfo #info{display:none}
+
+/* ===== גוף המצלמה: כיול 2 לפי שרטוט עמ' 6 (אחוז מרוחב/גובה הגוף) ===== */
+.cam{border-radius:7% / 10.8%;padding:6% 4.5%}
+.cam::after{border-radius:6.3% / 9.7%}
+.bezel{padding:7.8% 8.2%;border-radius:4% / 6.3%}
+.sh{left:58%;width:18%}
+.shf{left:24%;width:18%}
+.qsr{left:-1.7%;top:17%;width:2.6%;height:31%}
+.qsf{right:-1.7%;top:17%;width:2.6%;height:31%;z-index:3}
+.hwlab.s{left:62%}
+.cam.front{padding:0;container-type:inline-size}
+.fbez{left:5%;top:6.5%;width:44%}
+.bezel.sqb{padding:10%;border-radius:8%}
+.lens{left:48.5%;top:12.5%;height:71%;z-index:2}
+.ctsens{left:37.5%;top:79.5%;width:11%;height:9.5%;aspect-ratio:auto;border-radius:999px}
+.fmic{position:absolute;left:34.5%;top:84%;width:1.6%;aspect-ratio:1;border-radius:50%;background:#000}
+.flogo{left:6%;bottom:11%;font-family:var(--f-cam);font-size:calc(6.4cqw * var(--k));font-weight:800;letter-spacing:.02em;color:rgb(255 255 255/.7)}
+.fsix{position:absolute;left:83%;bottom:6%;font-family:var(--f-display);font-weight:800;font-size:calc(8cqw * var(--k));line-height:1;color:rgb(255 255 255/.7)}
+@media (max-width:600px){.cam{padding:6% 4.5%}.bezel{padding:7.8% 8.2%}}
+
+/* מסך פתיחה וכפתור ••• */
+#screen .boot{position:absolute;inset:0;background:#000;display:grid;place-items:center;font-family:var(--f-body);font-weight:800;font-size:calc(9cqw * var(--k));letter-spacing:.06em;color:#fff}
+.qsedit .dots3{font-size:calc(4cqw * var(--k));letter-spacing:-.1em;line-height:1;color:#fff}
+.phys{background:linear-gradient(#444,#2a2a2a)}
+
+/* פקדי החלקה */
+.pad{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+.pad button{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--slab);border-radius:999px;padding:7px 14px;font-size:14px}
+.pad button:hover{border-color:var(--muted)}
+.pad .ic{width:16px;height:16px}
+.pad .crumb{font-size:13px;color:var(--muted);padding-inline:6px}
+.pad .crumb b{color:var(--paper);font-weight:600}
+.opts{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.opts label{display:flex;gap:6px;align-items:center;cursor:pointer}
+
+/* פאנל הסבר */
+#info{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--slab);border:1px solid var(--line);border-radius:14px;padding:20px 22px;min-width:0}
+.ihead{display:flex;gap:14px;align-items:center}
+.iic{flex:none;width:52px;height:52px;border-radius:12px;background:#000;display:grid;place-items:center;color:#fff}
+.iic .ic{width:30px;height:30px}
+.ihead small{display:block;font-family:var(--f-cam);font-size:13px;color:var(--muted);text-align:right}
+.ihead h3{font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1.15;margin:0}
+#info p{margin:12px 0 0;max-width:60ch}
+#info .how,#info .def{font-size:14px;color:var(--muted)}
+#info .how span,#info .def span{display:inline-block;margin-inline-end:8px;color:var(--ui);font-weight:700}
+.iopts h4{margin:16px 0 6px;font-size:13px;letter-spacing:.04em;color:var(--muted);font-weight:700}
+.iopts ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.iopts li,.iopts li button{display:flex;flex-direction:column;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:15px;line-height:1.25;text-align:right}
+.iopts li:has(button){border:0;padding:0}
+.iopts li button:hover{border-color:var(--ui)}
+.iopts li span{font-family:var(--f-cam);font-size:11px;color:var(--muted)}
+.iopts li.cur{border-color:var(--ui);background:rgb(255 210 63/.08)}
+.conf{font-size:12px!important;display:inline-flex;align-items:center;gap:6px}
+.conf::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.conf.ok{color:var(--ok)}.conf.mid{color:var(--mid)}.conf.low{color:var(--low)}
+
+/* ---------- ממשק המצלמה, לפי איורי המדריך (מידות יחסיות לרוחב המסך) ---------- */
+#screen .ic{width:5cqw;height:5cqw;flex:none}
+#screen .num{font-family:var(--f-cam);font-weight:700;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+#screen .lb{display:flex;flex-direction:column;align-items:flex-start;line-height:1.08;min-width:0}
+#screen .lb small{font-family:var(--f-cam);font-size:calc(2.4cqw * var(--k));color:rgb(255 255 255/.62);font-weight:600;letter-spacing:.01em}
+#screen .lb b{font-family:var(--f-body);font-size:calc(3.5cqw * var(--k));font-weight:700;direction:rtl}
+/* מצב "מקור": רק אנגלית, בגודל מלא, כמו במצלמה */
+#screen.orig .lb b,#screen.orig .cap{display:none!important}
+#screen.orig .lb small{font-size:calc(3.6cqw * var(--k));color:#fff}
+#screen.orig .tlab{display:none}
+.gridov{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent calc(33.33% - .5px),rgb(255 255 255/.45) calc(33.33% - .5px),rgb(255 255 255/.45) calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.66% - .5px),rgb(255 255 255/.45) calc(66.66% - .5px),rgb(255 255 255/.45) calc(66.66% + .5px),transparent calc(66.66% + .5px)),linear-gradient(180deg,transparent calc(33.33% - .5px),rgb(255 255 255/.45) calc(33.33% - .5px),rgb(255 255 255/.45) calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.66% - .5px),rgb(255 255 255/.45) calc(66.66% - .5px),rgb(255 255 255/.45) calc(66.66% + .5px),transparent calc(66.66% + .5px))}
+.diagov{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top right,transparent calc(50% - .5px),rgb(255 255 255/.4) 50%,transparent calc(50% + .5px)),linear-gradient(to bottom right,transparent calc(50% - .5px),rgb(255 255 255/.4) 50%,transparent calc(50% + .5px))}
+
+/* מסך הצילום: 8 המיקומים מהאיור בעמוד 15 */
+.ov{position:absolute;display:flex;align-items:center;gap:1.2cqw;white-space:nowrap;font-size:calc(3.6cqw * var(--k));color:#fff;text-shadow:0 0 .5cqw rgb(0 0 0/.9),0 0 1.4cqw rgb(0 0 0/.55);padding:.8cqw 1cqw;border-radius:1.4cqw}
+.ov .ic{filter:drop-shadow(0 0 .4cqw rgb(0 0 0/.85)) drop-shadow(0 0 1cqw rgb(0 0 0/.45))}
+.ov:hover{background:rgb(0 0 0/.22)}
+.ov.p1{left:2cqw;top:2cqw}
+.ov.p1 .ic{width:5.6cqw;height:5.6cqw}
+.ov.p2{left:2cqw;top:50%;transform:translateY(-50%)}
+.ov.p2 .ic{width:5.8cqw;height:5.8cqw}
+.ov.p3{left:2cqw;bottom:2cqw}
+.ov.p3 .ic{width:6.4cqw;height:6.4cqw}
+.ov.p4{right:2cqw;top:2cqw}
+.batt{position:relative;box-shadow:0 0 .8cqw rgb(0 0 0/.6),inset 0 0 .8cqw rgb(0 0 0/.35);display:inline-grid;place-items:center;min-width:7.4cqw;height:4.4cqw;border:.45cqw solid #fff;border-radius:1cqw;padding:0 .6cqw;font-size:calc(2.9cqw * var(--k));line-height:1}
+.batt::after{content:"";position:absolute;right:-1.2cqw;top:50%;width:.7cqw;height:1.8cqw;transform:translateY(-50%);background:#fff;border-radius:0 .4cqw .4cqw 0}
+.ov.p5{right:2cqw;top:50%;transform:translateY(-50%)}
+.ov.p5 .ic{width:6.4cqw;height:6.4cqw}
+.ov.p6{right:2cqw;top:65%;transform:translateY(-50%);font-size:calc(3.8cqw * var(--k))}
+.ov.p6 sup{font-family:var(--f-cam);font-weight:700;font-size:calc(2.2cqw * var(--k));color:var(--ui);margin-left:-.6cqw}
+.ov.p7{left:50%;bottom:2cqw;transform:translateX(-50%);font-size:calc(4.1cqw * var(--k))}
+.ov.p8{right:2cqw;bottom:2cqw}
+.zb{display:inline-grid;place-items:center;min-width:5.4cqw;height:5.4cqw;border:.4cqw solid #fff;border-radius:1.2cqw;font-size:calc(3cqw * var(--k));padding:0 .5cqw}
+.ov.tc{left:50%;top:2cqw;transform:translateX(-50%);background:rgb(0 0 0/.45);font-size:calc(3.8cqw * var(--k))}
+.ov.rec .dot{width:2.2cqw;height:2.2cqw;border-radius:50%;background:var(--rec);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+.ov.tcb{left:50%;top:2cqw;transform:translateX(-50%)}
+.badge{background:rgb(0 0 0/.5);font-family:var(--f-cam);font-weight:700;font-size:calc(2.8cqw * var(--k));color:var(--ui)}
+.ov.tcode{left:50%;top:9cqw;transform:translateX(-50%);font-size:calc(2.8cqw * var(--k))}
+/* תוויות תרגום צהובות צמודות לכל סמל */
+.cap{position:absolute;font-style:normal;font-family:var(--f-body);font-weight:700;font-size:calc(2.3cqw * var(--k));color:#111;background:var(--ui);padding:.1cqw .9cqw;border-radius:.7cqw;white-space:nowrap;text-shadow:none;pointer-events:none;direction:rtl;line-height:1.45}
+.cap.below{left:0;top:100%;margin-top:.3cqw}.cap.below.r{left:auto;right:0}
+.cap.above{left:50%;bottom:100%;transform:translateX(-50%);margin-bottom:.3cqw}.cap.above.r{left:auto;right:0;transform:none}.cap.above.l{left:0;transform:none}
+.cap.side{left:100%;top:50%;transform:translateY(-50%);margin-left:.6cqw}
+.cap.side.r{left:auto;right:100%;margin:0 .6cqw 0 0}
+.pulse{animation:pulse 1.2s ease 2}
+@keyframes pulse{50%{box-shadow:0 0 0 .8cqw var(--ui);background:rgb(255 210 63/.25)}}
+
+/* ידית (הפס הקטן למעלה/למטה) */
+.handle{position:absolute;left:50%;transform:translateX(-50%);width:10cqw;height:.9cqw;border-radius:1cqw;background:rgb(255 255 255/.45)}
+.handle.top{top:1.4cqw}.handle.bot{bottom:1.6cqw}
+
+/* בורר מצבים */
+.modes{position:absolute;inset:0;background:rgb(0 0 0/.82);display:flex;flex-direction:column;justify-content:center}
+.mtrack{position:relative;height:42%}
+.mitem{position:absolute;left:50%;top:50%;width:25cqw;transform:translate(calc(-50% + var(--d) * 26cqw),-50%) scale(calc(1 - min(abs(var(--d)),2) * .14));opacity:calc(1 - min(abs(var(--d)),3) * .3);
+  display:flex;flex-direction:column;align-items:center;gap:1.2cqw;padding:2cqw 1cqw;border-radius:2.4cqw;transition:transform .25s,opacity .25s}
+.mitem .lb{align-items:center!important;text-align:center}
+.mitem.on{color:var(--ui)}
+.mitem.on .lb small,.mitem.on .lb b{color:var(--ui)!important}
+.mitem .ic{width:9cqw!important;height:9cqw!important}
+.mhint{position:absolute;bottom:2.5cqw;left:0;right:0;display:flex;justify-content:center}
+.mhint .lb{align-items:center!important}
+.mhint .lb small{font-size:calc(2.1cqw * var(--k))!important}.mhint .lb b{font-size:calc(2.6cqw * var(--k))!important;font-weight:600!important;color:rgb(255 255 255/.8)}
+
+/* לוח הפרמטרים (עמ' 16): שלושה אריחים, גלגלים, הערת 50Hz */
+.params{position:absolute;inset:0;background:#000;display:flex;flex-direction:column;padding:4cqw 3.2cqw 1.6cqw}
+.ptiles{display:grid;grid-template-columns:1fr .75fr 1fr;gap:3cqw}
+.ptile{position:relative;height:8.4cqw;border-radius:2.2cqw;background:#1d2022;display:flex;align-items:center;justify-content:center;gap:1.6cqw;font-size:calc(4.2cqw * var(--k));color:#fff}
+.ptile .ic{width:6cqw;height:6cqw}
+.ptile.empty{background:transparent}
+.ptile:hover{background:#272b2e}
+.ptile .sep{width:.3cqw;height:3.6cqw;background:rgb(255 255 255/.45);font-style:normal}
+.ptile .cap.below{left:50%;transform:translateX(-50%)}
+.ptile:first-child .cap.below{left:0;transform:none}.ptile:last-child .cap.below{left:auto;right:0;transform:none}
+.pbody{flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;justify-content:center;gap:.8cqw;padding-top:3cqw}
+.wsec{display:flex;flex-direction:column;align-items:center;gap:.6cqw}
+.wlab .lb{align-items:center!important;flex-direction:row!important;gap:1.2cqw}
+.wlab .lb small{font-size:calc(3.2cqw * var(--k))!important;color:rgb(255 255 255/.72)!important;font-family:var(--f-cam)}
+.wlab .lb b{font-size:calc(2.6cqw * var(--k))!important;color:#111;background:var(--ui);padding:0 .9cqw;border-radius:.7cqw}
+.wheel{width:100%;overflow:hidden;position:relative;-webkit-mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.wtrack{display:flex;gap:6.5cqw;width:max-content;transition:transform .22s ease}
+.wv{font-size:calc(6.6cqw * var(--k));line-height:1.15;color:#fff;padding:0 .4cqw}
+.wv.on{color:var(--ui)}
+.wdiv{height:.25cqw;margin:1cqw 16%;background:linear-gradient(90deg,transparent,rgb(255 255 255/.25),transparent)}
+.pnote{display:flex;align-items:center;justify-content:center;gap:1.6cqw;position:relative;padding-top:1cqw;font-size:calc(3.1cqw * var(--k));color:rgb(255 255 255/.72)}
+.pnote b{font-family:var(--f-body);font-size:calc(2.4cqw * var(--k));color:#111;background:var(--ui);padding:0 .9cqw;border-radius:.7cqw}
+.pinfo{position:absolute;right:0;bottom:0;color:rgb(255 255 255/.8)}
+.pinfo .ic{width:5.4cqw!important;height:5.4cqw!important}
+
+/* מרכז הבקרה (עמ' 18): אריחים עם אייקון בלבד */
+.cc{position:absolute;inset:0;background:#000;display:flex;flex-direction:column;padding:3.6cqw 5cqw 4.4cqw}
+.dots{display:flex;gap:2cqw;justify-content:center;padding-bottom:1.4cqw}
+.dots i{width:1.6cqw;height:1.6cqw;border-radius:50%;background:rgb(255 255 255/.35)}
+.dots i.on{background:#fff}
+.tiles{flex:1;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:1.6cqw 4cqw;align-items:start;align-content:center}
+.ccell{display:flex;flex-direction:column;align-items:center;gap:.8cqw;min-width:0}
+.tile{width:15cqw;aspect-ratio:1;border-radius:3.4cqw;background:#1b1e20;display:grid;place-items:center;color:#fff;transition:background .15s}
+.tile .ic{width:7.6cqw!important;height:7.6cqw!important}
+.tile:hover{background:#262a2d}
+.tile.on{background:#fff;color:#000}
+.tlab{align-items:center!important;text-align:center}
+.tlab small{font-size:calc(1.9cqw * var(--k))!important}.tlab b{font-size:calc(2.5cqw * var(--k))!important}
+/* אחסון (עמ' 20): תאריך, שלושה כרטיסים וטבעות */
+.sdate{text-align:center;font-size:calc(3.6cqw * var(--k));color:#fff;padding-bottom:2cqw}
+.scards{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.4cqw}
+.scard{position:relative;border-radius:2.4cqw;background:#1b1e20;border:.35cqw solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:visible}
+.scard .shead{width:100%;padding:.8cqw 0;border-radius:2cqw 2cqw 0 0;background:#3a3f43;font-size:calc(3cqw * var(--k));color:#fff}
+.scard.on{border-color:var(--ui)}
+.scard.on .shead{background:var(--ui);color:#111}
+.ring{margin:auto;width:17cqw;aspect-ratio:1;border-radius:50%;display:grid;place-content:center;text-align:center;line-height:1.05;
+  background:radial-gradient(closest-side,#1b1e20 80%,transparent 81%),conic-gradient(#e8e8e8 calc(var(--p) * 360deg),#4a4f53 0)}
+.ring .big{font-size:calc(3.4cqw * var(--k));color:#fff}.ring .small{font-size:calc(2.2cqw * var(--k));color:rgb(255 255 255/.55)}
+.scard.fmt{justify-content:center;font-size:calc(3.6cqw * var(--k));color:#fff}
+.scard .cap.below{left:50%;top:auto;bottom:1cqw;transform:translateX(-50%)}
+
+/* רשימות והגדרות */
+.list{position:absolute;inset:0;background:#000;display:flex;flex-direction:column}
+.lhead{display:flex;align-items:center;justify-content:space-between;gap:1.6cqw;padding:1.8cqw 2.4cqw}
+.lhead>.lb{align-items:center!important;text-align:center}
+.lhead .lb small{font-size:calc(3cqw * var(--k))!important;color:#fff!important}
+.lhead .lb b{font-size:calc(3.2cqw * var(--k))!important}
+.bk{flex:none;width:6.4cqw;height:6.4cqw;display:grid;place-items:center;border-radius:50%;background:#1d2022}
+.bk.ghost{background:none}
+.lbody{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#444 transparent;padding:0 2.4cqw 2cqw}
+.row{width:100%;display:flex;align-items:center;gap:2.4cqw;padding:1.6cqw 2.4cqw;margin-bottom:1cqw;border-radius:2cqw;background:#15181a;text-align:left}
+.row:hover{background:#1f2326}
+.row>.ic{opacity:.95}
+.row .lb{flex:1}
+.row.on .lb b,.row.on .lb small{color:var(--ui)!important}
+.row.danger .lb small,.row.danger .lb b{color:#ff8a80!important}
+.row:disabled{opacity:.3;cursor:not-allowed}
+.rv{display:flex;flex-direction:column;align-items:flex-end;line-height:1.05;font-family:var(--f-cam);font-weight:600;font-size:calc(3cqw * var(--k));color:rgb(255 255 255/.6);max-width:34cqw;text-align:right}
+.rv small{font-family:var(--f-body);font-size:calc(2.3cqw * var(--k));color:var(--ui);direction:rtl}
+.chev{width:3.6cqw!important;height:3.6cqw!important;opacity:.5}
+.chk{color:var(--ui);font-size:calc(4cqw * var(--k));font-weight:700}
+.sw{flex:none;width:9cqw;height:5cqw;border-radius:5cqw;background:#3a3f43;position:relative;transition:background .15s}
+.sw i{position:absolute;top:.5cqw;left:.5cqw;width:4cqw;height:4cqw;border-radius:50%;background:#fff;transition:left .15s}
+.sw.on{background:var(--ui)}.sw.on i{left:4.5cqw}
+
+/* דף ההחלפה המהירה */
+.qsp{position:absolute;inset:0;background:rgb(0 0 0/.88);display:flex;flex-direction:column;padding:2.4cqw 3cqw 8cqw}
+.qshead{display:flex;justify-content:space-between;align-items:center}
+.qsedit{width:6.4cqw;height:6.4cqw;display:grid;place-items:center;border-radius:50%;background:#1d2022}
+.qslist{flex:1;display:flex;gap:2cqw;align-items:center;justify-content:center;flex-wrap:wrap}
+.qsi{display:flex;flex-direction:column;align-items:center;gap:1cqw;padding:1.6cqw 2cqw;border-radius:2cqw;border:.3cqw solid transparent;min-width:15cqw}
+.qsi .lb{align-items:center!important;text-align:center}
+.qsi.on{border-color:var(--ui);color:var(--ui)}
+
+/* גלריה */
+.pb{position:absolute;inset:0}
+.pbtop{position:absolute;top:2cqw;right:2cqw;display:flex;gap:1.4cqw}
+.pbtop .ov,.pbbot .ov,.pbback{position:relative;background:rgb(0 0 0/.45)}
+.pbback{position:absolute!important;left:2cqw;top:2cqw}
+.pbbot{position:absolute;left:2cqw;right:2cqw;bottom:2cqw;display:flex;align-items:center;gap:2cqw;font-size:calc(3cqw * var(--k))}
+.scrub{position:relative;flex:1;height:.9cqw;background:rgb(255 255 255/.3);border-radius:1cqw}
+.scrub i{display:block;height:100%;background:#fff;border-radius:1cqw}
+.scrub b{position:absolute;top:50%;width:1.6cqw;height:1.6cqw;border-radius:50%;background:var(--ui);transform:translate(-50%,-50%)}
+
+/* חלון אישור */
+.modal{position:absolute;inset:0;background:rgb(0 0 0/.6);display:grid;place-items:center;z-index:4}
+.mbox{width:70%;background:#1b1e20;border-radius:3cqw;padding:3cqw;display:flex;flex-direction:column;gap:3cqw}
+.mbox p{margin:0}.mbox p .lb{align-items:center!important;text-align:center}
+.mbtns{display:grid;grid-template-columns:1fr 1fr;gap:2cqw}
+.mb{border-radius:2cqw;background:#2c3033;padding:1.4cqw}
+.mb .lb{align-items:center!important}
+.mb.ok{background:var(--ui);color:#111}.mb.ok .lb small,.mb.ok .lb b{color:#111!important}
+
+.off,.lockov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1cqw;background:#000;text-align:center}
+.off .lb,.lockov .lb{align-items:center!important}
+.lockov{background:rgb(0 0 0/.6)}
+.lockov .ic{width:8cqw!important;height:8cqw!important}
+#toast{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);background:rgb(20 20 20/.92);border:.2cqw solid rgb(255 255 255/.15);border-radius:2cqw;padding:1.4cqw 3cqw;display:flex;flex-direction:column;align-items:center;line-height:1.15;z-index:5;pointer-events:none;max-width:80%;text-align:center;color:#fff}
+#toast small{font-family:var(--f-cam);font-weight:600;font-size:calc(2.6cqw * var(--k));color:rgb(255 255 255/.7)}
+#toast b{font-family:var(--f-body);font-size:calc(3.2cqw * var(--k));direction:rtl}
+#flash{position:absolute;inset:0;background:#fff;z-index:6}
+
+/* שכבת גרירה: המסך הבא נמשך אחרי האצבע */
+.draglayer{position:absolute;inset:0;z-index:3;will-change:transform}
+#ui{will-change:transform}
+
+/* ===== כיול לפי איורי המדריך (עמ' 15, 16, 18, 20). מידות ב-cqw = אחוז מרוחב המסך ===== */
+/* מסך הצילום */
+.ov.p1{left:1.5cqw;top:.6cqw;font-size:calc(5.6cqw * var(--k));gap:1.6cqw}
+.ov.p1 .ic{width:7.4cqw;height:7.4cqw}
+.ov.p2{left:1.5cqw;top:51%}
+.ov.p2 .ic{width:8cqw;height:8cqw}
+.ov.p3{left:1.5cqw;bottom:.4cqw}
+.ov.p3 .ic{width:8cqw;height:8cqw}
+.ov.p4{right:1.7cqw;top:2.7cqw}
+.batt{min-width:5.4cqw;height:4.2cqw;border:.55cqw solid #fff;border-radius:1cqw;padding:0 .4cqw;font-size:calc(3.8cqw * var(--k));box-shadow:none}
+.batt::after{right:-1.3cqw;width:.9cqw;height:2cqw}
+.ov.p5{right:1.7cqw;top:51%}
+.ov.p5 .ic{width:8.5cqw;height:8.5cqw}
+.ov.p6{top:71.7%;font-size:calc(5cqw * var(--k));right:1.7cqw}
+.ov.p7{font-size:calc(6.2cqw * var(--k));bottom:.6cqw}
+.ov.p8{right:1.7cqw;bottom:.8cqw}
+.zb{min-width:6.7cqw;height:6.3cqw;border:.35cqw solid #fff;border-radius:1.2cqw;font-size:calc(4.5cqw * var(--k));padding:0 .4cqw}
+.ov.tc{font-size:calc(5cqw * var(--k))}
+/* ידיות ונקודות עמוד */
+.handle{width:12.4cqw;height:1.15cqw;border-radius:1cqw;background:#333}
+.handle.top{top:2.4cqw}.handle.bot{bottom:2.5cqw}
+.dots{gap:5.4cqw;padding-bottom:1.85cqw}
+.dots i{width:2.7cqw;height:2.7cqw;background:#343131}
+.dots i.on{background:#e5e5e5}
+/* לוח הפרמטרים */
+.params{padding:5.8cqw 4.2cqw 1.8cqw}
+.ptiles{grid-template-columns:1fr .735fr 1fr;gap:5.2cqw}
+.ptile{background:#17181a;border-radius:1.3cqw;color:#d1d1d1;font-size:calc(4cqw * var(--k));gap:2.2cqw}
+.ptile:hover{background:#202224}
+.ptile .ic{width:7.2cqw;height:7.2cqw}
+.ptile .sep{width:.5cqw;height:3.4cqw;background:#454648}
+.pbody{padding-top:1.4cqw;gap:0;justify-content:flex-start}
+.wsec{gap:.4cqw}
+.wlab .lb small{font-size:calc(4.3cqw * var(--k))!important;color:#d4d4d4!important}
+.wheel{-webkit-mask:linear-gradient(90deg,transparent 5%,#000 10%,#000 90%,transparent 95%);mask:linear-gradient(90deg,transparent 5%,#000 10%,#000 90%,transparent 95%)}
+.wtrack{gap:6.9cqw}
+.wheel[data-wheel="p_fps"] .wtrack,.wheel[data-wheel="p_nfps"] .wtrack,.wheel[data-wheel="p_trfps"] .wtrack{gap:10.8cqw}
+.wv{font-size:calc(8.3cqw * var(--k));line-height:1.1;padding:0;font-weight:600}
+.wdiv{height:.7cqw;margin:2.2cqw 24.4% 1.6cqw;background:linear-gradient(90deg,transparent,#333,transparent)}
+.pnote{font-size:calc(5.1cqw * var(--k));gap:2.9cqw;padding-top:.4cqw}
+.pnote b{font-size:calc(2.6cqw * var(--k))}
+.pinfo{color:#ccc;right:-1cqw}
+/* מרכז הבקרה */
+.cc{padding:1.9cqw 4.9cqw 2.5cqw}
+.tiles{gap:3.4cqw 3.2cqw;align-items:start;align-content:start;justify-items:center;padding-top:.6cqw}
+.tile{width:19cqw;border-radius:4.5cqw;background:#121313}
+.tile:hover{background:#1c1e1e}
+.tile .ic{width:12cqw!important;height:12cqw!important}
+.tile .ic text{font-family:var(--f-cam);font-weight:800}
+.ccell{gap:.4cqw}
+/* אחסון */
+.cc.stor{padding:1.5cqw 4.7cqw 4.7cqw 4.2cqw}
+.sdate{font-size:calc(4.4cqw * var(--k));letter-spacing:-.01em;padding-bottom:1.6cqw}
+.sdate .sp{display:inline-block;width:6.5cqw}
+.scards{grid-template-columns:1.17fr 1.17fr 1fr;gap:3cqw}
+.scard{border-radius:1.8cqw;border-width:.45cqw;background:#161718}
+.scard .shead{padding:2.2cqw 0;font-size:calc(4cqw * var(--k));line-height:1.1;background:#5d6065;color:rgb(255 255 255/.78);border-radius:1.4cqw 1.4cqw 0 0}
+.scard.on .shead{background:var(--ui);color:#111}
+.ring{width:20cqw;line-height:1.15;background:radial-gradient(closest-side,#161718 80%,transparent 81%),conic-gradient(#e3e3e3 calc(var(--p) * 360deg),#454648 0)}
+.ring .big{font-size:calc(4.8cqw * var(--k));letter-spacing:-.01em;color:#e3e3e3}
+.ring .small{font-size:calc(3cqw * var(--k));color:rgb(255 255 255/.3);margin-top:.6cqw}
+.scard.fmt{font-size:calc(4.4cqw * var(--k));color:#e3e3e3}
+/* כשהתרגום דולק יש תוויות מתחת לאריחים: אריחים קטנים יותר כדי שהכול ייכנס */
+#screen:not(.orig) .tile{width:13.4cqw;border-radius:3.1cqw}
+#screen:not(.orig) .tile .ic{width:8cqw!important;height:8cqw!important}
+#screen:not(.orig) .tiles{gap:.8cqw 3.2cqw;padding-top:0}
+#screen:not(.orig) .ccell{gap:.2cqw}
+#screen:not(.orig) .tlab small{font-size:calc(1.8cqw * var(--k))!important}
+#screen:not(.orig) .tlab b{font-size:calc(2.3cqw * var(--k))!important;line-height:1.05}
+
+/* ===== כיול 2: ביקורת 10 הסוכנים (מדידות מול איורי המדריך, cqw = אחוז מרוחב המסך) ===== */
+/* מסך הצילום: #screen בראש כל כלל אייקון כדי לגבור על '#screen .ic' */
+.ov.p1{left:1.1cqw;top:1.4cqw;font-size:calc(5.4cqw * var(--k));gap:1.6cqw}
+#screen .ov.p1 .ic{width:7cqw;height:7cqw}
+.ov.p1 .num{position:relative;top:-.3cqw}
+.ov.p2{left:1.1cqw;top:50.7%}
+#screen .ov.p2 .ic{width:7cqw;height:7cqw}
+.ov.p3{left:.7cqw;bottom:1cqw}
+#screen .ov.p3 .ic{width:8cqw;height:8cqw}
+.ov.p4{right:3cqw;top:3cqw}
+#screen .batt{width:6.8cqw;min-width:0;height:5.2cqw;border:.45cqw solid #fff;border-radius:1cqw;padding:0;font-size:calc(4.4cqw * var(--k));letter-spacing:-.02em;box-shadow:none}
+#screen .batt::after{right:-1.25cqw;width:.8cqw;height:2.2cqw;border-radius:0 .3cqw .3cqw 0}
+.ov.p5{right:1.1cqw;top:50.7%}
+#screen .ov.p5 .ic{width:9cqw;height:9cqw}
+.ov.p6{top:71.4%;font-size:calc(5cqw * var(--k));right:2.1cqw}
+.ov.p7{font-size:calc(6.2cqw * var(--k));bottom:0}
+.ov.p8{right:2.2cqw;bottom:1.2cqw}
+#screen .zb{min-width:6.8cqw;height:6.4cqw;border:.3cqw solid rgb(255 255 255/.8);border-radius:1.4cqw;font-size:calc(4.5cqw * var(--k));padding:0 .4cqw}
+#screen .ov .num{letter-spacing:.035em}
+#screen .batt .num{letter-spacing:-.02em}
+.ov.tc{font-size:calc(5cqw * var(--k))}
+#screen.orig .ov:hover{background:none}
+
+/* לוח הפרמטרים (צילום המסך בעמ' 16) */
+.params{padding:5.2cqw 3.2cqw 2.8cqw}
+.ptiles{grid-template-columns:1fr .75fr 1fr;gap:3.4cqw}
+.ptile{height:8.5cqw;border-radius:1.65cqw;background:#17181a;color:#d1d1d1;font-size:calc(4.5cqw * var(--k));gap:2.2cqw}
+#screen .ptile .ic{width:6cqw;height:6cqw}
+#screen .ptile[data-tileopt="p_aspect"] .ic{width:5.5cqw;height:5.5cqw;color:#fff}
+.pbody{padding-top:2.6cqw;gap:0;justify-content:flex-start}
+.wsec{gap:2cqw}
+.wlab .lb small{font-size:calc(4.3cqw * var(--k))!important;color:#ccc!important}
+.wdiv{height:.85cqw;width:55cqw;margin:2.1cqw auto 1.6cqw;background:linear-gradient(90deg,transparent,#0b0b0b 10%,#111 19%,#1a1a1a 29%,#212121 36%,#282828 42%,#333 50%,#282828 58%,#212121 64%,#1a1a1a 71%,#111 81%,#0b0b0b 90%,transparent)}
+.wtrack{gap:6.2cqw}
+.wheel[data-wheel="p_fps"] .wtrack,.wheel[data-wheel="p_nfps"] .wtrack,.wheel[data-wheel="p_trfps"] .wtrack{gap:10.6cqw}
+.wheel{-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.pnote{font-size:calc(5.25cqw * var(--k));gap:1.6cqw;padding-top:.4cqw;color:#ccc}
+.pinfo{color:#ccc;right:-.75cqw;top:50%;bottom:auto;transform:translateY(-50%)}
+#screen .pinfo .ic{width:5.6cqw!important;height:5.6cqw!important}
+.params .handle.top{width:10.2cqw;height:1.13cqw;top:1.85cqw;border-radius:.6cqw;background:#333}
+
+/* מרכז הבקרה (עמ' 18) */
+.handle{width:13cqw;height:1.5cqw;border-radius:.75cqw;background:#353232}
+.handle.bot{bottom:2.2cqw}
+.cc{padding:1.9cqw 4.9cqw 0}
+.tiles{flex:none;grid-template-columns:repeat(4,20cqw);grid-template-rows:repeat(2,20cqw);gap:3.6cqw 3.4cqw;justify-content:space-between;align-content:start;align-items:start;justify-items:center;padding-top:.3cqw}
+.tile{width:20cqw;border-radius:4.7cqw;background:#121313}
+.dots{gap:5.6cqw;padding-bottom:1.9cqw}
+.dots i{width:2.4cqw;height:2.4cqw;background:#353232}
+.dots i.on{background:#fff}
+/* כשהתרגום דולק יש תוויות מתחת לאריחים: אריחים קטנים יותר כדי שהכול ייכנס */
+#screen:not(.orig) .tiles{grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:.8cqw 3.2cqw;justify-content:stretch;padding-top:0}
+#screen:not(.orig) .tile{width:13.4cqw;border-radius:3.1cqw}
+
+/* אחסון (עמ' 20) */
+.cc.stor{padding:1.5cqw 5.1cqw 5.6cqw}
+.scards{grid-template-columns:1.13fr 1.19fr 1fr;gap:4cqw}
+.scard .shead{padding:2.6cqw 0;font-size:calc(4.4cqw * var(--k));line-height:1.1;background:#66696e}
+.scard.on{border-color:#fdd961}
+.scard.on .shead{background:#fdd961;color:#111}
+.ring{width:20.5cqw;background:radial-gradient(closest-side,#161718 86%,transparent 87%),conic-gradient(#e3e3e3 calc(var(--p) * 360deg),#454648 0)}
+.sdate{color:#d6d6d6}
+.sdate .sp{width:5.5cqw}
+/* בקשות מסוכן ההתנהגות */
+#screen.lb43 #feed{top:12.5%;height:75%}
+.scrub b.slw{background:#3b82f6;border-radius:.3cqw}
+.lockov{z-index:4}
+.row[disabled]{opacity:.3;cursor:not-allowed}
+
+/* ===== כיול 3: לפי 18 צילומי מסך אמיתיים של אקשן 6 (Roman Fox) ===== */
+#screen{--sel:#ffb65c;--row:#1d4560;--tileb:#1c3346;--cct:#1b262d;--cream:#efe6d6}
+/* ערך נבחר בכתום, כמו במצלמה */
+.wv.on,.vv.on,.pk-tl.sel,.mitem.on,.qsi.on{color:var(--sel)}
+/* לוח הפרמטרים: אריחים כחולים-כהים (s44) */
+.ptile{background:var(--tileb);color:#fff}
+.ptile:hover{background:#244058}
+/* מרכז הבקרה: אריחים ירקרקים-כהים, מתג פעיל = אייקון כתום (s34) */
+.tile{background:var(--cct)}
+.tile:hover{background:#243039}
+.tile.on{background:var(--cct);color:var(--sel)}
+
+/* רשימות והגדרות: שורות כחולות, "<" + כותרת + "✕" (s40–s42, s49, s51) */
+.lhead{padding:3.4cqw 3.4cqw 1.6cqw}
+.bk{background:none;width:6cqw;height:6cqw}
+#screen .bk .ic{width:5.2cqw;height:5.2cqw;stroke-width:2.2}
+.lhead>.lb small{font-size:calc(3.6cqw * var(--k))!important;font-weight:700}
+.lbody{padding:0 5.4cqw 3cqw}
+.row{background:var(--row);border-radius:2.2cqw;min-height:10.6cqw;padding:1.6cqw 3.2cqw;gap:3cqw;margin-bottom:1.6cqw}
+.row:hover{background:#235172}
+#screen .row>.ic{width:5.6cqw;height:5.6cqw;opacity:1}
+.row .lb small{color:#fff!important}
+#screen.orig .row .lb small{font-size:calc(3.9cqw * var(--k));font-weight:700}
+.row.on .lb small,.row.on .lb b{color:#fff!important}
+.rv{color:#fff;font-size:calc(3.7cqw * var(--k));font-weight:700}
+.chev{opacity:.95!important}
+.chk{color:#fff}
+.sw{width:10cqw;height:5.6cqw;background:#4d6475}
+.sw i{top:.6cqw;left:.6cqw;width:4.4cqw;height:4.4cqw}
+.sw.on{background:#fff}.sw.on i{left:4.8cqw;background:var(--row)}
+
+/* בורר מצבים (s33): כותרת מפרט, תגיות, אייקונים גדולים */
+.modes{background:#000;justify-content:flex-start;padding-top:9cqw}
+.mtitle{text-align:center;color:#fff;font-size:calc(5.2cqw * var(--k))}
+.mchips{display:flex;gap:1.4cqw;justify-content:center;margin-top:1.6cqw;min-height:4.4cqw}
+.mchip{background:#27323a;border-radius:1.2cqw;padding:.3cqw 1.4cqw;font-size:calc(2.8cqw * var(--k));color:#dfe6ea}
+.mtrack{position:relative;height:24cqw;margin-top:4cqw}
+.mbig{position:absolute;left:50%;top:50%;transition:transform .2s,opacity .2s}
+.mbig .ic3{width:var(--sz);height:var(--sz);display:block}
+.mcap{position:absolute;left:0;right:0;bottom:7cqw;display:flex;justify-content:center}
+.mcap .lb{align-items:center!important}
+.mbadge{position:absolute;right:-1cqw;bottom:-.5cqw;background:#f08c16;color:#fff;border-radius:.8cqw;font-size:calc(3cqw * var(--k));padding:0 1cqw}
+
+/* בוררי ערך: גלגלים אנכיים משני הצדדים מעל התמונה (s36, s39, s45, s46, s47, s48) */
+.pick{position:absolute;inset:0;background:rgb(0 0 0/.55)}
+.pk-back{position:absolute;left:3.6cqw;top:5cqw;color:#fff}
+#screen .pk-back .ic{width:5.6cqw;height:5.6cqw;stroke-width:2.2}
+.pk-title{position:absolute;left:0;right:0;top:6.4cqw;display:flex;justify-content:center}
+.pk-title .lb{align-items:center!important}
+.pk-title .lb small{font-size:calc(3.4cqw * var(--k))!important;color:#fff!important;font-weight:700}
+.pk-tl,.pk-tr{position:absolute;top:6.4cqw;font-size:calc(3.6cqw * var(--k));color:#fff}
+.pk-tl{left:5cqw}.pk-tr{right:5cqw}.pk-tr.withbox{right:18cqw}
+.pk-a{display:inline-block;margin-left:1cqw;background:#9fb2bf;color:#111;border-radius:.6cqw;padding:0 .8cqw;font-size:calc(2.6cqw * var(--k))}
+.vwheel{position:absolute;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.4cqw}
+.vwheel.L{left:5cqw;align-items:flex-start}
+.vwheel.R{right:5cqw;align-items:flex-end}
+.pick:has(.pk-box) .vwheel.R{right:18cqw}
+.vv{display:flex;flex-direction:column;align-items:inherit;color:#fff;line-height:1.05}
+.vv.empty{height:4.6cqw}
+.vv.d0{font-size:calc(6.4cqw * var(--k))}
+.vv.d1{font-size:calc(4.2cqw * var(--k));opacity:.95}
+.vv.d2{font-size:calc(3cqw * var(--k));opacity:.35}
+.vv.on{color:var(--sel)}
+.vcap{font-style:normal;font-family:var(--f-body);font-size:calc(2.3cqw * var(--k));font-weight:700;color:#111;background:var(--ui);border-radius:.6cqw;padding:0 .8cqw;direction:rtl}
+.pk-box{position:absolute;right:4.4cqw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:1.4cqw}
+.pk-m{font-size:calc(3.2cqw * var(--k));color:#fff}
+.pk-mode{min-width:10cqw;height:13cqw;border:.5cqw solid #fff;border-radius:1.8cqw;display:grid;place-items:center;font-size:calc(3.6cqw * var(--k));color:#fff}
+.pk-mode.on{background:rgb(255 255 255/.12)}
+.pk-ok,.pk-reset{position:absolute;right:4.4cqw;width:10cqw;height:10cqw;border-radius:1.8cqw;background:var(--cream);color:#111;display:grid;place-items:center;font-size:calc(5cqw * var(--k));font-weight:700}
+.pk-ok{bottom:5cqw}
+.pk-reset{top:5cqw}
+#screen .pk-reset .ic{width:5.4cqw;height:5.4cqw;stroke-width:2.4}
+.pick:has(.pk-box) .pk-ok{bottom:4cqw}
+.pk-desc{position:absolute;left:8cqw;right:8cqw;bottom:6cqw;text-align:center;color:#fff;font-family:var(--f-cam);font-weight:600;font-size:calc(3cqw * var(--k));line-height:1.2}
+
+/* לוח תמונה ושמע (s50, s38): לשוניות, תג PRO, אריחים בשתי עמודות */
+.imgp{position:absolute;inset:0;background:rgb(0 0 0/.72)}
+.imgp-top{position:absolute;left:31cqw;right:6cqw;top:5cqw;display:flex;align-items:center;gap:3cqw}
+.iat-tab{color:#6f98a8}
+.iat-tab.on{color:#fff}
+#screen .iat-tab .ic{width:5.6cqw;height:5.6cqw}
+.pro-b{margin-left:auto;border-radius:1.2cqw;padding:.4cqw 1.8cqw;font-size:calc(3.4cqw * var(--k));color:#e9dcc4;border:.35cqw solid #e9dcc4}
+.pro-b.on{background:var(--cream);color:#111;border-color:var(--cream)}
+.imgp-bar{position:absolute;left:26cqw;top:22cqw;width:.9cqw;height:10cqw;border-radius:1cqw;background:#9aa6ad}
+.imgp-grid{position:absolute;left:31cqw;right:6cqw;top:14cqw;bottom:0;display:grid;grid-template-columns:1fr 1fr;gap:1.8cqw 2.6cqw;align-content:start;overflow-y:auto;padding:0 0 3cqw}
+.iat{background:var(--tileb);border-radius:1.8cqw;min-height:11.4cqw;padding:1.2cqw;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4cqw;color:#fff;text-align:center}
+.iat:hover{background:#244058}
+.iat:disabled{opacity:.35}
+.iat-l .lb{align-items:center!important}
+.iat-l .lb small{color:#fff!important;font-size:calc(3.3cqw * var(--k))!important;font-weight:700}
+#screen.orig .iat-l .lb small{font-size:calc(3.5cqw * var(--k))!important}
+.iat-l .lb b{font-size:calc(2.3cqw * var(--k))!important;color:var(--ui)}
+.iat-v{font-size:calc(3.5cqw * var(--k))}
+.b10{display:inline-block;margin-left:.6cqw;background:#ffb65c;color:#3a1d00;border-radius:.6cqw;padding:0 .6cqw;font-size:calc(2.4cqw * var(--k));vertical-align:.3cqw}
+
+/* שמירת ההגדרות הנוכחיות (s43) */
+.savecur{position:absolute;left:0;right:0;top:18cqw;display:flex;justify-content:center;gap:9cqw;align-items:center}
+.sc-i{position:relative}
+.sc-i .ic3{width:17cqw;height:17cqw}
+.sc-cap{position:absolute;top:21cqw;left:50%;transform:translateX(4cqw)}
+
+/* ===== כיול 4 — סבב אימות אחרון מול צילומי המסך האמיתיים (verify2) ===== */
+/* בוררי ערך: שורות במרווח אחיד, ערך נבחר רק מעט גדול מהשכנים */
+.vwheel{top:55%;gap:0}
+.vv{min-height:6.6cqw;justify-content:center}
+.vv.empty{height:6.6cqw}
+.vv.d0{font-size:calc(5cqw * var(--k))}
+.vv.d1{font-size:calc(3.8cqw * var(--k));opacity:1}
+.vv.d2{font-size:calc(3.6cqw * var(--k));opacity:.3}
+.pk-tl,.pk-tr{font-size:calc(3.2cqw * var(--k))}
+.pk-tl{left:6.6cqw}.pk-tr{right:7cqw}.pk-tr.withbox{right:20cqw}
+#screen .pk-ok .ic{width:5cqw;height:5cqw;stroke-width:1.8;color:#1b2630}
+#screen .pk-reset .ic{width:5cqw;height:5cqw;stroke-width:1.9;color:#1b2a36}
+.pick:has(.pk-reset) .vwheel.R{right:18cqw}
+/* בוררים עם ידית (צמצם, ייצוב/שדה ראייה): רק ±1, מרווח גדול, תיאור בשתי שורות */
+.pick:has(.handle) .vwheel{top:48%}
+.pick:has(.handle) .vv{min-height:8.4cqw}
+.pick:has(.handle) .vv.empty{height:8.4cqw}
+.pick:has(.handle) .vv.d2{visibility:hidden}
+.pick:has(.handle) .vv.d1{font-size:calc(3.3cqw * var(--k));color:#dde3e8}
+.pick .handle.top{top:5.5cqw;width:8.5cqw;height:1cqw;border-radius:.5cqw;background:#e8e8e8}
+.pk-back{left:5.2cqw;top:6.2cqw}
+.pk-title{top:9.5cqw}
+.pk-desc{white-space:pre-line;bottom:8.5cqw;font-size:calc(2.8cqw * var(--k))}
+/* חשיפה / איזון לבן: M קטן גבוה מעל תיבה גבוהה בלי מילוי, תג A תכלכל */
+.pk-box{gap:5.5cqw}
+.pk-m{font-size:calc(2.4cqw * var(--k));color:#d6dde2}
+.pk-mode{height:15.5cqw;min-width:9.5cqw;font-size:calc(2.8cqw * var(--k));border-width:.45cqw}
+.pk-mode.on{background:none}
+.pk-a{background:#bcd3dc;color:#4f6a76;padding:0 .9cqw;margin-left:1.6cqw}
+.pick:has(.pk-box) .pk-ok{bottom:5.5cqw}
+
+/* רשימות הגדרות */
+.lbody{scrollbar-width:none}.lbody::-webkit-scrollbar{display:none}
+.lhead>.lb small{white-space:nowrap}
+#screen .chk .ic{width:5cqw;height:5cqw;stroke-width:1.6}
+.lsec{margin:0 0 1.2cqw .4cqw}
+.lsec .lb small{font:700 3.4cqw var(--f-cam)!important;color:#cfe6ff!important}
+.cui{position:relative;flex:none;display:inline-block;margin-right:2cqw}
+.cnum{position:absolute;right:-1cqw;bottom:-.6cqw;background:#f0a02a;color:#1a1a1a;font-style:normal;font-weight:800;border-radius:.6cqw;padding:0 .6cqw;font-size:calc(2cqw * var(--k));line-height:1.3}
+
+/* בורר מצבים */
+.modes{padding-top:8.5cqw}
+.mtitle{font-size:calc(4.3cqw * var(--k))}
+.mchips{margin-top:2.6cqw;gap:.85cqw;min-height:2.8cqw}
+.mchip{padding:0 .9cqw;font-size:calc(2.3cqw * var(--k));line-height:2.7cqw;border-radius:.8cqw;background:#22303b;font-weight:700}
+.mtrack{margin-top:0;height:20cqw}
+.mbadge{right:7%;bottom:10%;min-width:32%;height:22%;display:grid;place-items:center;padding:0 .4cqw;background:#f0a02a;color:#1a1a1a;font-weight:800;border-radius:.8cqw;font-size:calc(var(--sz)*.17);line-height:1}
+.modes .handle.bot{bottom:6.2cqw;width:8.6cqw;height:.8cqw;border-radius:.4cqw;background:#5a636b}
+
+/* שמירת ההגדרות הנוכחיות: "מותאם" במרכז, הווידאו משמאלו */
+.savecur{justify-content:flex-start;padding-left:19cqw;gap:10cqw;top:15.8cqw}
+.sc-i{--sz:15.5cqw}
+.sc-i .ic3{width:var(--sz);height:var(--sz)}
+.sc-i:first-child{opacity:.85}
+.sc-cap{left:50%;transform:translateX(-50%);top:23cqw}
+.sc-cap .lb{align-items:center!important}
+.sc-cap .lb small{font-size:calc(3.8cqw * var(--k))!important;font-weight:700}
+#screen .lhead .bk .ic{color:#e6e9ec}
+
+/* לוח תמונה ושמע */
+.iat{background:#17303a;min-height:12.6cqw;overflow:hidden}
+.iat:hover{background:#1f3d49}
+.imgp-grid{row-gap:2.2cqw;scrollbar-width:none}.imgp-grid::-webkit-scrollbar{display:none}
+.iat-l{max-width:100%;overflow:hidden}
+#screen.orig .iat-l .lb small{white-space:nowrap}
+.iat-tab{color:#8aa3ae}
+.imgp-bar{background:#6a88a3}
+.b10{margin-left:.15cqw;box-shadow:0 0 0 .2cqw rgb(255 230 200/.6)}
+.pro-b{padding:.5cqw 2.2cqw;font-size:calc(3.6cqw * var(--k))}
+.pro-b.on{color:#2a1c08}
+
+/* לוח הפרמטרים */
+.ptile{background:#234560;font-size:calc(3.8cqw * var(--k))}
+.ptile:hover{background:#2b5170}
+.params .handle.top{background:#7a9eaa}
+.wdiv{height:.5cqw;width:68cqw;background:linear-gradient(90deg,transparent,#3c4f78 20%,#6f8fb3 50%,#3c4f78 80%,transparent)}
+.wv{font-size:calc(6.6cqw * var(--k))}
+.wheel[data-wheel="p_fps"] .wtrack,.wheel[data-wheel="p_nfps"] .wtrack,.wheel[data-wheel="p_trfps"] .wtrack{gap:12cqw}
+.wheel{-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.wunit{text-align:center;color:#fff;font-size:calc(3.4cqw * var(--k));font-weight:700;margin-top:.6cqw}
+.wlab .lb small{color:#fff!important;font-weight:700}
+
+/* מרכז הבקרה */
+.dots{gap:4.2cqw;padding-bottom:1.2cqw}
+.dots i{width:1.8cqw;height:1.8cqw;background:#5f7f93}
+.dots i.on{background:#fff}
+.cc .handle.bot{background:#6c7ca0;width:10.5cqw;height:1cqw}
+.tile{border-radius:3.2cqw}
+.tile[data-tile="cc_qs"] .ic,.tile[data-tile="cc_settings"] .ic{transform:scale(.88)}
+
+
+/* מפת התפריטים */
+.mapsec{margin-top:56px}
+.maphead{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px}
+h2{font-family:var(--f-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);margin:0;line-height:1.1}
+.maphead p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--slab);border-radius:10px;padding:8px 12px;width:min(100%,340px)}
+.search .ic{width:18px;height:18px;flex:none;color:var(--muted)}
+.search input{flex:1;min-width:0;background:none;border:0;color:var(--paper);font:inherit;font-size:16px}
+.search input:focus{outline:none}
+.search:focus-within{border-color:var(--ui)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:12px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:8px;height:8px;border-radius:50%}
+.tsec h3{font-family:var(--f-body);font-weight:800;font-size:15px;letter-spacing:.03em;color:var(--ui);margin:34px 0 8px}
+.titem{border-inline-start:2px solid var(--line);padding-inline-start:16px;margin-block:10px}
+.tsec>.titem{border:0;padding:0}
+.tkids{margin-top:8px}
+.titem.hide{display:none}
+.titem.hit>.trow .tlb b{background:rgb(255 210 63/.18);box-shadow:0 0 0 3px rgb(255 210 63/.18)}
+.trow{display:flex;align-items:center;gap:12px}
+.trow .tic{flex:none;width:38px;height:38px;border-radius:9px;background:#000;display:grid;place-items:center;color:#fff}
+.trow .tic .ic{width:22px;height:22px}
+.tlb{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+.tlb small{font-family:var(--f-cam);font-size:12.5px;color:var(--muted)}
+.tlb b{font-size:21px;font-weight:700}
+.tsec>.titem>.trow .tlb b{font-family:var(--f-display);font-weight:400;font-size:26px}
+.tconf{font-size:11.5px;border-radius:999px;padding:1px 9px;border:1px solid currentColor;white-space:nowrap}
+.tconf.mid{color:var(--mid)}.tconf.low{color:var(--low)}
+.tshow{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:3px 12px;color:var(--muted);white-space:nowrap}
+.tshow:hover{color:var(--ui);border-color:var(--ui)}
+.titem p{margin:4px 0 0 0;padding-inline-start:50px;color:#b7c4ca;font-size:15px;max-width:72ch}
+.topts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding-inline-start:50px}
+.topts span{display:flex;flex-direction:column;line-height:1.15;border:1px solid var(--line);border-radius:7px;padding:3px 9px;font-size:14.5px}
+.topts small{font-family:var(--f-cam);font-size:11px;color:var(--muted)}
+@media (max-width:520px){.titem p,.topts{padding-inline-start:0}.tlb b{font-size:18px}}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer p{margin:6px 0;max-width:80ch}
+.bezel{--k:1}
+@media (max-width:600px){.bezel{--k:1.3}.cam{padding:6% 4.5%}.bezel{padding:7.8% 8.2%}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <img src="https://cdn.jsdelivr.net/gh/tsoolgee/dji-oa6-hebrew@main/images/camera-front.webp" alt="DJI Osmo Action 6, מבט מלפנים">
+  <div class="t">
+    <div class="eyebrow">DJI OSMO ACTION 6 · FW 01.05.08.03</div>
+    <h1>אקשן 6 <span>בעברית</span></h1>
+    <p>המסך של המצלמה, עם כל התפריטים ותתי־התפריטים. גוררים את המסך כמו במצלמה, לוחצים על הלחצנים, וכל פריט מופיע באנגלית כמו במצלמה ובתרגום לעברית.</p>
+  </div>
+</header>
+
+<div class="stage">
+  <div class="simcol">
+    <div id="cam" class="camholder">
+    <div class="cam" id="camRear">
+      <span class="hwlab s">לחצן הקלטה</span>
+      <button class="phys btnShutter sh" aria-label="לחצן צילום/הקלטה"></button>
+      <button class="phys btnQS qsr" aria-label="לחצן הפעלה / החלפה מהירה QS. לחיצה ארוכה מכבה"></button>
+      <span class="hwlab q">QS / הפעלה</span>
+      <div class="bezel" id="rearBezel"><div id="scrwrap"><div id="screen" tabindex="0" aria-label="מסך המצלמה. חצים במקלדת = החלקות"><canvas id="feed" aria-hidden="true"></canvas><div id="ui"></div></div>
+        <div id="toast" hidden></div><div id="flash" hidden></div></div></div>
+      
+    </div>
+    <div class="cam front" id="camFront" hidden>
+      <button class="phys btnShutter shf" aria-label="לחצן צילום/הקלטה"></button>
+      <button class="phys btnQS qsf" aria-label="לחצן הפעלה / החלפה מהירה QS"></button>
+      <div class="fbez"><div class="bezel sqb" id="frontBezel"></div></div>
+      <button class="lens" data-info="lens" aria-label="עדשה"><i></i></button>
+      <button class="ctsens" data-info="ct_sensor" aria-label="חיישן טמפרטורת צבע"></button>
+      <span class="fmic"></span><span class="flogo">ACTION</span><span class="fsix">6</span>
+    </div>
+    </div>
+    <div class="pad tools">
+      <button id="flip"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h13l-3-3M20 17H7l3 3"/></svg><span>היפוך לצד הקדמי</span></button>
+      <button id="imm"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>כניסה למצלמה (מסך מלא)</span></button>
+      <button id="infoT"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>הצג / הסתר הסבר</span></button>
+    </div>
+    <div class="pad">
+      <button data-sw="down"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15"/><path d="m6 13 6 6 6-6"/></svg>החלקה למטה</button>
+      <button data-sw="up"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V5"/><path d="m6 11 6-6 6 6"/></svg>החלקה למעלה</button>
+      <button data-sw="left"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18"/><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>החלקה שמאלה</button>
+      <button data-sw="right"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18"/><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/></svg>החלקה ימינה</button>
+      <span class="crumb">כעת: <b id="crumb"></b></span>
+    </div>
+    <div class="opts">
+      <label><input type="checkbox" id="caps" checked> תרגום לעברית על המסך (כבוי = בדיוק כמו במצלמה)</label>
+      <span>לחיצה ארוכה על QS = כיבוי/הדלקה · Esc = חזרה למסך הצילום</span>
+    </div>
+  </div>
+  <aside id="info" aria-live="polite"></aside>
+</div>
+
+<section class="mapsec">
+  <div class="maphead">
+    <div><h2>מפת התפריטים המלאה</h2><p><span id="count"></span> פריטים. "הצג" פותח את הפריט על מסך המצלמה.</p></div>
+    <label class="search"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="q" type="search" placeholder="חיפוש: ייצוב, Bitrate, צמצם…" aria-label="חיפוש בתפריטים"></label>
+  </div>
+  <div class="legend"><span><i style="background:var(--ok)"></i>מקור רשמי של DJI (ללא סימון)</span><span><i style="background:var(--mid)"></i>ממדריכים וביקורות</span><span><i style="background:var(--low)"></i>לפי אקשן 5 פרו, לא אומת לאקשן 6</span></div>
+  <div id="tree"></div>
+</section>
+
+<footer>
+  <p>מקורות: מדריך המשתמש הרשמי של DJI (v1.0, נובמבר 2025), דף המפרט, הערות הגרסה עד קושחה 01.05.08.03, מרכז העזרה של DJI, ומדריכים של משתמשים. סדר הפריטים בתפריט ההגדרות עשוי להשתנות בין גרסאות קושחה.</p>
+  <p>הממשק המצויר כאן הוא שחזור לצורך לימוד, לא צילום מסך של המצלמה.</p>
+</footer>
+</div>
+<script>
+// אייקונים בקו לבן, 24×24, בסגנון הממשק של המצלמה
+const IC = {
+  rec: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4" fill="currentColor"/>',
+  power: '<path d="M12 3v8"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/>',
+  arrowDown: '<path d="M12 4v15"/><path d="m6 13 6 6 6-6"/>',
+  arrowUp: '<path d="M12 20V5"/><path d="m6 11 6-6 6 6"/>',
+  arrowsH: '<path d="M3 12h18"/><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/>',
+  play: '<path fill-rule="evenodd" d="M2.8 3.75h18.4a1.8 1.8 0 0 1 1.8 1.8v12.9a1.8 1.8 0 0 1-1.8 1.8H2.8A1.8 1.8 0 0 1 1 18.45V5.55a1.8 1.8 0 0 1 1.8-1.8zm6.6 4.35v7.8l7-3.9z"/>',
+  sd: '<path d="M7 3h8l4 4v14H7z"/><path d="M10 6v3M13 6v3M16 8v1"/>',
+  battery: '<rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 10v4"/><rect x="5" y="9" width="10" height="6" fill="currentColor" stroke="none"/>',
+  video: '<rect x="2" y="5.5" width="13.5" height="13" rx="2.2"/><path d="M17.3 9.7 21.2 7.1q1.3-.8 1.3.7v8.4q0 1.5-1.3.7l-3.9-2.6z"/>',
+  photo: '<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+  slow: '<circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/><path d="M4 4l2 2"/>',
+  hyper: '<circle cx="11" cy="12" r="7"/><path d="M11 8v4l2.5 1.5"/><path d="M19 7l3 5-3 5"/>',
+  timelapse: '<circle cx="12" cy="13" r="7.5"/><path d="M12 9v4h3"/><path d="M9 3h6"/>',
+  moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  track: '<path d="M3 8V4h4M17 4h4v4M21 16v4h-4M7 20H3v-4"/><circle cx="12" cy="10" r="2.5"/><path d="M8 17c.8-2.5 2.2-3.5 4-3.5s3.2 1 4 3.5"/>',
+  portrait: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 3.5-6 7-6s6 2 7 6"/>',
+  sliders: '<path d="M3 7.45h11.8v1.6H3zM18.5 7.45H21v1.6h-2.5zM3 14.95h6.8v1.6H3zM13.5 14.95H21v1.6h-7.5z"/><circle cx="14.8" cy="8.25" r="2.6"/><circle cx="9.8" cy="15.75" r="2.6"/>',
+  specs: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10v4M7 12h2M9 10v4M13 10v4h2.5"/>',
+  zoom: '<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5 5M10.5 8v5M8 10.5h5"/>',
+  prerec: '<path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/>',
+  loop: '<path d="M17 7H8a4 4 0 0 0 0 8h1"/><path d="M7 17h9a4 4 0 0 0 0-8h-1"/><path d="m14 4 3 3-3 3M10 20l-3-3 3-3"/>',
+  eis: '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M3 9v6M21 9v6M9 3h6M9 21h6"/>',
+  fov: '<path d="M12 18 3 7M12 18l9-11"/><path d="M5.5 10a10 10 0 0 1 13 0"/>',
+  aspect: '<rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M7 9H6v2M17 15h1v-2"/>',
+  res: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9v6M7 12h3M10 9v6M14 9h2.5a1.5 1.5 0 0 1 0 3H14v3M14 12h2.5l1 3"/>',
+  fps: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9h4M3 15h4M17 9h4M17 15h4"/>',
+  timer: '<circle cx="12" cy="13" r="7.5"/><path d="M12 13V9M10 3h4M18 6l1.5-1.5"/>',
+  burst: '<rect x="8" y="8" width="12" height="11" rx="1.5"/><path d="M5 16V6.5A1.5 1.5 0 0 1 6.5 5H16"/>',
+  file: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/>',
+  live: '<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="9" stroke-dasharray="2 2.2"/>',
+  pro: '<rect x="2.5" y="7" width="19" height="10" rx="2"/><path d="M6 14.5v-5h1.8a1.3 1.3 0 0 1 0 2.6H6M10.5 14.5v-5h1.7a1.3 1.3 0 0 1 0 2.6h-1.7M12.3 12.1l1.3 2.4M17.2 9.5a2.5 2.5 0 1 0 .01 0z"/>',
+  ev: '<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17"/><path d="M6.5 10h3M8 8.5v3M14.5 14h3"/>',
+  shutter: '<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5 16 10M20.5 12H13M16 18.5 12 12M8 18.5 11 12M3.5 12H9M8 5.5 12 12"/>',
+  iso: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M6.5 9v6M9 14.5c.4.4 1 .6 1.6.6.9 0 1.4-.5 1.4-1.1 0-1.5-3-1-3-2.8 0-.6.5-1.2 1.4-1.2.6 0 1.1.2 1.4.5"/><ellipse cx="16" cy="12" rx="2" ry="3"/>',
+  wb: '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M6 9l1.2 6 1.3-4.5L9.8 15 11 9M13.5 9v6h2.2a1.5 1.5 0 0 0 0-3H13.5h2a1.5 1.5 0 0 0 0-3h-2"/>',
+  color: '<circle cx="9" cy="10" r="5"/><circle cx="15" cy="10" r="5"/><circle cx="12" cy="15" r="5"/>',
+  film: '<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 3v18M16 3v18M4 7.5h4M4 12h4M4 16.5h4M16 7.5h4M16 12h4M16 16.5h4"/>',
+  quality: '<path d="m12 3 2.6 5.5 6 .8-4.4 4.1 1.1 5.9L12 16.4l-5.3 2.9 1.1-5.9-4.4-4.1 6-.8z"/>',
+  sharp: '<path d="M12 3 21 20H3z"/><path d="M12 9v6"/>',
+  noise: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01M11 8h.01M16 7h.01M8 12h.01M13 11h.01M17 13h.01M7 17h.01M12 16h.01M16 17h.01" stroke-width="2.6"/>',
+  focus: '<path d="M3 8V4h4M17 4h4v4M21 16v4h-4M7 20H3v-4"/><path d="M8 12h8M12 8v8"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6"/>',
+  wind: '<path d="M3 9h11a3 3 0 1 0-3-3M3 15h15a3 3 0 1 1-3 3M3 12h7"/>',
+  grid4: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  custom: '<circle cx="9.3" cy="6.8" r="4.2"/><path d="M1.8 20.8c.6-4.6 3.6-7.3 7.7-7.3 1.6 0 3 .4 4.2 1.1a6.4 6.4 0 0 0-1.1 6.2z"/><path fill-rule="evenodd" d="M18.2 11.6a5.6 5.6 0 1 1 0 11.2 5.6 5.6 0 0 1 0-11.2zm-.95 2.5v2.15H15v1.9h2.25v2.15h1.9v-2.15H21v-1.9h-2.05V14.1z"/>',
+  qs: '<rect x="2.4" y="4.2" width="19.2" height="16.4" rx="2.4"/><text x="12" y="17.9" text-anchor="middle" font-size="14" font-weight="800" letter-spacing="-.2" fill="#121313" font-family="Saira Extra Condensed, Barlow Condensed, Arial Narrow, sans-serif">QS</text>',
+  hand: '<g transform="translate(1.2 1.6) scale(.86) rotate(-24 12 13)"><rect x="6.2" y="4.5" width="2.6" height="10.5" rx="1.3"/><rect x="9.2" y="1.5" width="2.6" height="13" rx="1.3"/><rect x="12.2" y="2.2" width="2.6" height="12.4" rx="1.3"/><rect x="15.2" y="4.8" width="2.5" height="10" rx="1.25"/><path d="M6.2 12.5h11.5V16a6 6 0 0 1-6 6h-.7c-2 0-3.4-.8-4.6-2.3l-3-4a1.4 1.4 0 0 1 2.2-1.7l.6.8z"/><path d="M17.5 12.8c1.8-.4 3.2.6 3 2.2l-.9 2.6c-.4 1.1-1.3 1.5-2.3 1.1z"/></g><path d="M17.8 3.4a4.2 4.2 0 0 1 3.9 3.9M18.6 .4a7 7 0 0 1 6.4 6.4" fill="none" stroke="#8a8a8a" stroke-width="1.8" stroke-linecap="round"/>',
+  gear: '<path fill-rule="evenodd" stroke="currentColor" stroke-width="1" stroke-linejoin="round" d="M12 2.9 20.1 7.6v8.8L12 21.1l-8.1-4.7V7.6zm0 5.5a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2z"/>',
+  orient: '<rect x="8.6" y="8.6" width="6.8" height="6.8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M20.6 10.2A8.8 8.8 0 0 0 4.3 8.6M3.4 13.8a8.8 8.8 0 0 0 16.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M1.7 7.4 7 8.1l-3.3 4.1zM22.3 16.6 17 15.9l3.3-4.1z"/>',
+  lock: '<path d="M8.3 10.6V7.8a3.7 3.7 0 0 1 7.4 0v2.8" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path fill-rule="evenodd" d="M6.2 10.6h11.6a1.6 1.6 0 0 1 1.6 1.6v7.6a1.6 1.6 0 0 1-1.6 1.6H6.2a1.6 1.6 0 0 1-1.6-1.6v-7.6a1.6 1.6 0 0 1 1.6-1.6zm5.8 3.3a.85.85 0 0 0-.85.85v2.5a.85.85 0 0 0 1.7 0v-2.5a.85.85 0 0 0-.85-.85z"/>',
+  voice: '<path fill-rule="evenodd" d="M12.4 3.8h6.4a2.6 2.6 0 0 1 2.6 2.6v12.3h-7.2v-2.9h-2.1a1 1 0 0 1-1-1v-2.1l-1.6-.6a.6.6 0 0 1-.3-.9l1.9-2.4V6.4a2.6 2.6 0 0 1 1.3-2.6zm2.4 3.6a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6z"/><path d="M6.4 9.3a3.8 3.8 0 0 0 0 5.4M3.6 7.2a7 7 0 0 0 0 9.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
+  front: '<rect x="3" y="4.4" width="18" height="1.8" rx=".9" opacity=".55"/><rect x="3" y="17.8" width="18" height="1.8" rx=".9" opacity=".55"/><path fill-rule="evenodd" d="M4.5 7.1h15A1.5 1.5 0 0 1 21 8.6v6.8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 15.4V8.6a1.5 1.5 0 0 1 1.5-1.5zm3 8.4h10l-3.3-4.6-2.4 3.1-1.5-1.6z"/>',
+  speaker: '<path d="M4 9.5h4l5-4.5v14l-5-4.5H4z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/>',
+  trash: '<path d="M4 6.5h16M9.5 6.5V4h5v2.5M6.5 6.5l1 14h9l1-14"/><path d="M10 10.5v6M14 10.5v6"/>',
+  buds: '<path d="M7 4a3.5 3.5 0 0 0-1 6.8V19a1.5 1.5 0 0 0 3 0V7.5A3.5 3.5 0 0 0 7 4zM17 4a3.5 3.5 0 0 1 1 6.8V19a1.5 1.5 0 0 1-3 0V7.5A3.5 3.5 0 0 1 17 4z"/>',
+  wifi: '<path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/>',
+  reset: '<path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20 3.5V8h-4.5"/>',
+  check: '<path d="M5.5 12.5l4.3 4.3L18.5 8"/>',
+  trashO: '<path d="M4 6.5h16M9.5 6.5V4h5v2.5M6.5 6.5l1 14h9l1-14"/><path d="M9.8 10.5v6.5M12 10.5v6.5M14.2 10.5v6.5"/>',
+  bitrate: '<path d="M3 15c2-5 4-5 6 0s4 5 6 0 4-5 6 0"/><path d="M3 9c2-5 4-5 6 0s4 5 6 0 4-5 6 0"/>',
+  depth: '<path d="M3 6c2 1.3 4 1.3 6 0s4-1.3 6 0 4 1.3 6 0"/><path d="M12 10v10M8 16l4 4 4-4"/>',
+  mountain: '<path d="M2.5 19 9 8l4 6 2.5-3.5 6 8.5z"/>',
+  tc: '<rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M5.5 9.5h4M7.5 9.5v5M15.5 9.8a2.4 2.4 0 1 0 0 4.4"/>',
+  star: '<path d="M12 2.5v19M2.5 12h19M5.3 5.3l13.4 13.4M18.7 5.3 5.3 18.7"/><circle cx="12" cy="12" r="2" fill="currentColor"/>',
+  screen: '<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m9 9 6 4M15 9l-6 4"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>',
+  bars: '<path d="M5 20v-5M10 20V10M15 20V7M20 20V3"/>',
+  bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
+  gridline: '<rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>',
+  level: '<path d="M2.5 12h19"/><rect x="7" y="8" width="10" height="8" rx="4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/>',
+  led: '<circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/>',
+  usb: '<path d="M12 3v15M8.5 6.5 12 3l3.5 3.5M7 10v3l5 2.5M17 9v3l-5 3"/><circle cx="12" cy="19.5" r="1.8"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9c-2.5-2.6-3.7-5.6-3.7-9S9.5 5.6 12 3z"/>',
+  ruler: '<rect x="2.5" y="8" width="19" height="8" rx="1"/><path d="M6 8v3M9.5 8v4.5M13 8v3M16.5 8v4.5"/>',
+  tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8" r="1.5"/>',
+  info: '<path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 2.6a7.4 7.4 0 1 0 0 14.8 7.4 7.4 0 0 0 0-14.8zM10.7 9.8h2.6v7h-2.6zm0-3h2.6v2.2h-2.6z"/>',
+  share: '<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1"/>',
+  snail: '<path d="M3 18h13a5 5 0 1 0-5-5c0 1.7 1.3 3 3 3s2-1 2-2"/><path d="M16 18c2 0 4-1.5 4.5-4M19.5 11 21 7.5M17.5 10.5 18 7"/>',
+  clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/>',
+  back: '<path d="m15 5-7 7 7 7"/>',
+  close: '<path d="M6 6l12 12M18 6 6 18"/>',
+  chevron: '<path d="m9 6 6 6-6 6"/>',
+};
+// אייקונים מלאים, לפי האיורים במדריך הרשמי (מסך הצילום ומרכז הבקרה)
+const ICS = {
+  // 1 אחסון: גוף מלבני עם טבעת (כמו באיור "1h53m")
+  store: '<path fill-rule="evenodd" d="M3.2 4.3h17.6a2.2 2.2 0 0 1 2.2 2.2v11a2.2 2.2 0 0 1-2.2 2.2H3.2A2.2 2.2 0 0 1 1 17.5v-11a2.2 2.2 0 0 1 2.2-2.2zM17.9 3a6.4 6.4 0 1 0 0 12.8 6.4 6.4 0 0 0 0-12.8z"/><path fill-rule="evenodd" d="M17.9 3.9a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.9a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2zm0 1.8a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6z"/>',
+  sd: '<path fill-rule="evenodd" d="M8 2.5h7.5L20 7v13a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 6 20V4a1.5 1.5 0 0 1 1.5-1.5zM9.5 5v3.5h1.4V5zm2.8 0v3.5h1.4V5zm2.8 0v3.5h1.4V5z"/>',
+  // 2 הפעלה: ריבוע מעוגל עם משולש
+  play: '<path fill-rule="evenodd" d="M5 4h14a2.5 2.5 0 0 1 2.5 2.5v11A2.5 2.5 0 0 1 19 20H5a2.5 2.5 0 0 1-2.5-2.5v-11A2.5 2.5 0 0 1 5 4zm5 4.5v7l6-3.5z"/>',
+  // 3 מצבי צילום
+  video: '<rect x="2" y="6" width="13.5" height="12" rx="2"/><path d="M16.5 10.2 22 7v10l-5.5-3.2z"/>',
+  photo: '<path fill-rule="evenodd" d="M8.2 4.5h7.6l1.6 2.3H20a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8.8a2 2 0 0 1 2-2h2.6zM12 9a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>',
+  slow: '<path fill-rule="evenodd" d="M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zm-1 4v6.2l4.6 2.7.9-1.5-3.7-2.2V7z"/><path d="M1 6.5 4 8M1 11h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  timelapse: '<path fill-rule="evenodd" d="M9 1.5h6V3.5H9zM12 5a8.5 8.5 0 1 1 0 17 8.5 8.5 0 0 1 0-17zm-1 3.5v5.3h4.5v-2H13V8.5z"/>',
+  hyper: '<path fill-rule="evenodd" d="M10.5 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm-1 3.5v5.3l3.8 2.3 1-1.6-2.8-1.7V7.5z"/><path d="M19.5 7.5 23 12l-3.5 4.5z"/>',
+  moon: '<path d="M20 15.2A8.5 8.5 0 1 1 8.8 4a7 7 0 0 0 11.2 11.2z"/><path d="m17 3 .6 1.5L19 5l-1.4.5L17 7l-.6-1.5L15 5l1.4-.5z"/>',
+  track: '<path d="M2 7V2.8h4.2v1.8H3.8V7zM17.8 2.8H22V7h-1.8V4.6h-2.4zM22 17v4.2h-4.2v-1.8h2.4V17zM6.2 21.2H2V17h1.8v2.4h2.4z"/><circle cx="12" cy="9" r="3"/><path d="M6.5 18c.9-3 2.9-4.5 5.5-4.5s4.6 1.5 5.5 4.5z"/>',
+  portrait: '<circle cx="12" cy="7.5" r="4"/><path d="M4 21c.8-4.8 3.8-7.5 8-7.5s7.2 2.7 8 7.5z"/>',
+  // 4 סוללה (המספר נכתב בתוך המסגרת ב-HTML)
+  // 5 פרמטרי תמונה ושמע: שני קווים עם נקודות
+  sliders: '<path d="M3 8.2h18v1.6H3zM3 14.2h18v1.6H3z"/><circle cx="15.5" cy="9" r="2.6"/><circle cx="8.5" cy="15" r="2.6"/>',
+  // מרכז הבקרה (8 האייקונים באיור בעמוד 18)
+  custom: '<circle cx="9.5" cy="7" r="4"/><path d="M2 20.5c.6-4.4 3.5-7 7.5-7 1.8 0 3.3.5 4.5 1.4a6 6 0 0 0-1.4 5.6z"/><path fill-rule="evenodd" d="M18 12.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm-.8 2v2.2H15v1.6h2.2v2.2h1.6v-2.2H21v-1.6h-2.2v-2.2z"/>',
+  qs: '<path fill-rule="evenodd" d="M4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5v-13A2.5 2.5 0 0 1 4.5 3zm4.4 4.3c-1.9 0-3.1 1.6-3.1 4.7s1.2 4.7 3.1 4.7c.5 0 .9-.1 1.3-.3l.8 1.1 1.1-.8-.8-1c.5-.8.7-2 .7-3.7 0-3.1-1.2-4.7-3.1-4.7zm0 1.6c.8 0 1.2.9 1.2 3.1 0 .9-.1 1.6-.2 2.1l-.6-.8-1.1.8.8 1c-.9 0-1.3-.9-1.3-3.1 0-2.2.4-3.1 1.2-3.1zm7.4-1.6c-1.7 0-2.8 1-2.8 2.5 0 1.6 1.1 2.1 2.3 2.6 1 .4 1.4.7 1.4 1.3s-.5.9-1.1.9c-.7 0-1.3-.3-1.9-.8l-1 1.2c.8.8 1.9 1.2 2.9 1.2 1.9 0 3-1.1 3-2.5 0-1.5-.9-2.1-2.2-2.6-1-.4-1.5-.6-1.5-1.2 0-.5.4-.8 1-.8s1.1.2 1.6.6l.9-1.1c-.6-.7-1.5-1.1-2.6-1.1z"/>',
+  hand: '<g transform="rotate(-18 12 13)"><rect x="6.6" y="6" width="2.6" height="9" rx="1.3"/><rect x="9.5" y="3.5" width="2.6" height="11" rx="1.3"/><rect x="12.4" y="4.2" width="2.6" height="10.5" rx="1.3"/><rect x="15.3" y="6.5" width="2.5" height="8.5" rx="1.25"/><path d="M6.6 12.5h11.2V16a6 6 0 0 1-6 6h-.7c-2 0-3.4-.8-4.6-2.3l-3-4a1.4 1.4 0 0 1 2.2-1.7l.9 1.1z"/></g><path d="M18.2 2.6a4.2 4.2 0 0 1 3 3M18.7 .2a6.6 6.6 0 0 1 4.8 4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+  gear: '<path fill-rule="evenodd" d="M12 1.8 20.8 6.9v10.2L12 22.2l-8.8-5.1V6.9zm0 6.6a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2z"/>',
+  orient: '<path fill-rule="evenodd" d="M9.3 8.3h5.4a1.3 1.3 0 0 1 1.3 1.3v4.8a1.3 1.3 0 0 1-1.3 1.3H9.3A1.3 1.3 0 0 1 8 14.4V9.6a1.3 1.3 0 0 1 1.3-1.3zm.4 1.7v4h4.6v-4z"/><path d="M4.6 10.5A7.6 7.6 0 0 1 18.3 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m19.8 4.2.4 5.2-4.9-1.9zM19.4 13.5A7.6 7.6 0 0 1 5.7 17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m4.2 19.8-.4-5.2 4.9 1.9z"/>',
+  lock: '<path d="M8.6 10.5V7.4a3.4 3.4 0 0 1 6.6-1.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path fill-rule="evenodd" d="M6.5 10.5h11a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20v-8a1.5 1.5 0 0 1 1.5-1.5zm4.6 3.5v3.5h1.8V14z"/>',
+  voice: '<path fill-rule="evenodd" d="M13 2.5h5.5a2 2 0 0 1 2 2V21h-6.8v-3h-2.2a1.2 1.2 0 0 1-1.2-1.2V14l-1.6-.6a.6.6 0 0 1-.3-.9L10.6 9V5a2.5 2.5 0 0 1 2.4-2.5zm1.8 4.8a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6z"/><path d="M6.3 9.7a3.4 3.4 0 0 0 0 4.6M3.6 7.6a6.8 6.8 0 0 0 0 8.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+  front: '<rect x="3" y="3" width="18" height="2" rx=".8" opacity=".55"/><rect x="3" y="19" width="18" height="2" rx=".8" opacity=".55"/><path fill-rule="evenodd" d="M4.5 6.5h15A1.5 1.5 0 0 1 21 8v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 16V8a1.5 1.5 0 0 1 1.5-1.5zm3 8.8h10l-3.3-4.8-2.4 3.2-1.5-1.6z"/>',
+  autorot: '<rect x="3.3" y="4" width="9.4" height="16.5" rx="2" fill="#454545" stroke="currentColor" stroke-width="1.8"/><path d="M13.6 11.6h5.3a2 2 0 0 1 2 2v4.9a2 2 0 0 1-2 2h-6.2z" fill="#454545"/><path d="M18.9 11.6a2 2 0 0 1 2 2v4.9a2 2 0 0 1-2 2h-6.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13.6 11.6h5.3" stroke="currentColor" stroke-width="1.8" opacity=".4"/><path d="M15 3.4a6.5 6.5 0 0 1 5.6 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".64"/>',
+  zoom1x: '<rect x="3" y="3" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+  star: '<circle cx="12" cy="12" r="10.5" fill="#8c8c8c"/><path d="M12 6.2 17.8 12 12 17.8 6.2 12z" fill="#f5c400" stroke="#f5c400" stroke-width="1.2" stroke-linejoin="round"/>',
+  snail: '<path fill-rule="evenodd" d="M12 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm0 3a5 5 0 1 0 5 5h-2a3 3 0 1 1-3-3z"/>',
+  trash: '<path d="M9 2.5h6l.8 2H20v2H4v-2h4.2z"/><path d="M5.5 8h13l-1 13.5h-11z"/>',
+  share: '<circle cx="18" cy="5.5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="18.5" r="3"/><path d="m8.2 10.8 7.6-4.1M8.2 13.2l7.6 4.1" stroke="currentColor" stroke-width="1.8"/>',
+  speaker: '<path d="M3 9h4.5L13 4.5v15L7.5 15H3z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  aperture: '<circle cx="12" cy="12" r="9.5"/><path d="M12 2.5 15 12M21.5 12l-9 3M16.8 20.3 9 13.5M7.2 20.3 9 10.5M2.5 12 12 9" fill="none" stroke="#0a1418" stroke-width="1.4"/>',
+  snap: '<path fill-rule="evenodd" d="M12 2.5a9.5 9.5 0 1 1 0 19 9.5 9.5 0 0 1 0-19zm0 1.8a7.7 7.7 0 1 0 0 15.4 7.7 7.7 0 0 0 0-15.4zm0 2.2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.8a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4z"/>',
+  micbox: '<rect x="2.5" y="5" width="19" height="14" rx="3"/><text x="12" y="15" text-anchor="middle" font-size="6.6" font-weight="800" font-family="Arial,sans-serif" fill="#1d4560">MIC</text><circle cx="6" cy="8" r=".7" fill="#1d4560"/><circle cx="8" cy="8" r=".7" fill="#1d4560"/>',
+  single: '<rect x="2.5" y="7" width="13" height="13" rx="2.2" opacity=".6"/><rect x="8.5" y="3" width="13" height="13" rx="2.2"/><path d="M17.8 7.2a3 3 0 1 0 2 4.6 2.4 2.4 0 0 1-2-4.6z" fill="#1d4560"/>',
+  backup: '<rect x="2.5" y="7" width="13" height="13" rx="2.2" opacity=".6"/><rect x="8.5" y="3" width="13" height="13" rx="2.2"/><path d="M16.8 5.8v6.3a1.9 1.9 0 1 1-1.2-1.8V7.4l3-.8v1.5z" fill="#1d4560"/>',
+  gridfill: '<rect x="2.5" y="2.5" width="19" height="19" rx="2.5"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18" stroke="#1d4560" stroke-width="1.3"/>',
+  info: '<path fill-rule="evenodd" d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 1.8a8.2 8.2 0 1 0 0 16.4 8.2 8.2 0 0 0 0-16.4zM11 10.5h2V17h-2zm0-3.5h2v2h-2z"/>',
+};
+function ic(name, cls = '') {
+  if (ICS[name]) return `<svg class="ic solid ${cls}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${ICS[name]}</svg>`;
+  return `<svg class="ic ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[name] || IC.info}</svg>`;
+}
+
+// עץ התפריטים של DJI Osmo Action 6 (קושחה 01.05.08.03, יולי 2026)
+// conf: h = מאומת ממקור רשמי של DJI, m = ממדריכים/ביקורות, l = לפי דגמים קודמים (אקשן 4 / 5 פרו), לא אומת לאקשן 6
+// o = אפשרויות: [אנגלית, עברית]
+const O = (...a) => a.map(x => Array.isArray(x) ? x : [x, x]);
+const FPS_STD = ['24', '25', '30', '48', '50', '60'];
+
+const N = {};
+function node(id, p) { N[id] = Object.assign({ id, kids: [], conf: 'h' }, p); return N[id]; }
+
+/* ---------- כפתורים פיזיים ---------- */
+node('btn_shutter', { en: 'Shutter/Record Button', he: 'לחצן צילום/הקלטה', icon: 'rec', type: 'info',
+  d: 'לחיצה אחת: צילום תמונה או התחלה/עצירה של הקלטה. כשהמצלמה כבויה, לחיצה אחת מדליקה אותה ומתחילה להקליט מיד (SnapShot), ולחיצה נוספת עוצרת. אחרי 3 שניות בלי פעולה המצלמה נכבית לבד. בעומק של כ-14 מ\' ויותר הלחצן ננעל אוטומטית (הגנה מפני לחץ מים) ואז לחיצה על QS מצלמת או מקליטה, ולחיצה כפולה פותחת את ההחלפה המהירה. לחיצה ארוכה של 5 שניות מכניסה ידנית למצב צלילה.' });
+node('btn_qs', { en: 'Power/Quick Switch Button', he: 'לחצן הפעלה / החלפה מהירה (QS)', icon: 'power', type: 'info',
+  d: 'לחיצה ארוכה: הדלקה/כיבוי. במסך הצילום: לחיצה פותחת את דף ההחלפה המהירה, ולחיצות נוספות עוברות בין המצבים השמורים. בזמן הקלטת וידאו או הילוך איטי: לחיצה מסמנת "רגע שיא" (Highlight). בכל מסך אחר: לחיצה חוזרת למסך הצילום.' });
+
+node('rear_screen', { en: 'Rear Touchscreen', he: 'מסך מגע אחורי', icon: 'screen', type: 'info', d: 'המסך הראשי: 2.5 אינץ׳, ‏400×712, בהירות 800 ניט (1000 בשיא). גם המסך הקדמי מציג את אותם תפריטים. החלקה למעלה מתחתית המסך מעירה אותו ומעבירה אליו.' });
+node('front_screen', { en: 'Front Touchscreen', he: 'מסך מגע קדמי', icon: 'front', type: 'info', d: 'מסך ריבועי 1.46 אינץ׳ (342×342) ליד העדשה, לסלפי ולוולוגים, בהירות 800 ניט. גם הוא מסך מגע עם אותם תפריטים. "תצוגה מלאה במסך הקדמי" קובעת אם התמונה ממלאת את הריבוע או מוצגת במלואה עם פסים שחורים.' });
+node('lens', { en: 'Lens / Glass Lens Cover', he: 'עדשה ומכסה זכוכית', icon: 'aperture', type: 'info', d: 'עדשה 155° עם צמצם משתנה f/2.0–f/4.0 וחיישן 1/1.1 אינץ׳ ריבועי. מכסה הזכוכית מוברג; לא להסיר אותו לעיתים קרובות (נכנס אבק). במקומו אפשר להבריג עדשת מאקרו (מיקוד 11–75 ס"מ, עמידה רק להתזות) או עדשת FOV Boost ‏(182°, בלי הילוך איטי).' });
+node('ct_sensor', { en: 'Color Temperature Sensor', he: 'חיישן טמפרטורת צבע', icon: 'sun', type: 'info', d: 'ליד הלוגו בחזית. עוזר לאיזון הלבן, גם מתחת למים. לא לכסות באצבע או באביזר.' });
+
+/* ---------- תנועות במסך ---------- */
+node('g_down', { en: 'Swipe down', he: 'החלקה למטה', icon: 'arrowDown', type: 'info', d: 'מהחלק העליון של המסך: פותחת את מרכז הבקרה. החלקה נוספת שמאלה בתוכו מציגה את מידע האחסון.' });
+node('g_up', { en: 'Swipe up', he: 'החלקה למעלה', icon: 'arrowUp', type: 'info', d: 'מהחלק התחתון של המסך: פותחת את פרמטרי ההקלטה של המצב הנוכחי (רזולוציה, קצב פריימים, ייצוב, שדה ראייה). החלקה למטה חוזרת.' });
+node('g_side', { en: 'Swipe left / right', he: 'החלקה ימינה / שמאלה', icon: 'arrowsH', type: 'info', d: 'במסך הצילום: פותחת את בורר מצבי הצילום. מחליקים לבחירת מצב ומקישים עליו.' });
+node('g_long', { en: 'Long press (playback)', he: 'לחיצה ארוכה בזמן צפייה', icon: 'play', type: 'info', d: 'בזמן צפייה בסרטון: לחיצה ארוכה על אזור ריק מנגנת במהירות כפולה.' });
+
+/* ---------- מסך הצילום ---------- */
+node('lv_storage', { en: 'Storage Capacity/Remaining Recording Time', he: 'אחסון / זמן הקלטה שנותר', icon: 'store', type: 'info', d: 'פינה שמאלית עליונה (מספר 1 באיור): כמה זמן הקלטה נשאר, למשל 1h53m. האייקון מראה אם שומרים לזיכרון הפנימי או לכרטיס.' });
+node('lv_battery', { en: 'Battery Level', he: 'רמת סוללה', icon: 'battery', type: 'info', d: 'פינה ימנית עליונה (מספר 4): אחוז הסוללה, כתוב בתוך סמל הסוללה.' });
+node('lv_playback', { en: 'Playback', he: 'גלריה', icon: 'play', type: 'page', d: 'שמאל, באמצע (מספר 2): ריבוע עם משולש. הקשה מציגה את התמונה או הסרטון האחרונים.' });
+node('lv_mode', { en: 'Shooting Mode', he: 'מצב צילום', icon: 'video', type: 'page', d: 'פינה שמאלית תחתונה (מספר 3): אייקון המצב הנוכחי. הקשה (או החלקה לצד) פותחת את בורר המצבים.' });
+node('lv_imgaudio', { en: 'Image/Audio Parameters', he: 'הגדרות תמונה ושמע', icon: 'sliders', type: 'page', d: 'ימין, באמצע (מספר 5): שני קווים עם נקודות. פותח את לוח התמונה והשמע: חשיפה, צמצם, צבע, גוון קולנועי ושמע. במצב PRO גם תריס, ISO ואיזון לבן.' });
+node('lv_aperture', { en: 'Aperture Value', he: 'ערך הצמצם', icon: 'aperture', type: 'page', d: 'ימין, מתחת לאייקון הפרמטרים (מספר 6): למשל F2.8. הקשה פותחת את מצבי הצמצם המשתנה.' });
+node('lv_specs', { en: 'Shooting Specifications', he: 'מפרט ההקלטה', icon: 'specs', type: 'page', d: 'למטה במרכז (מספר 7): למשל 4K30/RS/W = רזולוציה וקצב, ייצוב, שדה ראייה. הקשה (או החלקה למעלה) פותחת את הפרמטרים.' });
+node('lv_zoom', { en: 'Zoom', he: 'זום', icon: 'zoom1x', type: 'list', conf: 'm', o: O(['1.0x', 'בלי זום (פי 1)'], ['2.0x', 'זום פי 2']), def: '1.0x',
+  d: 'פינה ימנית תחתונה (מספר 8): 1x במסגרת. לחיצה כפולה על 1x מחליפה בין פי 1 לפי 2; לחצן QS (כשמוגדר Zoom) מבצע זום חלק. זום ללא אובדן איכות עד פי 2. לא זמין ב-38MP/34MP, SuperNight, מעקב אחרי נושא, הילוך איטי וטיימלאפס. עם עדשת המאקרו הזום מושבת.' });
+
+/* ---------- מצבי צילום ---------- */
+const MODES = ['m_track', 'm_hyper', 'm_tl', 'm_slow', 'm_video', 'm_photo', 'm_night', 'm_portrait'];
+node('modes', { en: 'Shooting Modes', he: 'מצבי צילום', icon: 'video', type: 'page', kids: MODES,
+  d: 'הבורר נפתח בהחלקה לצד. סדר המצבים בבורר עשוי להשתנות מעט בין גרסאות קושחה. מצבים מותאמים אישית (C1–C5) מופיעים לצידם.' });
+node('m_video', { en: 'Video', he: 'וידאו', icon: 'video', d: 'הקלטת וידאו רגילה, עד 8K/30fps. כאן זמינים הקלטה מוקדמת, הקלטה במעגל, ייצוב ושדה ראייה.', kids: ['p_recmode', 'p_aspect', 'p_eisfov', 'p_res', 'p_fps'] });
+node('m_photo', { en: 'Photo', he: 'תמונה', icon: 'photo', d: 'תמונות עד 38MP (7168×5376), כולל RAW, טיימר, צילום רציף ותמונה חיה (Live Photo).', kids: ['p_photosize', 'p_countdown', 'p_burst', 'p_format', 'p_live', 'p_pfov'] });
+node('m_slow', { en: 'Slow Motion', he: 'הילוך איטי', icon: 'slow', d: 'הילוך איטי פי 4 (120fps) או פי 8 (1080p/240fps). בלי ייצוב. השמע נשמר כקובץ נפרד באותה תיקייה.', kids: ['p_slowrate', 'p_slowres', 'p_slowaspect'] });
+node('m_hyper', { en: 'Hyperlapse', he: 'הייפרלאפס', icon: 'hyper', d: 'טיימלאפס בתנועה (ברכב, ביד). בוחרים מהירות.', kids: ['p_speed', 'p_tlres', 'p_tlfps'] });
+node('m_tl', { en: 'Timelapse', he: 'טיימלאפס', icon: 'timelapse', d: 'טיימלאפס כשהמצלמה נייחת על חצובה. בלי ייצוב. אפשר לשמור גם את התמונות המקוריות.', kids: ['p_interval', 'p_duration', 'p_tlres', 'p_tlfps', 'p_tlaspect'] });
+node('m_night', { en: 'SuperNight', he: 'לילה (SuperNight)', icon: 'moon', d: 'צילום בחושך עם פחות רעש, ISO עד 51200. עד 4K/60fps, 16:9 בלבד. ייצוב RockSteady/RockSteady+ בלבד, שדה ראייה: רגיל, רחב טבעי, רחב.', kids: ['p_neisfov', 'p_nres', 'p_nfps'] });
+node('m_track', { en: 'Subject Tracking', he: 'מעקב אחרי נושא', icon: 'track', d: 'עוקב אחרי אדם ומשאיר אותו במרכז. במרכז המסך מופיעה מסגרת אפורה; כשאדם נמצא במרכז מופיע סביבו ריבוע צהוב, ובלחיצה על הקלטה הוא הופך לירוק (הנושא נעול). אם הנושא אובד הריבוע הופך לאדום. עד 2.7K/60fps, ביחס 16:9 או 9:16. מיועד לאנשים, לא לבעלי חיים. עובד רק כשהמצלמה מוחזקת לרוחב, ולא עם עדשת מאקרו.', kids: ['p_trres', 'p_traspect', 'p_trfps'] });
+node('m_portrait', { en: 'Portrait', he: 'פורטרט', icon: 'portrait', d: 'מצב לצילום אנשים עם גווני עור משופרים (נוסף בקושחה 01.01.02.30). מצבי הצמצם: אוטומטי, קבוע f/2.8, אפקט אפקט כוכב f/4.0. לפי ביקורות: עד 4K/30fps ושדה ראייה ללא עיוות.', kids: ['p_aspect', 'p_eisfov', 'p_res', 'p_fps'] });
+
+/* פרמטרים (החלקה למעלה) */
+node('p_recmode', { en: 'Pre-Rec / Loop Recording', he: 'הקלטה מוקדמת / במעגל', icon: 'video', type: 'page', where: 'אריח שמאלי', kids: ['p_prerec', 'p_loop'], d: 'האריח השמאלי בלוח הפרמטרים, במצב וידאו בלבד (באקשן 5 פרו הוא היה גם במצב לילה). אפשר להפעיל רק אחת מהן בכל פעם.' });
+node('p_eisfov', { en: 'EIS | FOV', he: 'ייצוב | שדה ראייה', icon: 'eis', type: 'page', where: 'אריח ימני (RS | Wide)', kids: ['p_eis', 'p_fov'], d: 'האריח הימני בלוח הפרמטרים. מציג בקיצור את הייצוב ושדה הראייה.' });
+node('p_neisfov', { en: 'EIS | FOV', he: 'ייצוב | שדה ראייה', icon: 'eis', type: 'page', where: 'אריח ימני', kids: ['p_neis', 'p_nfov'], d: 'במצב לילה: RockSteady/RockSteady+ ושלושה שדות ראייה.' });
+node('p_prerec', { en: 'Pre-Rec', he: 'הקלטה מוקדמת', icon: 'prerec', type: 'list', o: O(['Off', 'כבוי'], ['5s', '5 שניות'], ['10s', '10 שניות'], ['15s', '15 שניות'], ['30s', '30 שניות'], ['1min', 'דקה'], ['2min', '2 דק\''], ['5min', '5 דק\'']), def: 'Off',
+  d: 'המצלמה מקליטה ברקע כל הזמן, וכשלוחצים הקלטה היא שומרת גם את השניות שלפני הלחיצה. מתאים לדיג ולרגעים לא צפויים.' });
+node('p_loop', { en: 'Loop Recording', he: 'הקלטה במעגל', icon: 'loop', type: 'list', o: O(['Off', 'כבוי'], ['Max', 'מקסימום'], ['5min', '5 דק\''], ['20min', '20 דק\''], ['1h', 'שעה']), def: 'Off',
+  d: 'המצלמה מקליטה ברצף ודורסת את הקטעים הישנים, כך שנשמרות רק הדקות האחרונות. מתאים לשימוש כמצלמת דרך ברכב. לא זמין ב-8K וב-4K Custom.' });
+node('p_eis', { en: 'EIS', he: 'ייצוב תמונה', icon: 'eis', type: 'list',
+  o: O(['Off', 'כבוי'], ['RockSteady', 'רוקסטדי'], ['RockSteady+', 'רוקסטדי פלוס'], ['HorizonBalancing', 'איזון אופק (±45°)'], ['HorizonSteady', 'יישור אופק (360°)']), def: 'RockSteady',
+  d: 'כבוי: שדה הראייה הרחב ביותר. RockSteady: ייצוב רגיל ששומר על תחושת תנועה. RockSteady+: ייצוב חזק יותר, חותך מעט את השוליים. HorizonBalancing: מיישר הטיה עד ±45°. HorizonSteady: מיישר אופק ב-360°. איזון/יישור אופק רק ב-16:9 או 4K Custom עד 60fps. להקלטת נתוני ג\'יירו: ייצוב כבוי ושדה ראייה רחב (Wide).' });
+node('p_fov', { en: 'FOV', he: 'שדה ראייה', icon: 'fov', type: 'list',
+  o: O(['Ultra Wide', 'רחב במיוחד (155°)'], ['Wide', 'רחב'], ['Natural Wide', 'רחב טבעי'], ['Standard (Dewarp)', 'רגיל (ללא עיוות)']), def: 'Wide',
+  d: 'Ultra Wide: הכי רחב, עם עיוות "עין דג". Natural Wide: רחב אבל מיישר קווים אנכיים (בניינים, עצים). Standard: מבטל את העיוות לגמרי וחותך יותר.' });
+node('p_aspect', { en: 'Aspect Ratio', he: 'יחס תמונה', icon: 'aspect', type: 'list', where: 'אריח אמצעי', conf: 'm', o: O(['Auto', 'אוטומטי (לפי כיוון המצלמה)'], ['Landscape', 'לרוחב (נעול)'], ['Portrait', 'לאורך (נעול)'], ['Custom', 'מותאם (4K ריבועי 3840×3840)']), def: 'Auto',
+  d: 'ברירת המחדל היא אוטומטי (Auto): כשהמצלמה לרוחב מקבלים 16:9 או 4:3, וכשהיא לאורך 9:16. לרוחב/לאורך נועלים את הכיוון בלי לסובב את המצלמה. מותאם (Custom) מצלם 4K ריבועי מלא, כדי לחתוך אחר כך ל-16:9 או ל-9:16 (ליוטיוב ולסטוריז).' });
+node('p_res', { en: 'Resolution', he: 'רזולוציה', icon: 'res', type: 'list', o: O(['1080p/16:9', 'Full HD לרוחב (16:9)'], ['2.7K/16:9', '2.7K לרוחב (16:9)'], ['2.7K/4:3', '2.7K גבוה (4:3)'], ['4K/16:9', '4K לרוחב (16:9)'], ['4K/4:3', '4K גבוה (4:3)'], ['8K/16:9', '8K לרוחב (16:9), הכי חד'], ['1080p/9:16', 'Full HD לאורך (9:16)'], ['2.7K/9:16', '2.7K לאורך (9:16)'], ['4K/9:16', '4K לאורך (9:16)'], ['4K/1:1', '4K ריבועי (Custom)']), def: '4K/16:9',
+  d: 'הגלגל העליון בלוח הפרמטרים: רזולוציה ויחס תמונה יחד. 8K ‏(7680×4320) רק ב-16:9 ועד 30fps, עם ייצוב RockSteady/RockSteady+ בלבד, שדה ראייה רגיל/רחב טבעי/רחב, בלי גוון קולנועי ועדיפות לאיכות, ו-ISO עד 12800. כשהמצלמה לאורך מופיעים 9:16.' });
+node('p_fps', { en: 'Frame Rate', he: 'קצב פריימים', icon: 'fps', type: 'list', wheel: 1, o: O('24', '25', '30', '48', '50', '60', '100', '120', '200', '240'), def: '30',
+  d: '100/120fps ב-4K ו-2.7K, ו-200/240fps רק ב-1080p. מ-100fps ומעלה אפשר ליצור אחר כך הילוך איטי במיוחד בגלריה. אין הגדרת מניעת הבהובים: היא פועלת אוטומטית לפי המדינה, עם התראה ב-25/50/100 או 30/60/120fps.' });
+node('p_photosize', { en: 'Photo Size', he: 'גודל תמונה', icon: 'res', type: 'list', conf: 'm', o: O(['4:3 L', '4:3 גדול (38MP, ‏7168×5376)'], ['4:3 M', '4:3 בינוני'], ['16:9 L', '16:9 גדול (34MP = תמונת 8K, ‏7680×4320)'], ['16:9 M', '16:9 בינוני']), def: '4:3 L', d: 'יחס תמונה וגודל יחד. L ב-4:3 = 38MP (הרזולוציה המרבית 7168×5376), L ב-16:9 = 34MP (זו "תמונת 8K"). בגדלים L (38/34MP) אין זום.' });
+node('p_countdown', { en: 'Countdown', he: 'טיימר', icon: 'timer', type: 'list', o: O(['Off', 'כבוי'], ['0.5s', 'חצי שנייה'], ['1s', 'שנייה'], ['2s', '2 שניות'], ['3s', '3 שניות'], ['5s', '5 שניות'], ['10s', '10 שניות']), def: 'Off', d: 'השהיה לפני הצילום.' });
+node('p_burst', { en: 'Burst', he: 'צילום רציף', icon: 'burst', type: 'list', o: O(['Off', 'כבוי'], ['30 photos / 3s', '30 תמונות ב-3 שניות']), def: 'Off', d: 'עד 30 תמונות ב-3 שניות. כשהוא כבוי המצלמה מצלמת תמונה אחת.' });
+node('p_format', { en: 'Photo Format', he: 'פורמט תמונה', icon: 'file', type: 'list', o: O(['JPEG', 'JPEG (תמונה רגילה)'], ['JPEG+RAW', 'JPEG + RAW (גם קובץ גולמי לעריכה)']), def: 'JPEG', d: 'RAW שומר את כל המידע לעריכה (DNG).' });
+node('p_live', { en: 'Live Photo', he: 'תמונה חיה', icon: 'live', type: 'toggle', def: 'Off', d: 'שומרת קטע וידאו 4K קצר יחד עם התמונה (נוספה בקושחה 01.03.05.08). לא עובדת עם צילום רציף.' });
+node('p_pfov', { en: 'FOV', he: 'שדה ראייה', icon: 'fov', type: 'list', o: O(['Ultra Wide', 'רחב במיוחד (155°)'], ['Wide', 'רחב'], ['Natural Wide', 'רחב טבעי'], ['Standard (Dewarp)', 'רגיל (ללא עיוות)']), def: 'Wide', d: 'כמו בווידאו.' });
+node('p_slowrate', { en: 'Slow Motion Rate', he: 'קצב האטה', icon: 'slow', type: 'list', o: O(['4x (120fps)', 'פי 4 (120fps)'], ['8x (240fps)', 'פי 8 (240fps)']), def: '4x (120fps)', d: 'פי 8 רק ב-1080p.' });
+node('p_slowres', { en: 'Resolution', he: 'רזולוציה', icon: 'res', type: 'list', d: 'חדות הסרטון. פי 8 (240fps) רק ב-1080p.', o: O(['4K', '4K (חד מאוד, 3840×2160)'], ['2.7K', '2.7K (חדות בינונית)'], ['1080p', '1080p (Full HD, קבצים קטנים)']), def: '4K' });
+node('p_slowaspect', { en: 'Aspect Ratio', he: 'יחס תמונה', icon: 'aspect', type: 'list', o: O(['16:9', '16:9 לרוחב'], ['9:16', '9:16 לאורך']), def: '16:9', d: '9:16 נוסף בקושחה 01.01.02.30.' });
+node('p_speed', { en: 'Speed', he: 'מהירות', icon: 'hyper', type: 'list', o: O(['Auto', 'אוטומטי'], ['x2', 'פי 2'], ['x5', 'פי 5'], ['x10', 'פי 10'], ['x15', 'פי 15'], ['x30', 'פי 30']), def: 'Auto', d: 'פי כמה הסרטון יהיה מהיר מהמציאות.' });
+node('p_interval', { en: 'Interval', he: 'מרווח בין תמונות', icon: 'timer', type: 'list', o: O(['0.5s', 'חצי שנייה'], ['1s', 'שנייה'], ['2s', '2 שניות'], ['3s', '3 שניות'], ['4s', '4 שניות'], ['5s', '5 שניות'], ['6s', '6 שניות'], ['8s', '8 שניות'], ['10s', '10 שניות'], ['15s', '15 שניות'], ['20s', '20 שניות'], ['25s', '25 שניות'], ['30s', '30 שניות'], ['40s', '40 שניות'], ['1min', 'דקה'], ['2min', '2 דק\''], ['5min', '5 דק\''], ['30min', '30 דק\''], ['60min', '60 דק\'']), def: '3s',
+  d: 'כל כמה זמן המצלמה מצלמת תמונה. לעננים ושקיעות: 3–5 שניות. לשמי כוכבים: 30 שניות.' });
+node('p_duration', { en: 'Duration', he: 'משך הצילום', icon: 'clock', type: 'list', o: O(['5min', '5 דק\''], ['10min', '10 דק\''], ['20min', '20 דק\''], ['30min', '30 דק\''], ['1h', 'שעה'], ['2h', 'שעתיים'], ['3h', '3 שעות'], ['5h', '5 שעות'], ['∞', 'ללא הגבלה']), def: '30min', d: 'כמה זמן המצלמה תצלם.' });
+node('p_tlres', { en: 'Resolution', he: 'רזולוציה', icon: 'res', type: 'list', o: O(['4K', '4K (חד מאוד, 3840×2160)'], ['2.7K', '2.7K (חדות בינונית)'], ['1080p', '1080p (Full HD, קבצים קטנים)']), def: '4K', d: 'חדות הסרטון המוגמר.' });
+node('p_tlfps', { en: 'Frame Rate', he: 'קצב פריימים', icon: 'fps', type: 'list', o: O('25', '30'), def: '30', d: 'קצב הסרטון המוגמר.' });
+node('p_tlaspect', { en: 'Aspect Ratio', he: 'יחס תמונה', icon: 'aspect', type: 'list', o: O(['16:9', '16:9 לרוחב'], ['9:16', '9:16 לאורך']), def: '16:9', d: '9:16 נוסף בקושחה 01.04.13.03.' });
+node('p_neis', { en: 'EIS', he: 'ייצוב תמונה', icon: 'eis', type: 'list', o: O(['RockSteady', 'רוקסטדי'], ['RockSteady+', 'רוקסטדי פלוס']), def: 'RockSteady', d: 'במצב לילה אין איזון/יישור אופק.' });
+node('p_nfov', { en: 'FOV', he: 'שדה ראייה', icon: 'fov', type: 'list', o: O(['Wide', 'רחב'], ['Natural Wide', 'רחב טבעי'], ['Standard (Dewarp)', 'רגיל (ללא עיוות)']), def: 'Wide', d: 'במצב לילה אין רחב במיוחד (155°).' });
+node('p_nres', { en: 'Resolution', he: 'רזולוציה', icon: 'res', type: 'list', o: O(['4K', '4K (חד מאוד, 3840×2160)'], ['2.7K', '2.7K (חדות בינונית)'], ['1080p', '1080p (Full HD, קבצים קטנים)']), def: '4K', d: '16:9 בלבד.' });
+node('p_nfps', { en: 'Frame Rate', he: 'קצב פריימים', icon: 'fps', type: 'list', o: O(...FPS_STD), def: '30', d: 'בחושך עדיף קצב נמוך: יותר אור לכל פריים. בתאורת חשמל בישראל (50Hz) עדיף 25 כדי למנוע הבהובים.' });
+node('p_trres', { en: 'Resolution', he: 'רזולוציה', icon: 'res', type: 'list', o: O(['2.7K', '2.7K (חדות בינונית)'], ['1080p', '1080p (Full HD, קבצים קטנים)']), def: '2.7K', d: 'במעקב אחרי נושא אין 4K: עד 2.7K.' });
+node('p_traspect', { en: 'Aspect Ratio', he: 'יחס תמונה', icon: 'aspect', type: 'list', o: O(['16:9', '16:9 לרוחב'], ['9:16', '9:16 לאורך']), def: '16:9', d: 'המצלמה נשארת לרוחב; 9:16 הוא חיתוך לאורך (לסטוריז).' });
+node('p_trfps', { en: 'Frame Rate', he: 'קצב פריימים', icon: 'fps', type: 'list', o: O(...FPS_STD), def: '30', d: 'עד 60 פריימים בשנייה.' });
+
+/* ---------- לוח תמונה ושמע ---------- */
+node('imgaudio', { en: 'Image/Audio Settings', he: 'הגדרות תמונה ושמע', icon: 'sliders', type: 'page',
+  d: 'נפתח מהאייקון בצד ימין של מסך הצילום. המתג PRO למעלה פותח שליטה ידנית.',
+  kids: ['ia_pro', 'ia_exp', 'ia_shutter', 'ia_iso', 'ia_ev', 'ia_wb', 'ia_color', 'ia_recovery', 'ia_quality', 'ia_film', 'ia_film_str', 'ia_scenario', 'ia_aperture', 'ia_adjust', 'ia_peak', 'ia_channel', 'ia_wind'] });
+node('ia_pro', { en: 'PRO', he: 'מצב מקצועי (PRO)', icon: 'pro', type: 'toggle', def: 'Off', d: 'מציג את כל האפשרויות הידניות: מצב חשיפה, תריס, ISO, איזון לבן והתאמות תמונה.' });
+node('ia_exp', { en: 'Exposure', he: 'מצב חשיפה', icon: 'ev', type: 'list', pro: 1, o: O(['Auto', 'אוטומטי'], ['M', 'ידני (M)']), def: 'Auto', d: 'ב-M בוחרים תריס ו-ISO בעצמכם.' });
+node('ia_shutter', { en: 'Shutter', he: 'מהירות תריס', icon: 'shutter', type: 'list', pro: 1, o: O(['Auto', 'אוטומטי'], '1/8000', '1/4000', '1/2000', '1/1000', '1/500', '1/250', '1/200', '1/120', '1/100', '1/60', '1/50', '1/30', '1/25', '1/24', '1/15', '1/8', '1/4', '1/2', '1s', '2s', '4s', '8s', '15s', '30s'), def: 'Auto', d: 'בווידאו: מ-1/8000 ועד 1/קצב הפריימים. בתמונה: עד 30 שניות. כלל אצבע לתנועה טבעית: תריס של 1 חלקי פעמיים קצב הפריימים (1/60 ב-30fps).' });
+node('ia_iso', { en: 'ISO', he: 'ISO (רגישות)', icon: 'iso', type: 'list', pro: 1, o: O(['Auto', 'אוטומטי (אפשר להגביל טווח)'], '100', '200', '400', '800', '1600', '3200', '6400', '12800', '25600', '51200'), def: 'Auto', d: 'תמונה: 100–25600. וידאו: עד 25600 (51200 רק במצב לילה). ב-8K עד 12800 (6400 ב-D-Log M).' });
+node('ia_ev', { en: 'EV', he: 'פיצוי חשיפה', icon: 'ev', type: 'list', o: O('-3.0', '-2.0', '-1.0', '-0.7', '-0.3', '0', '+0.3', '+0.7', '+1.0', '+2.0', '+3.0'), def: '0', d: 'מבהיר או מכהה את התמונה במצב אוטומטי. רבים מורידים ל-‎-0.3 כי ברירת המחדל בהירה.' });
+node('ia_wb', { en: 'WB', he: 'איזון לבן', icon: 'wb', type: 'list', pro: 1, conf: 'm', o: O(['Auto', 'אוטומטי'], ['5000K', '5000K'], ['5100K', '5100K'], ['5600K', '5600K (שמש בצהריים)']), def: 'Auto', d: 'חיישן טמפרטורת הצבע שבחזית עוזר לאיזון האוטומטי, גם מתחת למים. לא לכסות אותו באצבע. בידני בוחרים ערך בקלווין בקפיצות של 100K (למשל 5000K, 5100K, 5600K).' });
+node('ia_aperture', { en: 'Variable Aperture', he: 'צמצם משתנה', icon: 'aperture', type: 'list', kids: ['ap_auto', 'ap_large', 'ap_fixed', 'ap_star'], d: 'בחירת מצב הצמצם. המצבים הזמינים משתנים לפי מצב הצילום ולפי העדשה המחוברת.' });
+node('ap_auto', { en: 'Auto', he: 'אוטומטי', icon: 'aperture', type: 'list', o: O(['f/2.0–f/4.0', 'טווח מלא f/2.0 עד f/4.0'], ['f/2.2–f/4.0', 'מ-f/2.2 עד f/4.0'], ['f/2.4–f/4.0', 'מ-f/2.4 עד f/4.0'], ['f/2.6–f/4.0', 'מ-f/2.6 עד f/4.0'], ['f/2.8–f/4.0', 'מ-f/2.8 עד f/4.0']), def: 'f/2.0–f/4.0', d: 'הצמצם משתנה לבד לפי האור, ונפתח לגמרי בחושך. אפשר להגביל את הטווח. זמין בתמונה, וידאו, פורטרט, מעקב, הילוך איטי והייפרלאפס.' });
+node('ap_large', { en: 'Large Aperture (f/2.0)', he: 'צמצם פתוח (f/2.0)', icon: 'aperture', type: 'action', d: 'קבוע על f/2.0, הכי הרבה אור. זמין במצב SuperNight, ובכל המצבים כשעדשת המאקרו מחוברת (אז יש רק f/2.0 או אפקט כוכב f/4.0). עם עדשת FOV Boost אין f/2.0 מחוץ ל-SuperNight.' });
+node('ap_fixed', { en: 'Fixed (f/2.8)', he: 'קבוע (f/2.8)', icon: 'aperture', type: 'action', d: 'קבוע על f/2.8 כמו מצלמת אקשן קלאסית. מרחק מיקוד מינימלי 35 ס"מ.' });
+node('ap_star', { en: 'Starburst (f/4.0)', he: 'אפקט כוכב (f/4.0)', icon: 'star', type: 'action', d: 'קבוע על f/4.0: פנסים ונקודות אור יוצאים ככוכבים עם 6 קרניים. מיקוד מ-20 ס"מ.' });
+node('ia_color', { en: 'Color', he: 'פרופיל צבע', icon: 'color', type: 'list', conf: 'm', o: O(['Normal 10-bit', 'רגיל 10 ביט'], ['D-Log M 10-bit', 'D-Log M ‏10 ביט (לעריכת צבע)']), def: 'Normal 10-bit', d: 'רגיל: מוכן לשימוש. בווידאו ההקלטה תמיד ב-10 ביט (אין בחירה של 8 ביט כמו ב-Action 5 Pro). D-Log M: תמונה "שטוחה" שנראית דהויה, עם טווח דינמי רחב לעריכת צבע (DJI מספקת LUT). D-Log M זמין רק בווידאו, הילוך איטי והייפרלאפס, ומבטל גוון קולנועי ועדיפות לאיכות.' });
+node('ia_recovery', { en: 'Color Recovery', he: 'תצוגה מקדימה של הצבע', icon: 'color', type: 'toggle', conf: 'm', def: 'Off', d: 'רק ב-D-Log M: מציגה במסך איך ייראה הצבע אחרי תיקון, בלי לשנות את ההקלטה.' });
+node('ia_film', { en: 'Film Tone', he: 'גוון קולנועי', icon: 'film', type: 'list', conf: 'm', o: O(['Off', 'כבוי'], ['CC', 'CC (גוונים קרים)'], ['NC', 'NC (נגטיב קלאסי)'], ['TR', 'TR (גווני עור טבעיים)'], ['WT', 'WT (גוונים חמים, אדריכלות)'], ['FE', 'FE (עומק קולנועי)'], ['NV', 'NV (וינטג׳ ענברי)']), def: 'Off', d: 'פילטרים מובנים בסגנון סרט צילום, עם עוצמה מתכווננת. רק ב-16:9 עד 4K/60 או 4:3 עד 4K/30. לא זמין ב-8K, ב-D-Log M, ב-Custom וב-9:16. במצב תמונה יש גוונים משלו (JPEG בלבד, קושחה 01.02.05.21).' });
+node('ia_film_str', { en: 'Film Tone Intensity', he: 'עוצמת הגוון', icon: 'film', type: 'list', conf: 'm', o: O('0%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'), def: '50%', d: 'סליידר 0%–100% (ברירת מחדל 50%): כמה חזק הגוון הקולנועי. מופיע רק כשנבחר גוון.' });
+node('ia_quality', { en: 'Quality Priority', he: 'עדיפות לאיכות', icon: 'quality', type: 'toggle', def: 'Off', d: 'משפרת את איכות התמונה בווידאו. לא זמין ב-8K וב-D-Log M.' });
+node('ia_scenario', { en: 'Stabilization Scenario', he: 'תרחיש ייצוב', icon: 'eis', type: 'list', conf: 'm', o: O(['Daily', 'יומיומי'], ['Sports', 'ספורט']), def: 'Daily', d: 'מכוונן את הייצוב לסוג התנועה.' });
+node('ia_adjust', { en: 'Image Adjustments', he: 'התאמות תמונה', icon: 'sharp', type: 'page', pro: 1, kids: ['ia_texture', 'ia_nr'], d: 'חדות (Texture) והפחתת רעש. מדריכים ממליצים ‎-1 או ‎-2 לשניהם לתמונה טבעית.' });
+node('ia_texture', { en: 'Texture', he: 'חדות (טקסטורה)', icon: 'sharp', type: 'list', o: O('-2', '-1', '0', '+1', '+2'), def: '0', d: 'מינוס = תמונה רכה וטבעית יותר.' });
+node('ia_nr', { en: 'Noise Reduction', he: 'הפחתת רעש', icon: 'noise', type: 'list', o: O('-2', '-1', '0', '+1', '+2'), def: '0', d: 'פלוס = פחות גרעיניות אבל פחות פרטים.' });
+node('ia_peak', { en: 'Focus Peaking', he: 'הדגשת מיקוד', icon: 'focus', type: 'toggle', def: 'Off', d: 'רק עם עדשת מאקרו מחוברת: צובעת את האזורים שבמיקוד. בווידאו עד 30fps. בסימולטור השורה מוצגת כאילו עדשת המאקרו מחוברת.' });
+node('ia_channel', { en: 'Channel', he: 'ערוצי שמע', icon: 'mic', type: 'list', conf: 'm', o: O(['Stereo', 'סטריאו'], ['Mono', 'מונו']), def: 'Stereo', d: 'חלק מקטע השמע (Audio).' });
+node('ia_wind', { en: 'Wind Noise Reduction', he: 'הפחתת רעשי רוח', icon: 'wind', type: 'list', conf: 'm', o: O(['Off', 'כבוי'], ['Standard', 'רגיל'], ['High', 'גבוה']), def: 'Standard', d: 'מסננת רעשי רוח במיקרופונים המובנים.' });
+
+/* ---------- מרכז הבקרה ---------- */
+node('cc', { en: 'Control Center', he: 'מרכז הבקרה', icon: 'grid4', type: 'page', d: 'החלקה למטה מהחלק העליון של מסך הצילום. 8 כפתורים בשתי שורות. החלקה למעלה חוזרת.',
+  kids: ['cc_custom', 'cc_qs', 'cc_gesture', 'cc_settings', 'cc_orient', 'cc_lock', 'cc_voice', 'cc_front', 'storage'] });
+node('cc_custom', { en: 'Custom Modes', he: 'מצבים מותאמים אישית', icon: 'custom', type: 'page', kids: ['cu_save', 'cu_c1', 'cu_c2', 'cu_c3', 'cu_c4', 'cu_c5'], d: 'שמירת כל ההגדרות הנוכחיות כמצב מותאם ובחירת סצנה. המצבים מופיעים בבורר המצבים. (מספר המצבים המרבי והשמות C1–C5 לפי אקשן 4, לא אומתו לאקשן 6.)' });
+node('cu_save', { en: 'Save Current Settings', he: 'שמירת ההגדרות הנוכחיות', icon: 'custom', type: 'action', d: 'יוצר מצב חדש או דורס מצב קיים.' });
+['1', '2', '3', '4', '5'].forEach(n => node('cu_c' + n, { en: 'C' + n, he: 'מצב מותאם ' + n, icon: 'custom', type: 'action', conf: 'l', d: 'מצב שמור. הקשה מפעילה אותו.' }));
+node('cc_qs', { en: 'Quick Switch', he: 'החלפה מהירה (QS)', icon: 'qs', type: 'page', kids: ['qs_feature', 'qs_modes'], d: 'קובעת מה עושה לחצן QS ואילו מצבים הוא מחליף ביניהם.' });
+node('qs_feature', { en: 'Feature', he: 'פעולת הלחצן', icon: 'qs', type: 'list', o: O(['Switch Between Modes', 'מעבר בין מצבים'], ['Start/End Pre-Rec', 'התחלה/סיום הקלטה מוקדמת'], ['Lock Screen', 'נעילת מסך'], ['Screen Off', 'כיבוי מסך'], ['Zoom', 'זום']), def: 'Switch Between Modes', d: 'מה קורה בלחיצה קצרה על לחצן QS במסך הצילום. כיבוי מסך וזום נוספו בקושחה 01.02.05.21.' });
+node('qs_modes', { en: 'Shooting Mode', he: 'מצבים בהחלפה המהירה', icon: 'video', type: 'page', kids: ['qs_prompt', 'qs_screen', 'qs_m_video', 'qs_m_photo', 'qs_m_slow', 'qs_m_tl', 'qs_m_hyper', 'qs_m_night', 'qs_m_track', 'qs_m_custom', 'qs_m_play'], d: 'סמנו את המצבים שלחצן QS יעבור ביניהם.' });
+node('qs_prompt', { en: 'Voice Prompt', he: 'הכרזה קולית', icon: 'speaker', type: 'toggle', def: 'On', d: 'המצלמה מכריזה בקול על שם המצב בכל לחיצה על QS. שימושי כשהמצלמה על הקסדה.' });
+node('qs_screen', { en: 'Screen Switch', he: 'החלפת מסך (קדמי/אחורי)', icon: 'front', type: 'toggle', def: 'On', d: 'לחיצה על QS עוברת גם בין המסך האחורי לקדמי.' });
+[['video', 'Video', 'וידאו'], ['photo', 'Photo', 'תמונה'], ['slow', 'Slow Motion', 'הילוך איטי'], ['tl', 'Timelapse', 'טיימלאפס'], ['hyper', 'Hyperlapse', 'הייפרלאפס'], ['night', 'SuperNight', 'לילה'], ['track', 'Subject Tracking', 'מעקב אחרי נושא'], ['custom', 'Custom Modes', 'מצבים מותאמים'], ['play', 'Playback', 'גלריה']]
+  .forEach(([k, en, he]) => node('qs_m_' + k, { en, he, icon: k === 'play' ? 'play' : k === 'custom' ? 'custom' : N['m_' + k] ? N['m_' + k].icon : 'video', type: 'toggle', def: k === 'video' || k === 'photo' || k === 'slow' ? 'On' : 'Off', d: 'כלול/לא כלול בסבב של לחצן QS.' }));
+Object.assign(N.qs_m_custom, { conf: 'm', d: 'באקשן 6 כל מצב מותאם מופיע כשורה נפרדת בשמו (למשל Video 1), לא כמתג אחד.' });
+node('cc_gesture', { en: 'Gesture Control', he: 'שליטה בתנועות יד', icon: 'hand', type: 'toggle', def: 'Off', d: 'מרימים כף יד פתוחה מול המצלמה (עד 2 מטר, גם עם כפפות חמש אצבעות) כדי להתחיל/לעצור הקלטה או לצלם. אפשר לקבוע שהתנועה רק מתחילה הקלטה, כדי לא לעצור בטעות. עובד גם במצלמת רשת, בשידור חי ובפלט למסך חיצוני.' });
+node('cc_settings', { en: 'Settings', he: 'הגדרות מערכת', icon: 'gear', type: 'page', d: 'תפריט ההגדרות הכללי (אייקון 4 במרכז הבקרה).', kids: [] });
+node('cc_orient', { en: 'Orientation Lock', he: 'נעילת כיוון מסך', icon: 'orient', type: 'toggle', def: 'Off', d: 'נועלת את הממשק בכיוון הנוכחי (לרוחב או לאורך) כדי שלא יסתובב.' });
+node('cc_lock', { en: 'Screen Lock', he: 'נעילת מסך', icon: 'lock', type: 'toggle', def: 'Off', d: 'נועלת את מסך המגע מפני נגיעות בטעות (למשל בכיס או במים). משחררים בהחלקה למעלה מתחתית המסך.' });
+node('cc_voice', { en: 'Voice Control', he: 'שליטה קולית', icon: 'voice', type: 'toggle', def: 'Off', d: 'פקודות באנגלית: Start Recording (התחלת הקלטה), Stop Recording (עצירת הקלטה), Take Photo (צילום תמונה), Shut Down (כיבוי). נתמכת גם סינית מנדרינית. מומלץ עד מטר מהמצלמה ובסביבה שקטה.' });
+node('cc_front', { en: 'Full Front Screen', he: 'תצוגה מלאה במסך הקדמי', icon: 'front', type: 'toggle', def: 'Off', d: 'ממלאת את המסך הקדמי הריבועי בתמונה (חותך את השוליים) במקום להציג את כל הפריים.' });
+node('storage', { en: 'Storage', he: 'אחסון', icon: 'sd', type: 'page', kids: ['st_loc', 'st_fmt_int', 'st_fmt_sd'], d: 'במרכז הבקרה: החלקה שמאלה. מציג מקום פנוי בזיכרון הפנימי (50GB) ובכרטיס.' });
+node('st_loc', { en: 'Storage Location', he: 'מיקום שמירה', icon: 'sd', type: 'list', conf: 'm', o: O(['Internal Storage', 'זיכרון פנימי'], ['microSD Card', 'כרטיס microSD']), def: 'Internal Storage', d: 'לאן נשמרים הקבצים.' });
+node('st_fmt_int', { en: 'Format Internal Storage', he: 'פרמוט הזיכרון הפנימי', icon: 'trash', type: 'action', danger: 1, d: 'מוחק לצמיתות את כל מה שבזיכרון הפנימי.' });
+node('st_fmt_sd', { en: 'Format SD Card', he: 'פרמוט כרטיס הזיכרון', icon: 'trash', type: 'action', danger: 1, d: 'מוחק לצמיתות את כל מה שבכרטיס.' });
+
+/* ---------- הגדרות מערכת ---------- */
+const SET = ['s_snap', 's_single', 's_mic', 's_buds', 's_wifi', 's_depth', 's_scroff', 's_backup', 's_timer', 's_tc', 's_hl', 's_aod', 's_autooff', 's_bitrate', 's_sound', 's_grid', 's_horizon', 's_usb', 'storage', 's_lang', 's_info', 's_reset'];
+N.cc_settings.kids = SET;
+node('s_snap', { en: 'SnapShot', he: 'צילום מהיר (SnapShot)', icon: 'snap', type: 'list', o: O(['Last Settings', 'ההגדרות האחרונות'], ['Video', 'וידאו'], ['Photo', 'תמונה'], ['Hyperlapse', 'הייפרלאפס'], ['C1–C5', 'מצב מותאם C1–C5']), def: 'Last Settings', d: 'באיזה מצב המצלמה תקליט כשלוחצים על לחצן ההקלטה והיא כבויה.' });
+node('s_mic', { en: 'Wireless Mic', he: 'מיקרופון אלחוטי', icon: 'micbox', type: 'page', kids: ['mic_tx1', 'mic_tx2', 'mic_set'], d: 'חיבור עד שני משדרי DJI Mic בבלוטות\'. המשדר יכול גם להתחיל הקלטה. נתמכים DJI Mic 3, Mic 2, Mic Mini, Mic Mini 2 ו-Mic Mini 2S. אין חיבור ישיר ל-DJI Mic מהדור הראשון (רק דרך מקלט בחיבור USB-C).' });
+node('mic_tx1', { en: 'TX1', he: 'משדר 1', icon: 'mic', type: 'action', d: 'הקשה מכניסה למצב צימוד. פועלים לפי ההוראות במסך.' });
+node('mic_tx2', { en: 'TX2', he: 'משדר 2', icon: 'mic', type: 'action', d: 'צימוד משדר שני.' });
+node('mic_set', { en: 'Wireless Microphone Settings', he: 'הגדרות המיקרופון', icon: 'sliders', type: 'action', conf: 'm', d: 'מופיע רק אחרי שמשדר מחובר. מכוונים בו את פרמטרי השמע של המשדר: עוצמת ניטור, מסנן Low Cut, הפחתת רעש, מניעת עיוות (Clipping), בהירות הנורית וכיבוי אוטומטי של המשדר.' });
+node('s_buds', { en: 'Wireless Earbuds', he: 'אוזניות אלחוטיות', icon: 'buds', type: 'action', d: 'מכניסים את האוזניות למצב צימוד ובוחרים אותן ברשימה. הן משמשות כמיקרופון בלבד, לא להשמעה.' });
+node('s_wifi', { en: 'Wireless Connection', he: 'חיבור אלחוטי', icon: 'wifi', type: 'page', kids: ['wf_sw', 'wf_info', 'wf_freq', 'wf_reset'], d: 'החיבור לאפליקציית DJI Mimo הוא ב-Wi-Fi. בלוטות\' בטלפון רק חוסך את הקלדת הסיסמה. כאן גם מתג הכיבוי, פרטי הרשת, תדר ה-Wi-Fi ואיפוס.' });
+node('wf_info', { en: 'Wireless Information', he: 'פרטי החיבור האלחוטי', icon: 'info', type: 'info', d: 'שם המכשיר ברשת ה-Wi-Fi והסיסמה, לחיבור ידני (למשל כשגם שלט GPS מחובר). את השם והסיסמה משנים רק מאפליקציית DJI Mimo.' });
+node('wf_freq', { en: 'Wi-Fi Frequency', he: 'תדר Wi-Fi', icon: 'wifi', type: 'list', o: O(['Auto', 'אוטומטי'], ['2.4GHz', '2.4GHz (טווח רחוק יותר)'], ['5.8GHz', '5.8GHz (מהיר יותר)']), def: 'Auto', d: 'אם החיבור לאפליקציה לא יציב, אפשר לנסות תדר אחר.' });
+node('wf_sw', { en: 'Wireless Connection', he: 'חיבור אלחוטי (מתג)', icon: 'wifi', type: 'toggle', def: 'On', d: 'כיבוי מנתק בבת אחת את ה-Wi-Fi ואת הבלוטות\': האפליקציה לא תמצא את המצלמה, ואי אפשר לחבר משדר DJI Mic ישירות. חוסך סוללה.' });
+node('wf_reset', { en: 'Reset Wi-Fi Connection', he: 'איפוס חיבור ה-Wi-Fi', icon: 'reset', type: 'action', d: 'מאפס את כל החיבורים והסיסמאות של ה-Wi-Fi. תדר ה-Wi-Fi חוזר ל"אוטומטי" והשם נשאר. פותר בעיות חיבור לאפליקציה ולשלט ה-GPS.' });
+node('s_depth', { en: 'Depth & Altitude', he: 'עומק וגובה', icon: 'depth', type: 'page', kids: ['dp_dive', 'dp_hike'], d: 'שומר נתוני עומק או גובה בסרטון, להצגה כלוח מחוונים באפליקציה.' });
+node('dp_dive', { en: 'Diving', he: 'צלילה', icon: 'depth', type: 'page', kids: ['dp_depth', 'dp_auto'], d: 'הגדרות לצלילה.' });
+node('dp_depth', { en: 'Depth Display', he: 'הצגת עומק', icon: 'depth', type: 'toggle', def: 'Off', d: 'בעומק של מטר ויותר מוצגים במסך העומק וזמן הצלילה. מד הלחץ עובד רק כשהמצלמה במים בלי קופסה אטומה.' });
+node('dp_auto', { en: 'Auto Recording (Underwater)', he: 'הקלטה אוטומטית במים', icon: 'depth', type: 'toggle', def: 'Off', d: 'המצלמה מתחילה להקליט כשהיא נכנסת למים ועוצרת כשהיא יוצאת, לפי חיישן הלחץ. מופעל מעומק מטר, ורק בלי קופסה אטומה. (שם ההגדרה ומיקומה בתפריט לא אומתו.)' });
+node('dp_hike', { en: 'Hiking & Parachuting', he: 'טיול וצניחה', icon: 'mountain', type: 'page', kids: ['dp_alt'], d: 'הגדרות לגובה.' });
+node('dp_alt', { en: 'Altitude Display', he: 'הצגת גובה', icon: 'mountain', type: 'toggle', def: 'Off', d: 'מתחילים הקלטה ומוצג הגובה הנוכחי בזמן אמת.' });
+node('s_backup', { en: 'Built-in Mic Audio Backup', he: 'גיבוי שמע במיקרופון המובנה', icon: 'backup', type: 'list', o: O(['Off', 'כבוי'], ['Separate File (.aac)', 'קובץ נפרד (‎.aac)'], ['Audio Track', 'ערוץ שמע נוסף בסרטון']), def: 'Off', d: 'כשמקליטים עם מיקרופון אלחוטי, המצלמה מקליטה במקביל גם מהמיקרופון שלה, למקרה שמשהו ישתבש.' });
+node('s_tc', { en: 'Timecode', he: 'קוד זמן (Timecode)', icon: 'tc', type: 'page', kids: ['tc_show', 'tc_reset', 'tc_sync'], d: 'לסנכרון בין כמה מצלמות בעריכה. אפשר לסנכרן גם ממכשיר חיצוני דרך USB-C. לא זמין בהקלטה מעל 60fps. בדף קוד הזמן מוצג גם קצב הפריימים, כדי להגדיר אותו גם במחולל חיצוני (Tentacle, Deity, DJI Mic 3).' });
+node('tc_show', { en: 'Timecode Display', he: 'הצגת קוד זמן', icon: 'tc', type: 'toggle', def: 'Off', d: 'מציגה את קוד הזמן במסך הצילום.' });
+node('tc_reset', { en: 'Reset Timecode', he: 'איפוס קוד זמן', icon: 'reset', type: 'action', d: 'מאפס ל-00:00:00:00.' });
+node('tc_sync', { en: 'Sync with System Time', he: 'סנכרון עם שעון המערכת', icon: 'clock', type: 'action', d: 'הסנכרון נעשה באייקון הרענון במסך. הוא מכוון את קוד הזמן לפי שעון המערכת, שמתעדכן מהטלפון כשמחוברים ל-DJI Mimo.' });
+node('s_hl', { en: 'Intelligent Highlight', he: 'זיהוי רגעי שיא אוטומטי', icon: 'star', type: 'toggle', def: 'Off', d: 'המצלמה מסמנת לבד רגעים מעניינים בזמן ההקלטה לעריכה מהירה באפליקציה (קושחה 01.04.13.03).' });
+node('s_scroff', { en: 'Scrn Off When Rec', he: 'כיבוי מסך בזמן הקלטה', icon: 'moon', type: 'list', conf: 'm', o: O(['Never', 'אף פעם'], ['1 min', 'אחרי דקה'], ['3 min', 'אחרי 3 דק\''], ['5 min', 'אחרי 5 דק\''], ['10 min', 'אחרי 10 דק\'']), def: '1 min', d: 'המסך נכבה בזמן הקלטה ארוכה כדי לחסוך סוללה וחום. ההקלטה ממשיכה. (רק האפשרות 10 דקות אומתה באקשן 6. שאר האפשרויות וברירת המחדל לא אומתו.)' });
+node('s_autooff', { en: 'Auto Power Off', he: 'כיבוי אוטומטי', icon: 'power', type: 'list', conf: 'l', o: O(['Never', 'אף פעם'], ['1 min', 'דקה'], ['3 min', '3 דק\''], ['5 min', '5 דק\''], ['10 min', '10 דק\'']), def: '5 min', d: 'המצלמה נכבית אחרי זמן בלי שימוש.' });
+node('s_bitrate', { en: 'Bitrate', he: 'קצב נתונים (איכות וידאו)', icon: 'bitrate', type: 'list', conf: 'm', o: O(['Standard', 'רגיל'], ['High', 'גבוה']), def: 'Standard', d: 'גבוה = פחות דחיסה, יותר פרטים, קבצים גדולים יותר (עד 120Mbps). מומלץ לבחור גבוה (High).' });
+node('s_timer', { en: 'Timer Shooting', he: 'צילום מתוזמן', icon: 'timer', type: 'action', conf: 'm', d: 'פריט בתפריט ההגדרות של אקשן 6 (נראה בצילומי מסך של המצלמה). האפשרויות שבתוכו לא תועדו במקורות.' });
+node('s_aod', { en: 'Always On Display', he: 'תצוגה תמידית', icon: 'screen', type: 'toggle', conf: 'm', def: 'Off', d: 'כשהמסך נכבה בזמן הקלטה, הוא ממשיך להציג את משך ההקלטה ומידע על המצב, כך שרואים שההקלטה עדיין רצה.' });
+node('s_single', { en: 'Single Screen Preview (Scrn Off When Locked)', he: 'תצוגה במסך אחד', icon: 'single', type: 'toggle', def: 'Off', d: 'מופעל: רק מסך אחד דולק (האחורי או הקדמי), וכדי לעבור למסך השני מחליקים עליו למעלה. כבוי: התמונה מוצגת בשני המסכים יחד.' });
+node('s_grid', { en: 'Grid', he: 'קווי עזר', icon: 'gridfill', type: 'list', conf: 'm', o: O(['Off', 'כבוי'], ['Grid', 'רשת'], ['Diagonals', 'אלכסונים'], ['Grid & Diagonals', 'רשת ואלכסונים']), def: 'Off', d: 'קווים על המסך לעזרה בקומפוזיציה. לא מוקלטים.' });
+node('s_horizon', { en: 'Horizon Calibration', he: 'כיול אופק', icon: 'level', type: 'action', conf: 'l', d: 'מניחים את המצלמה על משטח ישר ומכיילים, אם האופק יוצא עקום.' });
+node('s_sound', { en: 'Sounds', he: 'צלילים', icon: 'speaker', type: 'list', conf: 'm', o: O(['High', 'גבוה'], ['Medium', 'בינוני'], ['Low', 'נמוך'], ['Mute', 'מושתק']), def: 'Medium', d: 'צלילי לחיצה, צילום ותחילת הקלטה. ' });
+node('s_usb', { en: 'USB Mode', he: 'מצב USB', icon: 'usb', type: 'action', d: 'אם המצלמה לא מזוהה כשמחברים לטלפון (OTG) או למחשב: מפעילים כאן ומחברים מחדש.' });
+node('s_lang', { en: 'Language', he: 'שפה', icon: 'globe', type: 'list', conf: 'l', o: O(['English', 'אנגלית'], ['简体中文', 'סינית מפושטת'], ['繁體中文', 'סינית מסורתית'], ['日本語', 'יפנית'], ['한국어', 'קוריאנית'], ['ไทย', 'תאית'], ['العربية', 'ערבית'], ['Deutsch', 'גרמנית'], ['Español', 'ספרדית'], ['Français', 'צרפתית'], ['Italiano', 'איטלקית'], ['Русский', 'רוסית'], ['Português (Brasil)', 'פורטוגזית (ברזיל)'], ['Türkçe', 'טורקית'], ['Bahasa Indonesia', 'אינדונזית'], ['Polski', 'פולנית']), def: 'English', d: 'אין עברית במצלמה, ולכן האתר הזה.' });
+node('s_info', { en: 'Device Info', he: 'מידע על המכשיר', icon: 'info', type: 'page', kids: ['in_fw', 'in_sn', 'in_logs', 'in_comp'], d: 'שם המכשיר, מספר סידורי, גרסת הקושחה, ייצוא יומנים ומידע רגולטורי.' });
+node('in_fw', { en: 'Firmware Version', he: 'גרסת קושחה', icon: 'info', type: 'info', val: '01.05.08.03', d: 'הגרסה האחרונה נכון ליולי 2026. עדכון דרך אפליקציית DJI Mimo.' });
+node('in_sn', { en: 'Serial Number', he: 'מספר סידורי', icon: 'tag', type: 'info', conf: 'l', d: 'המספר הסידורי של המצלמה, לאחריות ולתמיכה.' });
+node('in_logs', { en: 'Export Logs', he: 'ייצוא קובצי יומן', icon: 'file', type: 'action', d: 'לשליחה לתמיכה של DJI. היומנים נשמרים לכרטיס microSD בלבד, ולכן צריך כרטיס בפנים.' });
+node('in_comp', { en: 'Compliance Info', he: 'מידע רגולטורי', icon: 'info', type: 'info', conf: 'l', d: 'אישורי התקינה של המכשיר (רשויות תקשורת). (לפי אקשן 4, שם זו שורה נפרדת בהגדרות.)' });
+node('s_reset', { en: 'Factory Reset', he: 'איפוס להגדרות היצרן', icon: 'reset', type: 'action', danger: 1, conf: 'm', d: 'מחזיר את כל ההגדרות לברירת המחדל ומוחק את המצבים המותאמים. המצלמה מופעלת מחדש. לגבי הקבצים אין מקור רשמי, לכן גבו לפני האיפוס.' });
+
+/* ---------- גלריה ---------- */
+node('playback', { en: 'Playback', he: 'גלריה', icon: 'play', type: 'page', kids: ['pb_hl', 'pb_slow', 'pb_del', 'pb_share', 'pb_vol'], d: 'החלקה שמאלה מהקצה הימני חוזרת למסך הצילום. העלאה לענן (OneDrive, Google Drive, NAS) ושידור חי נעשים מאפליקציית DJI Mimo, לא מתפריט המצלמה.' });
+node('pb_hl', { en: 'Highlight', he: 'סימון רגע שיא', icon: 'star', type: 'action', d: 'מסמן רגע בסרטון כדי למצוא אותו מהר בעריכה באפליקציה.' });
+node('pb_slow', { en: 'Super Slow-Motion', he: 'הילוך איטי במיוחד', icon: 'snail', type: 'action', d: 'אייקון החילזון: יוצר מהרגע הנבחר קטע הילוך איטי עד 960fps (פי 32). רק בסרטוני 16:9 שצולמו ב-100fps ומעלה, עד 6 קטעים לסרטון, לא ב-1.5 השניות הראשונות ו-2 האחרונות. התוצאה ב-1080p.' });
+node('pb_del', { en: 'Delete', he: 'מחיקה', icon: 'trash', type: 'action', danger: 1, d: 'מוחקת את הקובץ (או קטע הילוך איטי שנוצר).' });
+node('pb_share', { en: 'Share', he: 'שיתוף לטלפון', icon: 'share', type: 'action', d: 'העברה לטלפון אנדרואיד שתומך ב-MTA (Mutual Transfer Alliance).' });
+node('pb_vol', { en: 'Volume', he: 'עוצמת שמע', icon: 'speaker', type: 'action', d: 'השתקה או שינוי עוצמה בצפייה.' });
+
+/* ---------- חיבור USB ---------- */
+node('usb', { en: 'USB Connection', he: 'חיבור בכבל USB', icon: 'usb', type: 'page', kids: ['usb_file', 'usb_cam', 'usb_dp'], d: 'חלון שקופץ כשמחברים למחשב.' });
+node('usb_file', { en: 'Transfer File: USB', he: 'העברת קבצים', icon: 'file', type: 'action', d: 'המצלמה מופיעה במחשב ככונן (DCIM > DJI_001). בזמן העברה אי אפשר לצלם.' });
+node('usb_dp', { en: 'DP Output', he: 'פלט למסך חיצוני (DisplayPort)', icon: 'screen', type: 'info', d: 'הצגת התמונה במסך חיצוני דרך USB-C (DisplayPort). שליטה בתנועות יד עובדת גם כאן (קושחה 01.02.05.21).' });
+node('usb_cam', { en: 'Webcam', he: 'מצלמת רשת', icon: 'video', type: 'action', d: 'המצלמה משמשת כמצלמת רשת במחשב, עד 4K. בתחתית המסך יופיע Webcam.' });
+
+const ROOTS = [
+  ['גוף המצלמה, כפתורים ותנועות', ['rear_screen', 'front_screen', 'lens', 'ct_sensor', 'btn_shutter', 'btn_qs', 'g_down', 'g_up', 'g_side', 'g_long']],
+  ['מסך הצילום', ['lv_storage', 'lv_battery', 'lv_playback', 'lv_mode', 'lv_imgaudio', 'lv_aperture', 'lv_specs', 'lv_zoom']],
+  ['מצבי צילום והפרמטרים שלהם (החלקה לצד / למעלה)', MODES],
+  ['לוח תמונה ושמע', ['imgaudio']],
+  ['מרכז הבקרה (החלקה למטה)', ['cc']],
+  ['גלריה', ['playback']],
+  ['חיבור למחשב', ['usb']],
+];
+
+// תמונה חיה מדומה בעינית: נוף מצויר בקנבס שמגיב להגדרות המצלמה
+const Feed = (() => {
+  let cv, cx, W = 0, H = 0, t0 = performance.now(), raf = 0, running = false;
+  // רכסים קבועים (אקראיות עם זרע קבוע כדי שהנוף לא ישתנה בכל טעינה)
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const ridge = (n, amp) => Array.from({ length: n + 1 }, (_, i) => Math.sin(i * .9) * amp * .5 + (rnd() - .5) * amp);
+  const R1 = ridge(24, .10), R2 = ridge(16, .07), R3 = ridge(10, .05);
+  const CLOUDS = Array.from({ length: 9 }, () => ({ x: rnd(), y: .06 + rnd() * .22, s: .06 + rnd() * .09, v: .004 + rnd() * .008 }));
+  const STARS = Array.from({ length: 140 }, () => ({ x: rnd(), y: rnd() * .55, r: rnd() * 1.2 + .3, p: rnd() * 6 }));
+  const LIGHTS = Array.from({ length: 60 }, () => ({ x: rnd(), y: .56 + rnd() * .08, c: rnd() }));
+
+  function size() {
+    const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1);
+    const w = Math.round(r.width * d), h = Math.round(r.height * d);
+    if (w && h && (w !== W || h !== H)) { W = cv.width = w; H = cv.height = h; }
+  }
+  function path(pts, base, y0) {
+    cx.beginPath(); cx.moveTo(0, H);
+    pts.forEach((v, i) => cx.lineTo(i / (pts.length - 1) * W, (y0 + v) * H));
+    cx.lineTo(W, H); cx.closePath();
+  }
+  function frame(now) {
+    if (!running) return;
+    size();
+    const st = Feed.state();
+    const speed = st.mode === 'm_slow' ? .25 : (st.mode === 'm_tl' || st.mode === 'm_hyper') ? 8 : 1;
+    const t = (now - t0) / 1000 * speed;
+    const night = st.mode === 'm_night';
+    // תנועת יד: תלויה בייצוב
+    const shakeAmp = { Off: 1, RockSteady: .18, 'RockSteady+': .08, HorizonBalancing: .1, HorizonSteady: .06 }[st.eis] ?? .15;
+    const rollAmp = { HorizonBalancing: 0, HorizonSteady: 0 }[st.eis] ?? (st.eis === 'Off' ? 2.2 : 1.1);
+    const sx = (Math.sin(t * 2.1) + Math.sin(t * 5.3) * .5) * shakeAmp * W * .006;
+    const sy = (Math.cos(t * 1.7) + Math.sin(t * 4.1) * .5) * shakeAmp * H * .008;
+    const roll = Math.sin(t * .6) * rollAmp * Math.PI / 180;
+    const fovZ = { 'Ultra Wide': 1, Wide: 1.1, 'Natural Wide': 1.14, 'Standard (Dewarp)': 1.26 }[st.fov] ?? 1.1;
+    const z = fovZ * (parseFloat(st.zoom) || 1) * (st.eis === 'RockSteady+' ? 1.06 : st.eis === 'HorizonSteady' ? 1.12 : 1);
+    cx.save();
+    cx.setTransform(1, 0, 0, 1, 0, 0);
+    cx.translate(W / 2 + sx, H / 2 + sy); cx.rotate(roll); cx.scale(z, z); cx.translate(-W / 2, -H / 2);
+    // שמיים
+    const g = cx.createLinearGradient(0, 0, 0, H * .6);
+    if (night) { g.addColorStop(0, '#050a1c'); g.addColorStop(1, '#1b2a4a'); }
+    else { g.addColorStop(0, '#5f9fd0'); g.addColorStop(.7, '#bcd8e6'); g.addColorStop(1, '#f1e6cf'); }
+    cx.fillStyle = g; cx.fillRect(-W, -H, W * 3, H * 3);
+    if (night) {
+      STARS.forEach(s => { cx.globalAlpha = .45 + .55 * Math.abs(Math.sin(t * .8 + s.p)); cx.fillStyle = '#fff'; cx.beginPath(); cx.arc(s.x * W, s.y * H, s.r * W / 700, 0, 7); cx.fill(); });
+      cx.globalAlpha = 1; cx.fillStyle = '#f4f1e0'; cx.beginPath(); cx.arc(W * .78, H * .16, W * .028, 0, 7); cx.fill();
+    } else {
+      const sun = cx.createRadialGradient(W * .74, H * .2, 0, W * .74, H * .2, W * .22);
+      sun.addColorStop(0, 'rgba(255,248,225,1)'); sun.addColorStop(.12, 'rgba(255,240,200,.9)'); sun.addColorStop(1, 'rgba(255,240,200,0)');
+      cx.fillStyle = sun; cx.fillRect(0, 0, W, H);
+      if (st.star) { // אפקט כוכב במצב f/4.0
+        cx.strokeStyle = 'rgba(255,250,235,.8)'; cx.lineWidth = W * .002;
+        for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3 + .3; cx.beginPath(); cx.moveTo(W * .74 - Math.cos(a) * W * .09, H * .2 - Math.sin(a) * W * .09); cx.lineTo(W * .74 + Math.cos(a) * W * .09, H * .2 + Math.sin(a) * W * .09); cx.stroke(); }
+      }
+      CLOUDS.forEach(c => {
+        const x = ((c.x + t * c.v) % 1.3 - .15) * W, y = c.y * H, s = c.s * W;
+        cx.fillStyle = 'rgba(255,255,255,.82)';
+        [[0, 0, 1], [.7, .1, .75], [-.7, .12, .7], [.3, -.3, .7]].forEach(([dx, dy, k]) => { cx.beginPath(); cx.ellipse(x + dx * s, y + dy * s, s * k, s * k * .55, 0, 0, 7); cx.fill(); });
+      });
+    }
+    // רכסים
+    path(R1, 0, .44); cx.fillStyle = night ? '#141d30' : '#7d93a6'; cx.fill();
+    path(R2, 0, .5); cx.fillStyle = night ? '#0f1726' : '#5f7a6a'; cx.fill();
+    if (night) LIGHTS.forEach(l => { cx.fillStyle = l.c > .5 ? 'rgba(255,200,120,.95)' : 'rgba(255,240,210,.9)'; cx.fillRect(l.x * W, l.y * H, W * .0035, W * .0035); });
+    // אגם
+    const lg = cx.createLinearGradient(0, H * .6, 0, H);
+    if (night) { lg.addColorStop(0, '#1a2842'); lg.addColorStop(1, '#070b14'); } else { lg.addColorStop(0, '#9cc3d6'); lg.addColorStop(1, '#3e6a80'); }
+    cx.fillStyle = lg; cx.fillRect(-W, H * .6, W * 3, H);
+    cx.strokeStyle = night ? 'rgba(255,230,180,.25)' : 'rgba(255,255,255,.35)'; cx.lineWidth = Math.max(1, H * .003);
+    for (let i = 0; i < 26; i++) {
+      const y = H * (.62 + i * .015), off = Math.sin(t * 1.3 + i) * W * .04;
+      cx.beginPath(); cx.moveTo(W * (.55 + .2 * Math.sin(i * 1.7)) + off, y); cx.lineTo(W * (.55 + .2 * Math.sin(i * 1.7)) + off + W * (.04 + (i % 4) * .015), y); cx.stroke();
+    }
+    path(R3, 0, .86); cx.fillStyle = night ? '#05080d' : '#2f4a2c'; cx.fill();
+    cx.restore();
+    // "ערכת צבע" לפי ההגדרות
+    const f = [];
+    const ev = parseFloat(st.ev) || 0; if (ev) f.push(`brightness(${(1 + ev * .22).toFixed(2)})`);
+    if (String(st.color).startsWith('D-Log') && !st.recovery) f.push('saturate(.55) contrast(.72) brightness(1.08)');
+        if (st.film === 'CC') f.push('sepia(.25) saturate(1.1) contrast(1.05)');
+    if (st.film === 'NC') f.push('saturate(.8) hue-rotate(-8deg)');
+    if (st.wb && st.wb !== 'Auto') { const k = parseInt(st.wb); f.push(k < 5000 ? `sepia(.0) hue-rotate(${(5000 - k) / 60}deg) saturate(1.1)` : `sepia(${Math.min(.5, (k - 5000) / 10000).toFixed(2)})`); }
+    if (st.dim) f.push('brightness(.9)');
+    cv.style.filter = f.join(' ') || 'none';
+    raf = requestAnimationFrame(frame);
+  }
+  return {
+    state: () => ({}),
+    once() { const r = running; running = true; frame(performance.now()); cancelAnimationFrame(raf); running = r; },
+    mount(canvas, stateFn) {
+      cv = canvas; cx = cv.getContext('2d'); this.state = stateFn;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      running = true; raf = requestAnimationFrame(now => { frame(now); if (reduce) running = false; });
+      document.addEventListener('visibilitychange', () => {
+        if (reduce) return;
+        if (document.hidden) { running = false; cancelAnimationFrame(raf); } else if (!running) { running = true; raf = requestAnimationFrame(frame); }
+      });
+      new ResizeObserver(() => { if (!running) { running = true; frame(performance.now()); if (reduce) running = false; } }).observe(cv);
+    },
+  };
+})();
+
+// סימולטור מסך DJI Osmo Action 6. מיקומי הסמלים לפי האיורים במדריך הרשמי (עמ' 15, 16, 18, 20).
+// המסך עצמו תמיד משמאל לימין כמו במצלמה; העברית רק מתווספת עליו.
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// עוטף מידות כמו 3840×2160 בבידוד כיווניות, כדי שבעברית לא יתהפכו ל-2160×3840
+const bd = s => String(s ?? '').replace(/\d+(?:\.\d+)?×\d+/g, m => '⁦' + m + '⁩');
+const CONF = { h: ['מקור רשמי', 'ok'], m: ['ממדריכים וביקורות', 'mid'], l: ['לא אומת לאקשן 6 (לפי דגם קודם)', 'low'] };
+
+/* ---------- מפת הורים (לנתיב "איך מגיעים") ---------- */
+const PARENT = {};
+(function walk(list, parent) {
+  list.forEach(id => {
+    if (!N[id] || id in PARENT) return;
+    PARENT[id] = parent; walk(N[id].kids || [], id);
+  });
+})(ROOTS.flatMap(r => r[1]), null);
+const HOW = {
+  cc: 'במסך הצילום: החלקה למטה מהחלק העליון', cc_settings: 'מרכז הבקרה ← הגדרות (אייקון 4)', imgaudio: 'במסך הצילום: שני הקווים עם הנקודות, בצד ימין',
+  modes: 'במסך הצילום: החלקה ימינה או שמאלה', playback: 'במסך הצילום: הריבוע עם המשולש, משמאל באמצע', storage: 'מרכז הבקרה ← החלקה שמאלה',
+};
+function howTo(id) {
+  if (HOW[id]) return HOW[id];
+  if (!N[id]) return '';
+  if (PARENT[id] && MODES.includes(PARENT[id]) && N[PARENT[id]]) return 'בוחרים את מצב ' + N[PARENT[id]].he + ' ← החלקה למעלה' + (N[id].where ? ' ← ' + N[id].where : '');
+  if (MODES.includes(id)) return HOW.modes + ' ← ' + N[id].he;
+  const ch = []; let x = id;
+  while (x && N[x]) {
+    if (HOW[x]) { ch.unshift(HOW[x]); break; }
+    if (MODES.includes(x)) { ch.unshift('בוחרים את מצב ' + N[x].he + ' ← החלקה למעלה'); break; }
+    ch.unshift(N[x].he); x = PARENT[x];
+  }
+  return ch.join(' ← ');
+}
+
+/* ---------- מצב ---------- */
+const S = { on: true, screen: 'live', stack: [], mode: 'm_video', rec: false, recStart: 0, ccPage: 0, pro: false, vals: {}, sel: 'lv_specs', captions: true, modal: null,
+  clip: { mode: 'm_video', res: '4K', ar: '16:9', fps: 120, dur: 65, slow: [] }, used: { 'Internal Storage': 31.0, 'microSD Card': 119.0 }, dive: false };
+for (const id in N) if (N[id].def !== undefined) S.vals[id] = N[id].def;
+S.vals.aperture = 'ap_auto';
+const val = id => S.vals[id];
+const optHe = (id, v) => { const o = ((N[id] && N[id].o) || []).find(x => x[0] === v); return o ? o[1] : v; };
+const STOR = { 'Internal Storage': 50, 'microSD Card': 238.3 };
+const bigPhoto = () => /^3[48]MP| L$/.test(String(val('p_photosize')));
+const zoomOk = () => !['m_night', 'm_track', 'm_slow', 'm_tl'].includes(S.mode) && !(S.mode === 'm_photo' && bigPhoto());
+const isVid = () => S.mode === 'm_video' || S.mode === 'm_portrait';
+
+/* ---------- חוקי מפרט (דף המפרט הרשמי) ---------- */
+const resOf = () => String(val('p_res')).split('/')[0];
+function fpsList() {
+  const [r, a] = String(val('p_res')).split('/');
+  let f = ['24', '25', '30', '48', '50', '60'];
+  if (r === '8K' || S.mode === 'm_portrait') return ['24', '25', '30'];
+  if (a === '1:1') return f;
+  if (r === '1080p') return f.concat(['100', '120', '200', '240']);
+  return f.concat(['100', '120']);
+}
+function resList() {
+  const a = val('p_aspect');
+  if (a === 'Custom') return ['4K/1:1'];
+  let all = N.p_res.o.map(o => o[0]);
+  if (S.mode === 'm_portrait') all = all.filter(v => !v.startsWith('8K'));
+  if (a === 'Portrait') return all.filter(v => v.endsWith('/9:16'));
+  return all.filter(v => !v.endsWith('/9:16') && v !== '4K/1:1');
+}
+const dlogOn = () => String(val('ia_color')).startsWith('D-Log');
+function disabled(id) {
+  const r = resOf(), a = String(val('p_res')).split('/')[1], f = parseInt(val('p_fps'));
+  const dlog = dlogOn(), allBut = (k, keep) => ((N[k] && N[k].o) || []).map(o => o[0]).filter(v => v !== keep);
+  if (id === 'p_eis') {
+    if (r === '8K') return ['Off', 'HorizonBalancing', 'HorizonSteady'];
+    const d = (['16:9', '1:1'].includes(a) && f <= 60) ? [] : ['HorizonBalancing', 'HorizonSteady'];
+    if (val('p_fov') === 'Standard (Dewarp)') d.push('RockSteady+'); // צילום s47: עם Dewarp אין RS+ ברשימה
+    return d;
+  }
+  if (id === 'p_fov' && r === '8K') return ['Ultra Wide'];
+  if (id === 'p_slowrate' && val('p_slowres') !== '1080p') return ['8x (240fps)'];
+  if (id === 'p_slowres' && String(val('p_slowrate')).startsWith('8x')) return ['4K', '2.7K'];
+  if (id === 'ia_film') {
+    const filmOk = !dlog && r !== '8K' && ((a === '16:9' && f <= 60) || (a === '4:3' && f <= 30));
+    if (!filmOk && isVid()) return allBut('ia_film', 'Off');
+  }
+  if (id === 'ia_iso') {
+    if (r === '8K') return dlog ? ['12800', '25600', '51200'] : ['25600', '51200'];
+    if (S.mode !== 'm_night') return ['51200'];
+  }
+  if (id === 'p_loop' && (r === '8K' || a === '1:1' || val('p_aspect') === 'Custom')) return allBut('p_loop', 'Off');
+  if (id === 'p_burst' && val('p_live') === 'On') return allBut('p_burst', 'Off');
+  return [];
+}
+function apertureAvail(mode) {
+  if (mode === 'm_tl') return ['ap_fixed', 'ap_star'];
+  if (mode === 'm_night') return ['ap_large', 'ap_fixed', 'ap_star'];
+  return ['ap_auto', 'ap_fixed', 'ap_star'];
+}
+function normalize() {
+  if (isVid()) {
+    const rl = resList(); if (!rl.includes(val('p_res'))) S.vals.p_res = rl.includes('4K/16:9') ? '4K/16:9' : rl.includes('4K/9:16') ? '4K/9:16' : rl[0];
+    const fl = fpsList(); if (!fl.includes(val('p_fps'))) S.vals.p_fps = fl.includes('30') ? '30' : fl[0];
+  }
+  ['p_eis', 'p_fov', 'p_slowrate', 'p_slowres', 'ia_film', 'ia_iso', 'p_loop', 'p_burst'].forEach(id => {
+    if (!N[id] || !N[id].o) return;
+    const d = disabled(id);
+    if (d.includes(val(id))) S.vals[id] = id === 'p_eis' ? 'RockSteady' : N[id].o.map(o => o[0]).find(v => !d.includes(v));
+  });
+  if (val('p_prerec') !== 'Off' && val('p_loop') !== 'Off') S.vals.p_loop = 'Off';
+  if (val('p_live') === 'On' && val('p_burst') && val('p_burst') !== 'Off') S.vals.p_burst = 'Off';
+  if ((resOf() === '8K' || dlogOn()) && val('ia_quality') === 'On') S.vals.ia_quality = 'Off';
+  if (!apertureAvail(S.mode).includes(S.vals.aperture)) S.vals.aperture = apertureAvail(S.mode)[0];
+}
+const EIS_SHORT = { 'Off': 'Off', 'RockSteady': 'RS', 'RockSteady+': 'RS+', 'HorizonBalancing': 'HB', 'HorizonSteady': 'HS' };
+const FOV_SHORT = { 'Ultra Wide': 'UW', 'Wide': 'W', 'Natural Wide': 'NW', 'Standard (Dewarp)': 'S' };
+const FOV_TILE = { 'Ultra Wide': 'Ultra Wide', 'Wide': 'Wide', 'Natural Wide': 'Natural Wide', 'Standard (Dewarp)': 'Standard' };
+function apertureLabel() { const a = S.vals.aperture; return a === 'ap_large' ? 'F2.0' : a === 'ap_star' ? 'F4.0' : a === 'ap_fixed' ? 'F2.8' : (S.mode === 'm_night' ? 'F2.0' : 'F2.8'); }
+function remainStr() {
+  const k = val('st_loc') in STOR ? val('st_loc') : 'Internal Storage', free = Math.max(0, STOR[k] - (S.used[k] || 0));
+  if (S.mode === 'm_photo') return String(Math.min(9999, Math.floor(free * 1024 / 1.9)));
+  const m = Math.floor(free * 5.95); return `${Math.floor(m / 60)}h${String(m % 60).padStart(2, '0')}m`;
+}
+function specsLine() {
+  const m = S.mode;
+  if (isVid()) return `${resOf()}${val('p_fps')}/${EIS_SHORT[val('p_eis')]}/${FOV_SHORT[val('p_fov')]}`;
+  if (m === 'm_photo') { const ps = String(val('p_photosize')); return `${/^\d+MP/.test(ps) ? ps.split(' ')[0] : ps.replace(' ', '')}/${FOV_SHORT[val('p_pfov')]}`; }
+  if (m === 'm_slow') return `${val('p_slowres')}/${val('p_slowrate').split(' ')[0]}`;
+  if (m === 'm_hyper') return `${val('p_tlres')}${val('p_tlfps')}/${val('p_speed') === 'Auto' ? 'Auto' : val('p_speed')}`;
+  if (m === 'm_tl') return `${val('p_tlres')}${val('p_tlfps')}/${val('p_interval')}`;
+  if (m === 'm_night') return `${val('p_nres')}${val('p_nfps')}/${EIS_SHORT[val('p_neis')]}/${FOV_SHORT[val('p_nfov')]}`;
+  if (m === 'm_track') return `${val('p_trres')}${val('p_trfps')}`;
+  return '';
+}
+
+/* ---------- ניווט ---------- */
+function go(screen, arg) { S.stack.push([S.screen, S.arg]); S.screen = screen; S.arg = arg; render(); }
+function back() { let p = S.stack.pop(); if (p && p[0] === 'qspage') p = S.stack.pop(); if (p) { S.screen = p[0]; S.arg = p[1]; } else S.screen = 'live'; render(); }
+function home() { S.stack = []; S.screen = 'live'; S.arg = null; S.modal = null; render(); }
+function select(id) { if (N[id]) { S.sel = id; renderInfo(); } }
+let toastT;
+function toast(he, en) {
+  const t = $('#toast'); t.innerHTML = (en ? `<small>${esc(en)}</small>` : '') + (S.captions || !en ? `<b>${esc(he)}</b>` : ''); t.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2200);
+}
+function lbl(id, extra = '') { const n = N[id]; return `<span class="lb ${extra}"><small dir="ltr">${esc(n.en)}</small><b dir="auto">${esc(n.he)}</b></span>`; }
+function lb2(en, he) { return `<span class="lb"><small dir="ltr">${esc(en)}</small><b dir="auto">${esc(he)}</b></span>`; }
+function cap(he, pos = '') { return `<i class="cap ${pos}">${esc(he)}</i>`; }
+
+/* ---------- מסך הצילום (עמ' 15) ---------- */
+function scrLive() {
+  const m = N[S.mode];
+  const showZoom = zoomOk();
+  const store = val('st_loc') === 'microSD Card' ? 'sd' : 'store';
+  const remain = remainStr();
+  const grid = val('s_grid');
+  const pre = S.cdLeft ? `<div class="ov badge tcb num">${S.cdLeft}</div>` : S.mode === 'm_video' && val('p_prerec') !== 'Off' ? `<div class="ov badge tcb">PRE-REC ${esc(val('p_prerec'))}</div>` : S.mode === 'm_video' && val('p_loop') !== 'Off' ? `<div class="ov badge tcb">LOOP ${esc(val('p_loop'))}</div>` : '';
+  return `${grid === 'Grid' || grid === 'Grid & Diagonals' ? '<div class="gridov"></div>' : ''}${grid === 'Diagonals' || grid === 'Grid & Diagonals' ? '<div class="diagov"></div>' : ''}
+  <button class="ov p1" data-go="storage" data-sel="lv_storage">${ic(store)}<span class="num">${remain}</span>${cap('זמן שנותר', 'below')}</button>
+  ${S.rec ? `<div class="ov tc rec"><span class="dot"></span><span class="num">${recTime()}</span></div>` : pre}
+  ${val('tc_show') === 'On' ? `<div class="ov tcode num">00:14:07:12</div>` : ''}
+  <button class="ov p4" data-act="batt" data-sel="lv_battery"><span class="batt"><span class="num">100</span></span>${cap('סוללה', 'below r')}</button>
+  <button class="ov p2" data-go="playback" data-sel="lv_playback">${ic('play')}${cap('גלריה', 'side')}</button>
+  <button class="ov p3" data-go="modes" data-sel="lv_mode">${ic(m.icon)}${cap(m.he, 'above l')}</button>
+  <button class="ov p5" data-go="imgaudio" data-sel="lv_imgaudio">${ic('sliders')}${cap('תמונה ושמע', 'side r')}</button>
+  <button class="ov p6" data-go="aperture" data-sel="lv_aperture"><span class="num">${apertureLabel()}</span>${cap('צמצם', 'side r')}</button>
+  <button class="ov p7" data-go="params" data-sel="lv_specs"><span class="num">${esc(specsLine())}</span>${cap('מפרט ההקלטה', 'above')}</button>
+  ${showZoom ? `<button class="ov p8" data-zoom="1" data-sel="lv_zoom"><span class="zb num">${esc(val('lv_zoom').replace('.0', ''))}</span>${cap('זום', 'above r')}</button>` : ''}`;
+}
+
+/* ---------- בורר מצבים ---------- */
+/* מצבים מותאמים (Video 1..5) יושבים בתחילת הגלגל, כמו בצילום s33 */
+const WM = () => [...Array.from({ length: S.customCount || 0 }, (_, i) => 'cu' + (i + 1)), ...MODES];
+const curPick = () => S.custom && S.custom <= (S.customCount || 0) ? 'cu' + S.custom : S.mode;
+const selOf = m => /^cu/.test(m) ? 'm_video' : m;
+function commitMode(m) { if (/^cu/.test(m)) { S.mode = 'm_video'; S.custom = +m.slice(2); } else { S.mode = m; S.custom = 0; } }
+function scrModes() {
+  const WL = WM(), idx = Math.max(0, WL.indexOf(S.modePick ?? curPick())); S.modePick = WL[idx];
+  const cu = /^cu/.test(WL[idx]) ? +WL[idx].slice(2) : 0, id = cu ? 'm_video' : WL[idx], n = N[id];
+  const spec = specsLine().split('/'), title = `${n.en}${cu ? ' ' + cu : ''}+${spec[0]}${spec.length > 2 ? '' : ''}${isVid() && id === S.mode ? '/' + (String(val('p_res')).split('/')[1] || '') : ''}`;
+  const chips = [];
+  if (['m_video', 'm_portrait', 'm_night'].includes(id)) chips.push(EIS_SHORT[val(id === 'm_night' ? 'p_neis' : 'p_eis')]);
+  if (String(val('ia_color')).startsWith('D-Log')) chips.push('D-Log M');
+  const items = WL.map((m, i) => { const d = i - idx; if (Math.abs(d) > 2) return ''; const sz = d === 0 ? 21.5 : Math.abs(d) === 1 ? 14.5 : 10, x = d === 0 ? 0 : Math.sign(d) * (Math.abs(d) === 1 ? 23.6 : 39), k = /^cu/.test(m) ? m.slice(2) : '';
+    return `<button class="mbig ${d === 0 ? 'on' : ''}" data-mode="${m}" style="--sz:${sz}cqw;transform:translate(calc(-50% + ${x}cqw),-50%);opacity:${d === 0 ? 1 : Math.abs(d) === 1 ? .9 : .2}"><span style="display:block">${ic3d(k ? 'video' : N[m].icon)}</span>${k ? `<span class="mbadge num">${k}</span>` : ''}</button>`; }).join('');
+  return `<div class="modes">
+    <div class="mtitle num">${esc(title)}</div>
+    <div class="mchips">${chips.map(c => `<span class="mchip num">${esc(c)}</span>`).join('')}</div>
+    <div class="mtrack">${items}</div>
+    ${S.captions ? `<div class="mcap">${lb2(n.en, n.he)}</div>` : ''}
+    <div class="handle bot"></div></div>`;
+}
+/* אייקון "תלת-ממדי" של מצב צילום: מילוי מדורג לבן-אפור כמו בבורר המקורי */
+function ic3d(name) {
+  if (name === 'custom') return '<svg class="ic3" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="g3c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#b9c0c6"/></linearGradient><clipPath id="c3c"><circle cx="11" cy="11" r="10"/></clipPath></defs><circle cx="11" cy="11" r="10" fill="url(#g3c)"/><g clip-path="url(#c3c)" fill="#3d5a73"><circle cx="11" cy="8.4" r="3.7"/><path d="M3.2 21.5c.9-4.8 4-7.4 7.8-7.4s6.9 2.6 7.8 7.4z"/></g><circle cx="18" cy="17.8" r="3.9" fill="#1b1e21" stroke="#e8e2d4" stroke-width=".6"/><path d="M18 15.8v4M16 17.8h4" stroke="#f0b35a" stroke-width="1.1" stroke-linecap="round"/></svg>';
+  if (name === 'video') return `<svg class="ic3" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="g3v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9c0c6"/></linearGradient></defs><rect x="1" y="5.5" width="14.5" height="13" rx="2.2" fill="url(#g3v)"/><path d="M6.4 8.6v6.8l5.6-3.4z" fill="#2f3b44"/><path d="M16.6 10.1 22.4 6.4v11.2l-5.8-3.7z" fill="url(#g3v)"/><path d="M18.2 9.4v5.2M19.6 8.5v7M21 7.6v8.8" stroke="#8d979f" stroke-width=".45"/></svg>`;
+  const body = ICS[name] || ICS.video;
+  return `<svg class="ic3" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b9c0c6"/></linearGradient></defs><g fill="url(#g3)">${body}</g></svg>`;
+}
+
+/* ---------- לוח הפרמטרים (עמ' 16) ---------- */
+const PSPEC = {
+  m_video: { l: 'p_recmode', m: 'p_aspect', r: 'p_eisfov', w: ['p_res', 'p_fps'] },
+  m_portrait: { m: 'p_aspect', r: 'p_eisfov', w: ['p_res', 'p_fps'] },
+  m_night: { r: 'p_neisfov', w: ['p_nres', 'p_nfps'] }, // אריח הקלטה מוקדמת/במעגל מופיע במדריך אקשן 6 רק במצב וידאו
+  m_photo: { l: 'p_countdown', m: 'p_live', r: 'p_pfov', w: ['p_photosize', 'p_burst', 'p_format'] },
+  m_slow: { m: 'p_slowaspect', w: ['p_slowres', 'p_slowrate'] },
+  m_hyper: { r: 'p_tlfps', w: ['p_speed', 'p_tlres'] },
+  m_tl: { m: 'p_tlaspect', r: 'p_tlfps', w: ['p_interval', 'p_duration', 'p_tlres'] },
+  m_track: { m: 'p_traspect', w: ['p_trres', 'p_trfps'] },
+};
+function tileContent(id) {
+  if (id === 'p_recmode') {
+    const pr = val('p_prerec'), lo = val('p_loop');
+    return pr !== 'Off' ? `<span class="num">PRE ${esc(pr)}</span>` : lo !== 'Off' ? `<span class="num">LOOP ${esc(lo)}</span>` : ic('video');
+  }
+  if (id === 'p_aspect') { const a = val('p_aspect'); return a === 'Custom' ? '<span class="num">1:1</span>' : a === 'Portrait' ? '<span class="num">9:16</span>' : a === 'Landscape' ? '<span class="num">16:9</span>' : ic('autorot'); }
+  if (id === 'p_eisfov') return `<span class="num">${EIS_SHORT[val('p_eis')]}</span><i class="sep"></i><span class="num">${FOV_TILE[val('p_fov')]}</span>`;
+  if (id === 'p_neisfov') return `<span class="num">${EIS_SHORT[val('p_neis')]}</span><i class="sep"></i><span class="num">${FOV_TILE[val('p_nfov')]}</span>`;
+  if (id === 'p_live') return `<span class="num">LIVE</span><i class="sep"></i><span class="num">${esc(val('p_live').toUpperCase())}</span>`;
+  if (id === 'p_countdown') return `${ic('timer')}<span class="num">${esc(val('p_countdown'))}</span>`;
+  if (id === 'p_pfov') return `<span class="num">${FOV_TILE[val('p_pfov')]}</span>`;
+  return `<span class="num">${esc(val(id))}</span>`;
+}
+function wheelOpts(id) {
+  if (id === 'p_res') return resList().map(v => [v, optHe('p_res', v)]);
+  if (id === 'p_fps') return fpsList().map(v => [v, v]);
+  const d = disabled(id); return (N[id].o || []).filter(o => !d.includes(o[0]));
+}
+function wheel(id) {
+  const opts = wheelOpts(id), cur = val(id);
+  const isFps = /fps$/.test(id);
+  return `<div class="wsec">${isFps ? (S.captions ? `<div class="wlab caponly">${cap(N[id].he)}</div>` : '') : `<div class="wlab">${lbl(id)}</div>`}
+    <div class="wheel" data-wheel="${id}"><div class="wtrack">${opts.map(o => `<button class="wv ${o[0] === cur ? 'on' : ''}" data-set="${id}" data-v="${esc(o[0])}"><span class="num">${esc(o[0].replace(/ \(.*\)/, ''))}</span></button>`).join('')}</div></div>${isFps && /^\d/.test(cur) ? '<div class="wunit num">fps</div>' : ''}</div>`;
+}
+function scrParams() {
+  const sp = PSPEC[S.mode] || { w: [] };
+  const t = k => k && N[k] ? `<button class="ptile" data-tileopt="${k}" data-sel="${k}">${tileContent(k)}${cap(N[k].he, 'below')}</button>` : '<span class="ptile empty"></span>';
+  const fpsNow = parseInt(val(isVid() ? 'p_fps' : 'p_nfps')) || 30, recFps = fpsNow <= 25 ? 25 : fpsNow <= 60 ? 50 : 100;
+  const note = (isVid() || S.mode === 'm_night') && fpsNow % 25 !== 0 ? `<div class="pnote"><span class="num">50Hz Anti-flicker Recommended:</span><span class="num">${recFps}</span>${S.captions ? '<b>מומלץ בישראל</b>' : ''}<button class="pinfo" data-act="pinfo">${ic('info')}</button></div>` : '';
+  return `<div class="params"><div class="handle top"></div>
+    <div class="ptiles">${t(sp.l)}${t(sp.m)}${t(sp.r)}</div>
+    <div class="pbody">${sp.w.map(wheel).join('<div class="wdiv"></div>')}</div>${note}</div>`;
+}
+function centerWheels() {
+  document.querySelectorAll('#ui .wheel').forEach(w => {
+    const tr = w.firstElementChild, s = tr.querySelector('.on') || tr.firstElementChild; if (!s) return;
+    const x = w.clientWidth / 2 - (s.offsetLeft + s.offsetWidth / 2);
+    tr.style.transform = `translateX(${x}px)`;
+  });
+}
+function stepWheel(id, dir) {
+  const o = wheelOpts(id).map(x => x[0]); const i = o.indexOf(val(id));
+  const j = Math.max(0, Math.min(o.length - 1, i + dir)); if (j !== i) setVal(id, o[j]);
+}
+
+
+/* ---------- בוררי ערך (צילומי מסך אמיתיים s36/s39/s45/s46/s47/s48) ---------- */
+const dispV = (id, v) => String(v).replace('-bit', 'bit').replace('Standard (Dewarp)', 'Standard (Dewarp)');
+const APL = { ap_auto: 'Auto', ap_large: 'Large Aperture (f/2.0)', ap_fixed: 'Fixed (f/2.8)', ap_star: 'Starburst (f/4.0)' };
+const APD = { ap_auto: 'Variable aperture that automatically adjusts to shooting conditions.\nMaximizes aperture in low light', ap_fixed: 'Fixed f/2.8 aperture, like classic action cameras. Minimum focus distance is 35 cm', ap_star: 'Fixed aperture f/4.0 with minimum focus distance of 20 cm to capture six-point starburst effect', ap_large: 'Fixed f/2.0 aperture for maximum light' };
+const PICK = {
+  eisfov: () => ({ sel: 'p_eisfov', handle: 1, L: { id: 'p_eis' }, R: { id: 'p_fov', rev: 1 }, desc: val('p_fov') === 'Standard (Dewarp)' ? 'Equivalent focal length (15 mm)' : '' }),
+  neisfov: () => ({ sel: 'p_neisfov', handle: 1, L: { id: 'p_neis' }, R: { id: 'p_nfov', rev: 1 } }),
+  aperture: () => ({ sel: 'ia_aperture', handle: 1, title: 'Variable Aperture', he: 'צמצם משתנה',
+    L: { list: apertureAvail(S.mode).map(k => [k, APL[k], N[k] ? N[k].he : '']), cur: S.vals.aperture, key: 'aperture' },
+    R: S.vals.aperture === 'ap_auto' ? { id: 'ap_auto', fmt: v => v.replace(/\.0/g, '').replace('–', '-') } : null, desc: APD[S.vals.aperture] }),
+  color: () => ({ sel: 'ia_color', topL: 'Color', topR: 'Color Recovery', L: { id: 'ia_color' }, R: { id: 'ia_recovery', list: [['Off', 'Off', 'כבוי'], ['On', 'On', 'פועל']] }, check: 1 }),
+  imgadj: () => ({ sel: 'ia_texture', topL: 'Texture', topR: 'Noise Reduction', L: { id: 'ia_texture', rev: 1 }, R: { id: 'ia_nr', rev: 1 }, reset: 1, check: 1 }),
+  wb: () => ({ sel: 'ia_wb', L: { id: 'ia_wb', skip: 'Auto', fmt: v => v, dim: val('ia_wb') === 'Auto' }, box: { id: 'ia_wb', label: 'M', text: 'AWB', on: val('ia_wb') === 'Auto', set: 'Auto' }, check: 1 }),
+  exposure: () => ({ sel: 'ia_exp', topL: `S ${val('ia_shutter') === 'Auto' ? '1/' + (parseInt(val('p_fps')) || 30) : val('ia_shutter')}`, topLc: 'sel', topR: !S.pro ? '' : `${val('ia_exp') === 'M' ? val('ia_iso') : String(S.vals.iso_rng || '100~12800').split('~')[1]} ISO`, topRbadge: val('ia_exp') !== 'M' ? 'A' : '',
+    L: { id: 'ia_ev', fmt: v => (v === '0' ? '+0.0' : v.length === 2 ? v + '.0' : v) + 'EV' },
+    R: !S.pro ? null : val('ia_exp') === 'M' ? { id: 'ia_iso', skip: 'Auto' } : { id: 'iso_rng', list: ['100~1600', '100~3200', '100~6400', '100~12800'].map(v => [v, v, 'טווח ISO אוטומטי']), cur: S.vals.iso_rng || '100~12800', key: 'iso_rng' }, box: !S.pro ? null : { id: 'ia_exp', label: 'M', text: val('ia_exp') === 'M' ? 'M' : 'Auto', on: val('ia_exp') !== 'M', set: val('ia_exp') === 'M' ? 'Auto' : 'M' }, check: 1 }),
+};
+function vwheel(side, w) {
+  let list = w.list || (N[w.id].o || []).filter(o => !disabled(w.id).includes(o[0])).map(o => [o[0], o[0], o[1]]);
+  if (w.skip) list = list.filter(o => o[0] !== w.skip);
+  if (w.rev) list = [...list].reverse();
+  const cur = w.cur ?? val(w.id), i = Math.max(0, list.findIndex(o => o[0] === cur));
+  const f = w.fmt || (v => dispV(w.id, v));
+  const rows = [-2, -1, 0, 1, 2].map(d => { const o = list[i + d]; if (!o || (w.dim && d !== 0)) return '<span class="vv empty"></span>';
+    return `<button class="vv d${Math.abs(d)} ${d === 0 && !w.dim ? 'on' : ''}" data-pk="${w.key || w.id}" data-v="${esc(o[0])}"><span class="num">${esc(f(o[1]))}</span>${d === 0 && S.captions && o[2] && o[2] !== o[1] ? `<i class="vcap">${esc(bd(o[2]))}</i>` : ''}</button>`; }).join('');
+  return `<div class="vwheel ${side}" data-vw="${w.key || w.id}">${rows}</div>`;
+}
+function scrPick(key) {
+  const P = PICK[key](), grid = ['Grid', 'Grid & Diagonals'].includes(val('s_grid'));
+  return `<div class="pick">${grid ? '<div class="gridov"></div>' : ''}
+    ${P.handle ? '<div class="handle top"></div>' : ''}
+    ${P.handle ? `<button class="pk-back" data-back="1" aria-label="חזרה">${ic('back')}</button>` : ''}
+    ${P.title ? `<div class="pk-title">${lb2(P.title, P.he || '')}</div>` : ''}
+    ${P.topL ? `<div class="pk-tl num ${P.topLc || ''}">${esc(P.topL)}</div>` : ''}
+    ${P.topR ? `<div class="pk-tr num ${P.box || P.reset ? 'withbox' : ''}">${esc(P.topR)}${P.topRbadge ? `<span class="pk-a">${P.topRbadge}</span>` : ''}</div>` : ''}
+    ${vwheel('L', P.L)}${P.R ? vwheel('R', P.R) : ''}
+    ${P.box ? `<div class="pk-box"><span class="pk-m num">${P.box.label}</span><button class="pk-mode ${P.box.on ? 'on' : ''}" data-pk="${P.box.id}" data-v="${esc(P.box.set)}"><span class="num">${esc(P.box.text)}</span></button></div>` : ''}
+    ${P.reset ? `<button class="pk-reset" data-pkreset="${key}" aria-label="איפוס">${ic('reset')}</button>` : ''}
+    ${P.check ? `<button class="pk-ok" data-back="1" aria-label="אישור">${ic('check')}</button>` : ''}
+    ${P.desc ? `<div class="pk-desc">${esc(P.desc)}</div>` : ''}</div>`;
+}
+
+/* ---------- לוח תמונה ושמע (צילומים s50, s38) ---------- */
+const IA_TILES = {
+  img: () => S.pro ? ['ia_exp', 'ia_wb', 'ia_color', 'ia_aperture', 'ia_scenario', 'ia_imgadj', 'ia_film', 'ia_quality'] : ['ia_ev', 'ia_aperture', 'ia_color', 'ia_film', 'ia_scenario', 'ia_quality'],
+  aud: () => ['ia_channel', 'ia_wind'],
+};
+const IA_LABEL = { ia_exp: ['Exposure', 'חשיפה'], ia_imgadj: ['Image Adjustment', 'התאמות תמונה'], ia_wind: ['Wind Noise Reduction', 'הפחתת רעשי רוח'], ia_scenario: ['Stabilization Scenario', 'תרחיש ייצוב'] };
+function iaValue(k) {
+  if (k === 'ia_aperture') return S.vals.aperture === 'ap_auto' ? String(val('ap_auto')).replace(/\.0/g, '').replace('–', '-') : APL[S.vals.aperture].replace(/.*\((.*)\)/, '$1');
+  if (k === 'ia_wb') return val('ia_wb') === 'Auto' ? 'AWB' : val('ia_wb');
+  if (k === 'ia_color') { const c = dispV(k, val(k)); return c.includes('10bit') ? esc(c.replace(' 10bit', '')) + '<span class="b10">10bit</span>' : esc(c); }
+  if (k === 'ia_imgadj') return '';
+  if (N[k] && N[k].type === 'toggle') return val(k) === 'On' ? 'On' : 'Off';
+  return esc(val(k) ?? '');
+}
+function scrImg() {
+  const tab = S.iaTab || 'img', tiles = IA_TILES[tab]().filter(k => N[k] || IA_LABEL[k]);
+  const t = k => { const [en, he] = IA_LABEL[k] || [N[k].en, N[k].he], off = k === 'ia_quality' && (resOf() === '8K' || dlogOn());
+    return `<button class="iat" ${off ? 'disabled' : ''} data-ia="${k}" data-sel="${N[k] ? k : 'imgaudio'}"><span class="iat-l">${lb2(en, he)}</span><span class="iat-v num">${iaValue(k)}</span></button>`; };
+  return `<div class="imgp">
+    <div class="imgp-top"><button class="iat-tab ${tab === 'img' ? 'on' : ''}" data-iatab="img" aria-label="תמונה">${ic('aperture')}</button><button class="iat-tab ${tab === 'aud' ? 'on' : ''}" data-iatab="aud" aria-label="שמע">${ic('mic')}</button>
+      <button class="pro-b ${S.pro ? 'on' : ''}" data-row="ia_pro" data-sel="ia_pro"><span class="num">PRO</span></button></div>
+    <div class="imgp-bar"></div>
+    <div class="imgp-grid lbody">${tiles.map(t).join('')}</div></div>`;
+}
+/* ---------- שמירת ההגדרות כמצב מותאם (צילום s43) ---------- */
+function scrSaveCur() {
+  return `<div class="list"><div class="lhead"><button class="bk" data-back="1" aria-label="חזרה">${ic('back')}</button>${lb2('Save Current Settings', 'שמירת ההגדרות הנוכחיות')}<button class="bk" data-act="cu_del" aria-label="מחיקה">${ic('trashO')}</button></div>
+    <div class="savecur"><button class="sc-i" data-act="cu_new" data-sel="cu_save">${ic3d('video')}<span class="mbadge num">${(S.customCount || 0) + 1}</span></button>
+    <button class="sc-i" data-act="cu_new" data-sel="cu_save">${ic3d('custom')}</button><div class="sc-cap">${lb2('Custom', 'מצב מותאם')}</div></div></div>`;
+}
+
+/* ---------- מרכז הבקרה (עמ' 18) ואחסון (עמ' 20) ---------- */
+const CC_TILES = ['cc_custom', 'cc_qs', 'cc_gesture', 'cc_settings', 'cc_orient', 'cc_lock', 'cc_voice', 'cc_front'];
+function scrCC() {
+  if (S.ccPage === 1) {
+    const d = new Date(), p2 = n => String(n).padStart(2, '0');
+    const card = (k, en, _u, total, of) => { const used = S.used[k] || 0; return `<button class="scard ${val('st_loc') === k ? 'on' : ''}" data-stor="${k}" data-sel="st_loc"><span class="shead num">${en}</span>
+      <span class="ring" style="--p:${used / total}"><span class="num big">${used.toFixed(1)}GB</span><span class="num small">${of}</span></span>${cap(k === 'microSD Card' ? 'כרטיס זיכרון' : 'זיכרון פנימי', 'below')}</button>`; };
+    return `<div class="cc stor"><div class="dots"><i></i><i class="on"></i></div>
+      <div class="sdate num">${d.getFullYear()}.${p2(d.getMonth() + 1)}.${p2(d.getDate())}<span class="sp"></span>${p2(d.getHours())}:${p2(d.getMinutes())}</div>
+      <div class="scards">${card('Internal Storage', 'Internal', 31.0, 50, '50.0GB')}${card('microSD Card', 'SD Card', 119.0, 238.3, '238.3GB')}
+      <button class="scard fmt" data-go="storage" data-sel="storage"><span class="num">Format</span>${cap('פרמוט', 'below')}</button></div>
+      <div class="handle bot"></div></div>`;
+  }
+  const tiles = CC_TILES.filter(id => N[id]).map(id => {
+    const n = N[id], on = n.type === 'toggle' && val(id) === 'On';
+    return `<div class="ccell"><button class="tile ${on ? 'on' : ''}" data-tile="${id}" data-sel="${id}" aria-label="${esc(n.en)}">${ic(n.icon)}</button>${S.captions ? lbl(id, 'tlab') : ''}</div>`;
+  }).join('');
+  return `<div class="cc"><div class="dots"><i class="on"></i><i></i></div><div class="tiles">${tiles}</div><div class="handle bot"></div></div>`;
+}
+
+/* ---------- רשימות ---------- */
+function rowValue(id) {
+  const n = N[id];
+  if (n.type === 'toggle') return `<span class="sw ${val(id) === 'On' ? 'on' : ''}"><i></i></span>`;
+  if (n.o && !n.kids.length) return `<span class="rv"><span dir="ltr">${esc(val(id))}</span>${S.captions ? `<small dir="auto">${esc(bd(optHe(id, val(id))))}</small>` : ''}</span>${ic('chevron', 'chev')}`;
+  if (n.val) return `<span class="rv"><span dir="ltr">${esc(n.val)}</span></span>`;
+  if (n.kids.length || n.type === 'page') return ic('chevron', 'chev');
+  return '';
+}
+const PAGE_TITLE = { cc_qs: ['Quick Switch Button Settings', 'הגדרות לחצן ההחלפה המהירה'], cc_settings: ['Settings', 'הגדרות'] };
+const NO_ICONS = ['cc_qs'];
+function head(id) { const t = PAGE_TITLE[id]; return `<div class="lhead"><button class="bk" data-back="1" aria-label="חזרה">${ic('back')}</button>${t ? lb2(t[0], t[1]) : lbl(id)}<button class="bk" data-home="1" aria-label="סגירה">${ic('close')}</button></div>`; }
+function scrList(id) {
+  let kids = (N[id].kids || []).filter(k => N[k]);
+  if (id === 'imgaudio') kids = kids.filter(k => S.pro || !N[k].pro || k === 'ia_pro');
+  if (id === 'ia_aperture') { const av = apertureAvail(S.mode); kids = kids.filter(k => av.includes(k)); }
+  const rows = kids.map(k => {
+    const kn = N[k], isAp = k.startsWith('ap_'), on = isAp && S.vals.aperture === k;
+    const off = k === 'ia_quality' && (resOf() === '8K' || dlogOn());
+    return `<button class="row ${kn.danger ? 'danger' : ''} ${on ? 'on' : ''}" ${off ? 'disabled' : ''} data-row="${k}" data-sel="${k}">${NO_ICONS.includes(id) ? '' : ic(kn.icon)}${lbl(k)}${isAp ? (on ? '<span class="chk">' + ic('check') + '</span>' : '') : rowValue(k)}</button>`;
+  }).join('');
+  return `<div class="list">${head(id)}<div class="lbody">${rows}</div></div>`;
+}
+function scrOpts(id) {
+  if (id === 's_snap' && S.customCount) {
+    const sp = specsLine().split('/'), sub2 = `+${sp[0]}/${String(val('p_res')).split('/')[1] || '16:9'}`;
+    const rows = Array.from({ length: S.customCount }, (_, i) => { const c = `Video ${i + 1}`;
+      return `<button class="row ${c === val(id) ? 'on' : ''}" data-pick="${id}" data-v="${c}"><span class="cui">${ic('video')}<i class="cnum num">${i + 1}</i></span>${lb2(c + sub2, 'מצב מותאם ' + (i + 1))}${c === val(id) ? '<span class="chk">' + ic('check') + '</span>' : ''}</button>`; }).join('');
+    return `<div class="list">${head(id)}<div class="lbody"><div class="lsec">${lb2('Custom Modes', 'מצבים מותאמים')}</div>${rows}</div></div>`;
+  }
+  const dis = disabled(id);
+  const rows = N[id].o.map(o => `<button class="row ${o[0] === val(id) ? 'on' : ''}" ${dis.includes(o[0]) ? 'disabled' : ''} data-pick="${id}" data-v="${esc(o[0])}">${lb2(o[0], bd(o[1]))}${o[0] === val(id) ? '<span class="chk">' + ic('check') + '</span>' : ''}</button>`).join('');
+  return `<div class="list">${head(id)}<div class="lbody">${rows}</div></div>`;
+}
+
+/* ---------- גלריה ---------- */
+const fmtT = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+function scrPlayback() {
+  const c = S.clip || {}, pos = S.pbPos ?? 18, dur = c.dur || 0;
+  return `<div class="pb">
+    <button class="ov pbback" data-back="1" data-sel="playback">${ic('back')}${cap('חזרה', 'below')}</button>
+    <div class="pbtop"><button class="ov" data-act="pb_vol" data-sel="pb_vol">${ic('speaker')}${cap('עוצמה', 'below')}</button><button class="ov" data-act="pb_share" data-sel="pb_share">${ic('share')}${cap('שיתוף', 'below')}</button><button class="ov" data-act="pb_del" data-sel="pb_del">${ic('trash')}${cap('מחיקה', 'below r')}</button></div>
+    ${S.fast ? '<div class="ov badge tcb num">2x ▶▶</div>' : ''}
+    <div class="pbbot"><button class="ov" data-act="pb_hl" data-sel="pb_hl">${ic('star')}${cap('רגע שיא', 'above l')}</button><div class="scrub"><i style="width:${pos}%"></i>${(S.marks || []).map(x => `<b style="left:${x}%"></b>`).join('')}${(c.slow || []).map(x => `<b class="slw" style="left:${x}%"></b>`).join('')}</div><span class="num">${c.photo ? '' : `${fmtT(pos / 100 * dur)} / ${fmtT(dur)}`}</span><button class="ov" data-act="pb_slow" data-sel="pb_slow">${ic('snail')}${cap('הילוך איטי במיוחד', 'above r')}</button></div></div>`;
+}
+
+/* ---------- חלון אישור (פרמוט, איפוס, מחיקה) ---------- */
+function confirmBox(en, he, okEn, okHe, fn) { S.modal = { en, he, okEn, okHe, fn }; render(); }
+function scrModal() {
+  const m = S.modal;
+  return `<div class="modal"><div class="mbox"><p>${lb2(m.en, m.he)}</p><div class="mbtns"><button class="mb" data-modal="0">${lb2('Cancel', 'ביטול')}</button><button class="mb ok" data-modal="1">${lb2(m.okEn, m.okHe)}</button></div></div></div>`;
+}
+
+function render() {
+  const sc = $('#screen'), ui = $('#ui');
+  const lbx = !!(S.front && val('cc_front') !== 'On' && S.screen === 'live');
+  const ar = S.mode === 'm_photo' ? (/^38MP|^4:3/.test(String(val('p_photosize'))) ? '43' : '169') : isVid() ? (val('p_aspect') === 'Custom' ? '11' : String(val('p_res')).split('/')[1] === '4:3' ? '43' : '169') : '169';
+  sc.classList.toggle('lb16', lbx && ar === '169'); sc.classList.toggle('lb43', lbx && ar === '43');
+  sc.classList.toggle('orig', !S.captions);
+  if (S.on && S.boot) { ui.innerHTML = '<div class="boot">OSMO</div>'; renderCrumb(); return; }
+  if (!S.on) { ui.innerHTML = `<div class="off">${lb2('Press and hold QS to power on', 'המצלמה כבויה · לחיצה ארוכה על QS מדליקה')}</div>`; renderCrumb(); return; }
+  normalize();
+  let h = ''; const s = S.screen;
+  if (s === 'live') h = scrLive();
+  else if (s === 'modes') h = scrModes();
+  else if (s === 'params') h = scrParams();
+  else if (s === 'cc') h = scrCC();
+  else if (s === 'playback') h = scrPlayback();
+  else if (s === 'qspage') h = scrQS();
+  else if (s === 'aperture') h = scrPick('aperture');
+  else if (s === 'pick') h = scrPick(S.arg);
+  else if (s === 'imgaudio') h = scrImg();
+  else if (s === 'savecur') h = scrSaveCur();
+  else if (s === 'opts') h = scrOpts(S.arg);
+  else if (N[s]) h = scrList(s);
+  if (S.dark) h = `<div class="off">${lb2('Screen Off', 'המסך כבוי · נגיעה או QS מדליקים')}</div>` + (S.rec ? `<div class="ov tc rec"><span class="dot"></span><span class="num">${recTime()}</span></div>` : '');
+  if (S.modal) h += scrModal();
+  if (S.vals.cc_lock === 'On' && s === 'live' && !S.dark) h += `<div class="lockov">${ic('lock')}${lb2('Swipe up to unlock', 'המסך נעול · החלקה למעלה לשחרור')}</div>`;
+  if (S.scrLock && !S.dark) h += `<div class="lockov">${ic('lock')}${lb2('Swipe up to switch to this screen', 'החלקה למעלה מעבירה למסך הזה')}</div>`;
+  ui.innerHTML = h;
+  sc.dataset.s = s;
+  if (s === 'params') centerWheels();
+  if (REDUCE && typeof Feed !== 'undefined' && Feed.once) Feed.once();
+  renderCrumb();
+}
+const SCR_NAME = { pick: 'בורר ערך', savecur: 'שמירת ההגדרות הנוכחיות', qspage: 'דף ההחלפה המהירה', live: 'מסך הצילום', modes: 'בורר מצבי הצילום', params: 'לוח הפרמטרים', cc: 'מרכז הבקרה', playback: 'גלריה', aperture: 'צמצם משתנה', opts: 'בחירת אפשרות' };
+function renderCrumb() {
+  const s = S.screen;
+  $('#crumb').textContent = !S.on ? 'המצלמה כבויה' : (SCR_NAME[s] || (N[s] ? N[s].he : s)) + (s === 'opts' && N[S.arg] ? ': ' + N[S.arg].he : '') + (s === 'cc' && S.ccPage ? ' · אחסון' : '');
+}
+
+/* ---------- פאנל הסבר ---------- */
+function renderInfo() {
+  const n = N[S.sel]; if (!n) return;
+  const c = CONF[n.conf] || CONF.h, how = howTo(n.id);
+  const opts = n.o ? `<div class="iopts"><h4>אפשרויות</h4><ul>${n.o.map(o => `<li class="${S.vals[n.id] === o[0] ? 'cur' : ''}"><span dir="ltr">${esc(o[0])}</span><b dir="auto">${esc(bd(o[1]))}</b></li>`).join('')}</ul></div>` : '';
+  const kids = n.kids && n.kids.length ? `<div class="iopts"><h4>בתוך התפריט</h4><ul>${n.kids.filter(k => N[k]).map(k => `<li><button data-jump="${k}" data-ctx="${n.id}"><span dir="ltr">${esc(N[k].en)}</span><b>${esc(N[k].he)}</b></button></li>`).join('')}</ul></div>` : '';
+  $('#info').innerHTML = `<div class="ihead"><span class="iic">${ic(n.icon)}</span><div><small dir="ltr">${esc(n.en)}</small><h3>${esc(n.he)}</h3></div></div>
+    ${n.d ? `<p>${esc(bd(n.d))}</p>` : ''}${how ? `<p class="how"><span>איך מגיעים</span>${esc(how)}</p>` : ''}
+    ${n.def !== undefined ? `<p class="def"><span>ברירת מחדל</span><bdi dir="ltr">${esc(n.def)}</bdi>${n.o && optHe(n.id, n.def) !== n.def ? ' · ' + esc(bd(optHe(n.id, n.def))) : ''}</p>` : ''}${opts}${kids}
+    <p class="conf ${c[1]}">מקור: ${c[0]}</p>`;
+}
+
+/* ---------- הקשות ---------- */
+function setVal(id, v) {
+  S.vals[id] = v; select(id);
+  if (id === 'ia_pro') S.pro = v === 'On';
+  if (id === 'p_prerec' && v !== 'Off') S.vals.p_loop = 'Off';
+  if (id === 'p_loop' && v !== 'Off') S.vals.p_prerec = 'Off';
+  if (id === 'p_prerec' && v !== 'Off') S.lastPre = v;
+  if (id === 'p_live' && v === 'On') S.vals.p_burst = 'Off';
+  if (id === 'p_burst' && v !== 'Off') S.vals.p_live = 'Off';
+  if (id === 's_lang' && v !== 'English') toast('במצלמה האמיתית הממשק יוחלף לשפה זו', 'Language');
+  render();
+}
+const DANGER = {
+  st_fmt_int: ['Format internal storage? All data will be erased.', 'לפרמט את הזיכרון הפנימי? כל הקבצים יימחקו.', 'Format', 'פרמוט'],
+  st_fmt_sd: ['Format SD card? All data will be erased.', 'לפרמט את כרטיס הזיכרון? כל הקבצים יימחקו.', 'Format', 'פרמוט'],
+  s_reset: ['Restore factory settings?', 'לאפס להגדרות היצרן?', 'Reset', 'איפוס'],
+  wf_reset: ['Reset all wireless connections?', 'לאפס את כל החיבורים האלחוטיים?', 'Reset', 'איפוס'],
+  pb_del: ['Delete this file?', 'למחוק את הקובץ?', 'Delete', 'מחיקה'],
+  tc_reset: ['Reset timecode?', 'לאפס את קוד הזמן?', 'Reset', 'איפוס'],
+};
+function doAction(k) {
+  const n = N[k]; if (!n && !DANGER[k]) return;
+  if (DANGER[k]) {
+    const [en, he, oe, oh] = DANGER[k];
+    return confirmBox(en, he, oe, oh, () => {
+      if (k === 'st_fmt_int' || k === 'st_fmt_sd') { S.used[k === 'st_fmt_int' ? 'Internal Storage' : 'microSD Card'] = 0; S.marks = []; S.clip = null; render(); }
+      toast(k === 'pb_del' ? 'הקובץ נמחק (הדמיה בלבד)' : 'בוצע (הדמיה בלבד)', 'Done');
+    });
+  }
+  if (k === 'mic_tx1' || k === 'mic_tx2' || k === 's_buds') return toast('מחפשת מכשירים לצימוד…', 'Searching…');
+  if (k === 'cu_save') return go('savecur');
+  if (k.startsWith('cu_c')) { home(); return toast('הופעל מצב ' + n.en, n.en); }
+  if (k === 's_horizon') return toast('מכיילת את האופק… הניחו את המצלמה על משטח ישר', 'Calibrating…');
+  if (k === 'in_logs') return toast('היומנים נשמרו לכרטיס הזיכרון', 'Logs exported');
+  if (k === 's_usb') return toast('מצב USB הופעל. חברו את הכבל מחדש', 'USB Mode');
+  toast(n.he, n.en);
+}
+function poke() { if (snapOff) { clearTimeout(snapOff); snapOff = null; } }
+function onTap(e) {
+  poke();
+  if (S.dark) { S.dark = false; return render(); }
+  if (S.scrLock) return;
+  const sb = e.target.closest('.scrub');
+  if (sb && !swiping && S.screen === 'playback') { const r = sb.getBoundingClientRect(); S.pbPos = Math.max(0, Math.min(100, Math.round((e.clientX - r.left) / r.width * 100))); return render(); }
+  const b = e.target.closest('button'); if (!b || swiping || b.disabled) return;
+  const d = b.dataset;
+  if (d.modal !== undefined) {
+    if (d.modal === '0' && S.modal && S.modal.en.startsWith('Generating') && S.clip && S.clip.slow) S.clip.slow.pop();
+    const fn = S.modal && S.modal.fn; S.modal = null; render(); if (d.modal === '1' && fn) fn(); return;
+  }
+  if (d.sel) select(d.sel);
+  if (d.back) return back();
+  if (d.go) {
+    clearTimeout(qsBack);
+    if (S.vals.cc_lock === 'On' && S.screen === 'live') return;
+    if (S.rec && S.screen === 'live') return toast('לא זמין בזמן הקלטה', 'Unavailable while recording');
+    if (d.go === 'modes') S.modePick = curPick();
+    return go(d.go);
+  }
+  if (d.zoom) { const o = N.lv_zoom.o.map(x => x[0]); S.vals.lv_zoom = o[(o.indexOf(val('lv_zoom')) + 1) % o.length]; return render(); }
+  if (d.mode) {
+    if (d.mode === S.modePick) { commitMode(d.mode); S.modePick = null; select(S.mode); return home(); }
+    S.modePick = d.mode; select(selOf(d.mode)); return render();
+  }
+  if (d.set) return setVal(d.set, d.v);
+  if (d.home) return home();
+  if (d.pk) { if (d.pk === 'aperture') { S.vals.aperture = d.v; select(d.v); return render(); } if (d.pk === 'iso_rng') { S.vals.iso_rng = d.v; select('ia_iso'); return render(); } return setVal(d.pk, d.v); }
+  if (d.pkreset) { S.vals.ia_texture = '0'; S.vals.ia_nr = '0'; toast('התאמות התמונה אופסו', 'Reset'); return render(); }
+  if (d.iatab) { S.iaTab = d.iatab; return render(); }
+  if (d.ia) {
+    const k = d.ia, map = { ia_exp: 'exposure', ia_wb: 'wb', ia_color: 'color', ia_aperture: 'aperture', ia_imgadj: 'imgadj', ia_ev: 'exposure' };
+    if (map[k]) return go('pick', map[k]);
+    if (N[k] && N[k].type === 'toggle') return setVal(k, val(k) === 'On' ? 'Off' : 'On');
+    if (N[k] && N[k].o) return go('opts', k);
+    return;
+  }
+  if (d.tileopt === 'p_eisfov' || d.tileopt === 'p_neisfov') { select(d.tileopt); return go('pick', d.tileopt === 'p_eisfov' ? 'eisfov' : 'neisfov'); }
+  if (d.tileopt) { const n = N[d.tileopt]; if (!n) return; if ((n.kids || []).length) return go(d.tileopt); if (n.type === 'toggle') return setVal(d.tileopt, val(d.tileopt) === 'On' ? 'Off' : 'On'); return go('opts', d.tileopt); }
+  if (d.stor) { setVal('st_loc', d.stor); return toast('הקבצים יישמרו ל' + (d.stor === 'microSD Card' ? 'כרטיס הזיכרון' : 'זיכרון הפנימי'), d.stor); }
+  if (d.pick) { setVal(d.pick, d.v); return back(); }
+  if (d.tile) {
+    const n = N[d.tile]; if (!n) return;
+    if (n.type === 'toggle') { setVal(d.tile, val(d.tile) === 'On' ? 'Off' : 'On'); toast(`${n.he}: ${val(d.tile) === 'On' ? 'פועל' : 'כבוי'}`, `${n.en}: ${val(d.tile) === 'On' ? 'On' : 'Off'}`); if (d.tile === 'cc_lock' && val('cc_lock') === 'On') home(); return; }
+    return go(d.tile);
+  }
+  if (d.row) {
+    const k = d.row, n = N[k]; if (!n) return;
+    if (k.startsWith('ap_')) { S.vals.aperture = k; if (k === 'ap_auto') return go('opts', 'ap_auto'); toast(n.he, n.en); return render(); }
+    if (n.type === 'toggle') return setVal(k, val(k) === 'On' ? 'Off' : 'On');
+    if (n.kids.length) return go(k);
+    if (n.o) return go('opts', k);
+    if (n.type === 'action') return doAction(k);
+    return toast(n.he, n.en);
+  }
+  if (d.act === 'cu_new') { S.customCount = Math.min(5, (S.customCount || 0) + 1); toast(`ההגדרות נשמרו כמצב מותאם Video ${S.customCount}`, `Saved as Video ${S.customCount}`); return back(); }
+  if (d.act === 'cu_del') return confirmBox('Delete custom modes?', 'למחוק את המצבים המותאמים?', 'Delete', 'מחיקה', () => { S.customCount = 0; S.custom = 0; toast('המצבים המותאמים נמחקו', 'Deleted'); });
+  if (d.act) {
+    if (d.act === 'batt') return toast('סוללה 100% · עד 240 דקות (1080p/24fps, מסכים כבויים)', 'Battery 100%');
+    if (d.act === 'pinfo') return toast('בישראל החשמל 50Hz: 25/50/100fps מונעים הבהובים מתאורה', 'Anti-flicker');
+    if (d.act === 'pb_del') return doAction('pb_del');
+    if (d.act === 'pb_hl') { const p = S.pbPos ?? 18; if (!(S.marks || []).includes(p)) S.marks = [...(S.marks || []), p]; render(); return toast('סומן רגע שיא', 'Highlight marked'); }
+    if (d.act === 'pb_slow') {
+      const c = S.clip || {}, p = S.pbPos ?? 18, t = p / 100 * (c.dur || 0);
+      if (c.photo || c.mode !== 'm_video') return toast('הילוך איטי במיוחד זמין רק לסרטוני וידאו', 'Video footage only');
+      if (c.ar !== '16:9' || !['4K', '2.7K', '1080p'].includes(c.res) || c.fps < 100) return toast('נדרש סרטון 4K/2.7K/1080p ביחס 16:9 ב-100fps ומעלה', 'Requires 16:9 ≥100fps');
+      if (c.dur <= 3 || t < 1.5 || t > c.dur - 2) return toast('לא זמין ב-1.5 השניות הראשונות וב-2 האחרונות', 'Not available at this point');
+      if (c.slow.length >= 6) return toast('אפשר עד 6 קטעים לסרטון', 'Max 6 clips per video');
+      c.slow.push(p);
+      return confirmBox('Generating super slow-motion (1080p)…', 'יוצרת הילוך איטי במיוחד (1080p)…', 'Preview', 'תצוגה מקדימה', () => toast('תצוגה מקדימה של ההילוך האיטי', 'Preview'));
+    }
+    const n = N[d.act]; return n ? toast(n.he, n.en) : undefined;
+  }
+  if (d.qs) { clearTimeout(qsBack); S.qsPick = d.qs; qsApply(d.qs); }
+}
+
+/* ---------- החלקות ---------- */
+let sx, sy, swiping = false, swWheel = null, lpT;
+function swipe(dir) {
+  if (!S.on) return;
+  poke();
+  if (S.scrLock) { if (dir === 'up') { S.scrLock = false; return render(); } return; }
+  const s = S.screen;
+  if (S.modal) return;
+  if (S.dark) { S.dark = false; return render(); }
+  if (S.vals.cc_lock === 'On' && s === 'live') { if (dir !== 'up') return toast('החלקה למעלה משחררת', 'Swipe up to unlock'); S.vals.cc_lock = 'Off'; toast('המסך שוחרר', 'Screen unlocked'); return render(); }
+  if (S.rec && s === 'live') return toast('לא זמין בזמן הקלטה', 'Unavailable while recording');
+  if (dir === 'down') { if (s === 'live') { S.ccPage = 0; select('cc'); return go('cc'); } if (s === 'params') return home(); }
+  if (dir === 'up') {
+    if (s === 'live') { select(S.mode); return go('params'); }
+    if (s === 'modes') { if (S.modePick) commitMode(S.modePick); S.modePick = null; select(S.mode); return home(); }
+    if (s === 'cc') return home();
+  }
+  if (dir === 'left' || dir === 'right') {
+    if (s === 'live') { S.modePick = curPick(); select('modes'); return go('modes'); }
+    if (s === 'modes') { const WL = WM(), i = WL.indexOf(S.modePick); const j = Math.min(WL.length - 1, Math.max(0, i + (dir === 'left' ? 1 : -1))); S.modePick = WL[j]; select(selOf(WL[j])); return render(); }
+    if (s === 'cc') { S.ccPage = dir === 'left' ? 1 : 0; if (S.ccPage) select('storage'); return render(); }
+    if (s === 'playback' && dir === 'left') return home();
+  }
+}
+function initSwipe(el) {
+  // גרירה חיה: המסך עוקב אחרי האצבע/העכבר, ובשחרור נפתח או חוזר למקומו
+  let D = null;
+  const W = () => el.clientWidth, H = () => el.clientHeight;
+  const layer = html => { const l = document.createElement('div'); l.className = 'draglayer'; l.innerHTML = html; el.appendChild(l); return l; };
+  const tf = (node, x, y, anim) => { node.style.transition = anim ? 'transform .2s ease, opacity .2s ease' : 'none'; node.style.transform = `translate(${x}px,${y}px)`; };
+  function begin(e, dx, dy) {
+    const h = Math.abs(dx) > Math.abs(dy), s = S.screen, t = D.target;
+    try { el.setPointerCapture(e.pointerId); } catch (_) {}
+    swiping = true;
+    clearTimeout(lpT);
+    if (S.modal || !S.on) return (D.kind = 'none');
+    const wh = t.closest('.wheel');
+    if (wh && h) { D.kind = 'wheel'; D.id = wh.dataset.wheel; D.node = wh.firstElementChild; D.base = new DOMMatrix(getComputedStyle(D.node).transform).m41; return; }
+    const sc = t.closest('.lbody,.pbody');
+    if (sc && !h) { D.kind = 'scroll'; D.node = sc; D.base = sc.scrollTop; return; }
+    if (S.dark || S.scrLock || (S.vals.cc_lock === 'On' && s === 'live')) return (D.kind = 'tap');
+    if (S.rec && s === 'live') return (D.kind = 'tap');
+    if (s === 'live' && !h && dy > 0) { S.ccPage = 0; D.kind = 'open'; D.dir = 'down'; D.node = layer(scrCC()); tf(D.node, 0, -H()); return; }
+    if (s === 'live' && !h && dy < 0) { D.kind = 'open'; D.dir = 'up'; D.node = layer(scrParams()); tf(D.node, 0, H()); return; }
+    if (s === 'live' && h) { S.modePick = curPick(); D.kind = 'fade'; D.dir = dx < 0 ? 'left' : 'right'; D.node = layer(scrModes()); D.node.style.opacity = 0; return; }
+    if (s === 'cc' && !h && dy < 0) { D.kind = 'close'; D.dir = 'up'; D.node = $('#ui'); return; }
+    if (s === 'params' && !h && dy > 0) { D.kind = 'close'; D.dir = 'down'; D.node = $('#ui'); return; }
+    if (s === 'modes' && h) { D.kind = 'modes'; D.node = $('#ui .mtrack'); return; }
+    if (s === 'modes' && !h && dy < 0) { D.kind = 'close'; D.dir = 'up'; D.node = $('#ui'); return; }
+    if (s === 'cc' && h) { D.kind = 'page'; D.node = $('#ui .cc'); return; }
+    if (s === 'playback' && h && dx < 0) {
+      const r = el.getBoundingClientRect();
+      if (D.x - r.left > r.width * .85) { D.kind = 'close'; D.dir = 'left'; D.node = $('#ui'); return; }
+      toast('הקובץ הבא (הדמיה)', 'Next file'); return (D.kind = 'none');
+    }
+    D.kind = 'none';
+  }
+  function move(dx, dy) {
+    const n = D.node;
+    switch (D.kind) {
+      case 'wheel': n.style.transition = 'none'; n.style.transform = `translateX(${D.base + dx}px)`; break;
+      case 'scroll': n.scrollTop = D.base - dy; break;
+      case 'open': tf(n, 0, D.dir === 'down' ? Math.min(0, -H() + dy) : Math.max(0, H() + dy)); break;
+      case 'fade': n.style.opacity = Math.min(1, Math.abs(dx) / (W() * .35)); break;
+      case 'close': tf(n, D.dir === 'left' ? Math.min(0, dx) : 0, D.dir === 'up' ? Math.min(0, dy) : D.dir === 'down' ? Math.max(0, dy) : 0); break;
+      case 'modes': if (n) { n.style.transition = 'none'; n.style.transform = `translateX(${dx}px)`; } break;
+      case 'page': if (n) tf(n, S.ccPage === 0 ? Math.min(0, dx) : Math.max(0, dx), 0); break;
+    }
+  }
+  function end(dx, dy) {
+    const n = D.node, k = D.kind, dir = D.dir, wid = D.id;
+    const done = fn => setTimeout(() => { if (n && n.classList.contains('draglayer')) n.remove(); else if (n) { n.style.transform = ''; n.style.transition = ''; } fn && fn(); }, 200);
+    if (k === 'wheel') { const step = Math.round(-dx / (W() * .16)); if (step) stepWheel(wid, step); else centerWheels(); return; }
+    if (k === 'open') {
+      const ok = dir === 'down' ? dy > H() * .28 : -dy > H() * .28;
+      tf(n, 0, ok ? 0 : (dir === 'down' ? -H() : H()), true);
+      return done(() => { if (ok) { if (dir === 'down') { select('cc'); go('cc'); } else { select(S.mode); go('params'); } } });
+    }
+    if (k === 'fade') {
+      const ok = Math.abs(dx) > W() * .12; n.style.transition = 'opacity .2s'; n.style.opacity = ok ? 1 : 0;
+      return done(() => { if (ok) { select('modes'); go('modes'); } });
+    }
+    if (k === 'close') {
+      const dist = dir === 'left' ? -dx : dir === 'up' ? -dy : dy, size = dir === 'left' ? W() : H();
+      const ok = dist > size * .25;
+      tf(n, dir === 'left' ? (ok ? -W() : 0) : 0, dir === 'up' ? (ok ? -H() : 0) : dir === 'down' ? (ok ? H() : 0) : 0, true);
+      return done(() => { if (ok) { if (S.screen === 'modes') { if (S.modePick) commitMode(S.modePick); S.modePick = null; select(S.mode); } home(); } });
+    }
+    if (k === 'modes') {
+      const WL = WM(), step = Math.round(-dx / (W() * .26)), i = WL.indexOf(S.modePick), j = Math.max(0, Math.min(WL.length - 1, i + step));
+      S.modePick = WL[j]; select(selOf(WL[j])); return render();
+    }
+    if (k === 'page') {
+      const ok = Math.abs(dx) > W() * .2 && ((S.ccPage === 0 && dx < 0) || (S.ccPage === 1 && dx > 0));
+      tf(n, ok ? (dx < 0 ? -W() : W()) : 0, 0, true);
+      return done(() => { if (ok) { S.ccPage = S.ccPage ? 0 : 1; if (S.ccPage) select('storage'); render(); } });
+    }
+    if (k === 'tap') { if (Math.abs(dy) > Math.abs(dx)) swipe(dy > 0 ? 'down' : 'up'); else swipe(dx < 0 ? 'left' : 'right'); }
+  }
+  el.addEventListener('pointerdown', e => {
+    if (e.button > 0) return;
+    poke();
+    D ={ x: e.clientX, y: e.clientY, target: e.target, kind: null };
+    swiping = false;
+    if (S.screen === 'playback' && !e.target.closest('button')) lpT = setTimeout(() => { S.fast = true; render(); }, 450);
+  });
+  el.addEventListener('pointermove', e => {
+    if (!D) return;
+    const dx = e.clientX - D.x, dy = e.clientY - D.y;
+    if (!D.kind) { if (Math.hypot(dx, dy) < 8) return; begin(e, dx, dy); }
+    move(dx, dy);
+  });
+  const up = e => {
+    clearTimeout(lpT); if (S.fast) { S.fast = false; render(); }
+    if (!D) return;
+    const dx = e.clientX - D.x, dy = e.clientY - D.y, was = D;
+    if (was.kind) { end(dx, dy); setTimeout(() => swiping = false, 60); }
+    D = null;
+  };
+  el.addEventListener('pointerup', up);
+  el.addEventListener('pointercancel', e => { if (D && D.kind && D.kind !== 'tap') end(0, 0); D = null; swiping = false; clearTimeout(lpT); });
+  el.addEventListener('dragstart', e => e.preventDefault());
+}
+
+/* ---------- לחצנים פיזיים ---------- */
+let qsT, qsLong = false, qsBack, snapOff, qsTap = 0, qsSingle, diveT, diveHeld = false;
+const QS_ITEMS = () => [
+  ...(val('qs_screen') === 'On' ? ['screen'] : []),
+  ...['m_video', 'm_photo', 'm_slow', 'm_tl', 'm_hyper', 'm_night', 'm_track'].filter(m => val('qs_m_' + m.slice(2)) === 'On'),
+  ...(val('qs_m_custom') === 'On' ? ['custom'] : []),
+  ...(val('qs_m_play') === 'On' ? ['play'] : []),
+];
+const QS_LABEL = { screen: ['Screen Switch', 'החלפת מסך'], custom: ['C1', 'מצב מותאם 1'], play: ['Playback', 'גלריה'] };
+const qsLabel = k => N[k] ? [N[k].en, N[k].he] : QS_LABEL[k];
+function recTime() { const t = S.rec ? Math.floor((Date.now() - S.recStart) / 1000) : 0; return `${String(Math.floor(t / 60)).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`; }
+function endClip() {
+  const dur = Math.max(1, (Date.now() - S.recStart) / 1000);
+  S.clip = { mode: S.mode, res: resOf(), ar: String(val('p_res')).split('/')[1], fps: parseInt(val('p_fps')) || 30, dur, slow: [] };
+  S.marks = (S.recMarks || []).map(ms => Math.min(100, Math.round(ms / 1000 / dur * 100))); S.recMarks = [];
+}
+function flash() { const f = $('#flash'); if (!f) return; f.hidden = false; setTimeout(() => f.hidden = true, 140); }
+function shutter() {
+  select('btn_shutter'); clearTimeout(snapOff); snapOff = null;
+  if (S.dive) { S.dive = false; return toast('יציאה ממצב צלילה', 'Shutter button restored'); }
+  if (!S.on) {
+    S.on = true; S.stack = []; S.screen = 'live'; S.snap = true;
+    const sm = String(val('s_snap') || '');
+    if (sm === 'Video') S.mode = 'm_video'; else if (sm === 'Photo') S.mode = 'm_photo'; else if (sm === 'Hyperlapse') S.mode = 'm_hyper';
+    else if (sm.startsWith('C')) toast('SnapShot: מצב מותאם', 'SnapShot C1');
+    if (S.mode === 'm_photo') { render(); flash(); S.clip = { photo: true }; S.snap = false; snapOff = setTimeout(() => { S.on = false; render(); }, 3000); return toast('SnapShot: צולמה תמונה, כיבוי בעוד 3 שניות', 'SnapShot'); }
+    S.rec = true; S.recStart = Date.now(); S.recMarks = []; S.scrOffDone = false; toast('SnapShot: המצלמה נדלקה ומקליטה', 'SnapShot'); return render();
+  }
+  S.dark = false; S.modal = null;
+  if (S.screen !== 'live') { S.stack = []; S.screen = 'live'; }
+  if (S.mode === 'm_photo') {
+    const cd = parseFloat(val('p_countdown')) || 0;
+    const snapP = () => { flash(); S.clip = { photo: true }; toast(val('p_burst') && val('p_burst') !== 'Off' ? 'צילום רציף: 30 תמונות' : 'צולמה תמונה', 'Photo taken'); };
+    if (cd) {
+      if (S.cdT) { clearTimeout(S.cdT); S.cdT = null; S.cdLeft = 0; toast('הטיימר בוטל', 'Countdown cancelled'); return render(); }
+      toast(`טיימר ${cd === 1 ? 'שנייה אחת' : cd === 0.5 ? 'חצי שנייה' : cd + ' שניות'}…`, 'Countdown');
+      S.cdLeft = Math.ceil(cd);
+      const tick = () => {
+        if (!S.on || S.mode !== 'm_photo') { S.cdT = null; S.cdLeft = 0; return render(); }
+        if (--S.cdLeft <= 0) { S.cdT = null; S.cdLeft = 0; snapP(); return render(); }
+        render(); S.cdT = setTimeout(tick, 1000);
+      };
+      S.cdT = setTimeout(tick, cd < 1 ? cd * 1000 : 1000);
+    } else snapP();
+    return render();
+  }
+  if (S.rec) { endClip(); S.rec = false; } else { S.rec = true; S.recStart = Date.now(); S.recMarks = []; S.scrOffDone = false; }
+  if (!S.rec && S.snap) {
+    S.snap = false; toast('SnapShot: המצלמה תיכבה בעוד 3 שניות', 'Auto power off in 3s');
+    snapOff = setTimeout(() => { snapOff = null; if (!S.rec) { S.on = false; render(); } }, 3000);
+  }
+  render();
+}
+function qsDown() {
+  qsLong = false;
+  qsT = setTimeout(() => {
+    poke(); qsLong = true; if (S.rec) endClip();
+    S.on = !S.on; S.rec = false; S.snap = false; S.dark = false; S.dive = false; S.scrLock = false;
+    clearTimeout(S.cdT); S.cdT = null; S.cdLeft = 0;
+    select('btn_qs');
+    if (S.on) { S.boot = true; home(); setTimeout(() => { S.boot = false; render(); }, 1400); }
+    else { home(); toast('המצלמה כובתה', 'Power off'); }
+  }, 700);
+}
+function qsApply(k) {
+  if (!k) return home();
+  if (k === 'screen') { S.screen = 'live'; S.stack = []; flip(true); return; }
+  if (k === 'play') { S.stack = [['live']]; S.screen = 'playback'; return render(); }
+  if (k === 'custom') { home(); return toast('הופעל מצב מותאם C1', 'C1'); }
+  S.mode = k; home();
+}
+function openQS() {
+  const list = QS_ITEMS();
+  if (!list.length) return toast('לא נבחרו מצבים להחלפה המהירה', 'No Quick Switch modes selected');
+  S.qsPick = list.includes(S.mode) ? S.mode : null;
+  S.stack = [['live']]; S.screen = 'qspage'; render();
+  clearTimeout(qsBack); qsBack = setTimeout(() => { if (S.screen === 'qspage' && S.qsPick) qsApply(S.qsPick); }, 2500);
+}
+function qsUp() {
+  clearTimeout(qsT); if (qsLong || !S.on) return; select('btn_qs'); poke();
+  if (S.dark) { S.dark = false; return render(); }
+  if (S.dive) { // מצב צלילה: לחיצה אחת מצלמת/מקליטה, לחיצה כפולה פותחת את דף ההחלפה המהירה
+    if (qsTap && Date.now() - qsTap < 350) { clearTimeout(qsSingle); qsTap = 0; return openQS(); }
+    qsTap = Date.now(); qsSingle = setTimeout(() => { qsTap = 0; const d = S.dive; S.dive = false; shutter(); S.dive = d; }, 350); return;
+  }
+  if (S.rec) {
+    if (!['m_video', 'm_slow', 'm_portrait'].includes(S.mode)) return;
+    (S.recMarks = S.recMarks || []).push(Date.now() - S.recStart); return toast('סומן רגע שיא', 'Highlight marked');
+  }
+  if (S.screen === 'qspage') {
+    const list = QS_ITEMS(); if (!list.length) return home();
+    S.qsPick = list[(list.indexOf(S.qsPick) + 1) % list.length];
+    const [en] = qsLabel(S.qsPick);
+    if (val('qs_prompt') === 'On') toast(`הכרזה קולית: "${en}"`, en);
+    render(); clearTimeout(qsBack); qsBack = setTimeout(() => { if (S.screen === 'qspage' && S.qsPick) qsApply(S.qsPick); }, 2500); return;
+  }
+  if (S.screen !== 'live') return home();
+  const f = val('qs_feature');
+  if (f === 'Screen Off') { S.dark = true; return render(); }
+  if (f === 'Zoom') {
+    if (!zoomOk() || !N.lv_zoom) return toast('זום לא זמין במצב הזה', 'Zoom unavailable');
+    const o = N.lv_zoom.o.map(x => x[0]); S.vals.lv_zoom = o[(o.indexOf(val('lv_zoom')) + 1) % o.length]; toast('זום ' + val('lv_zoom'), 'Zoom'); return render();
+  }
+  if (f === 'Lock Screen') { S.vals.cc_lock = 'On'; return render(); }
+  if (f === 'Start/End Pre-Rec') {
+    if (S.mode !== 'm_video') return toast('הקלטה מוקדמת זמינה רק במצב וידאו', 'Video mode only');
+    if (val('p_prerec') !== 'Off') { S.lastPre = val('p_prerec'); S.vals.p_prerec = 'Off'; } else { S.vals.p_prerec = S.lastPre || '5s'; S.vals.p_loop = 'Off'; }
+    toast('הקלטה מוקדמת: ' + (val('p_prerec') === 'Off' ? 'כבויה' : 'פועלת'), 'Pre-Rec'); return render();
+  }
+  openQS();
+}
+function scrQS() {
+  const items = QS_ITEMS().map(k => { const [en, he] = qsLabel(k); return `<button class="qsi ${k === S.qsPick ? 'on' : ''}" data-qs="${k}">${ic(N[k] ? N[k].icon : k === 'screen' ? 'front' : k === 'play' ? 'play' : 'custom')}${lb2(en, he)}</button>`; }).join('');
+  return `<div class="qsp"><div class="qshead">${lb2('Quick Switch', 'החלפה מהירה')}<button class="qsedit" data-go="cc_qs" data-sel="cc_qs" aria-label="עריכת ההחלפה המהירה"><span class="dots3">•••</span></button></div><div class="qslist">${items}</div>
+  <div class="mhint">${lb2('Press QS to switch', 'לחיצה נוספת על QS עוברת לפריט הבא')}</div></div>`;
+}
+
+/* ---------- מפת התפריטים ---------- */
+function treeItem(id, depth, seen, ctx) {
+  const n = N[id]; if (!n) return '';
+  const c = CONF[n.conf] || CONF.h;
+  const opts = n.o ? `<div class="topts">${n.o.map(o => `<span><small dir="ltr">${esc(o[0])}</small><b dir="auto">${esc(bd(o[1]))}</b></span>`).join('')}</div>` : '';
+  const kidsHtml = n.kids.length && !seen.has(id) ? `<div class="tkids">${n.kids.map(k => treeItem(k, depth + 1, new Set([...seen, id]), id)).join('')}</div>` : '';
+  const txt = (n.en + ' ' + n.he + ' ' + (n.d || '') + ' ' + (n.o || []).flat().join(' ')).toLowerCase();
+  return `<div class="titem" data-id="${id}" data-t="${esc(txt)}">
+    <div class="trow"><span class="tic">${ic(n.icon)}</span><div class="tlb"><small dir="ltr">${esc(n.en)}</small><b>${esc(n.he)}</b></div>${n.conf !== 'h' ? `<span class="tconf ${c[1]}">${c[0]}</span>` : ''}<button class="tshow" data-show="${id}" data-ctx="${ctx || ''}">הצג</button></div>
+    ${n.d ? `<p>${esc(bd(n.d))}</p>` : ''}${opts}${kidsHtml}</div>`;
+}
+function renderTree() {
+  $('#tree').innerHTML = ROOTS.map(([title, ids]) => `<section class="tsec"><h3>${esc(title)}</h3>${ids.map(id => treeItem(id, 0, new Set())).join('')}</section>`).join('');
+  $('#count').textContent = Object.keys(N).length;
+}
+function filterTree(q) {
+  q = q.trim().toLowerCase();
+  document.querySelectorAll('.titem').forEach(el => el.classList.remove('hit', 'hide'));
+  if (!q) return;
+  const items = [...document.querySelectorAll('.titem')];
+  items.forEach(el => el.classList.add('hide'));
+  items.filter(el => el.dataset.t.includes(q)).forEach(el => {
+    el.classList.add('hit');
+    for (let p = el; p && p.classList; p = p.parentElement) if (p.classList.contains('titem')) p.classList.remove('hide');
+    el.querySelectorAll('.titem').forEach(k => k.classList.remove('hide'));
+  });
+}
+function showOnCamera(id, ctx) {
+  if (!N[id]) return;
+  S.on = true; S.stack = []; S.dark = false; S.modal = null; S.scrLock = false;
+  const chain = [id]; let x = ctx || PARENT[id]; while (x) { chain.unshift(x); x = PARENT[x]; }
+  const wantFront = ['front_screen', 'lens', 'ct_sensor'].includes(id), wantRear = ['rear_screen'].includes(id);
+  if ((wantFront && !S.front) || (wantRear && S.front)) flip(true);
+  if (chain[0] === 'usb') toast('החלון הזה קופץ כשמחברים את המצלמה למחשב בכבל', 'USB');
+  S.screen = 'live';
+  const push = k => { S.stack.push([S.screen, S.arg]); S.screen = k; };
+  if (MODES.includes(chain[0])) {
+    S.mode = chain[0];
+    if (chain.length > 1) { S.stack = [['live']]; S.screen = 'params'; chain.slice(1).filter(k => N[k] && (N[k].kids || []).length).forEach(push); if (N[id].o && !(PSPEC[S.mode] || { w: [] }).w.includes(id) && S.screen !== 'params') { S.stack.push([S.screen]); S.screen = 'opts'; S.arg = id; } }
+  } else if (chain[0] === 'cc') {
+    S.stack = [['live']]; S.screen = 'cc'; S.ccPage = chain.includes('storage') && !chain.includes('cc_settings') ? 1 : 0;
+    chain.slice(1).filter(k => N[k] && (N[k].kids || []).length && k !== id).forEach(push);
+    if ((N[id].kids || []).length) push(id);
+    else if (N[id].o && N[id].type === 'list') { S.stack.push([S.screen, S.arg]); S.screen = 'opts'; S.arg = id; }
+  } else if (chain[0] === 'imgaudio') {
+    S.stack = [['live']]; S.screen = 'imgaudio';
+    if (N[id].pro) { S.pro = true; S.vals.ia_pro = 'On'; }
+    if (chain.includes('ia_aperture')) { S.stack.push(['imgaudio']); S.screen = 'aperture'; }
+  } else if (chain[0] === 'playback') { S.stack = [['live']]; S.screen = 'playback'; }
+  else if (id === 'g_down') { S.stack = [['live']]; S.screen = 'cc'; S.ccPage = 0; }
+  else if (id === 'g_up' || id === 'lv_specs') { S.stack = [['live']]; S.screen = 'params'; }
+  else if (id === 'g_side' || id === 'lv_mode') { S.stack = [['live']]; S.screen = 'modes'; S.modePick = curPick(); }
+  select(id); render();
+  $('#cam').scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth', block: 'center' });
+  const hl = document.querySelector(`#screen [data-sel="${id}"],#screen [data-row="${id}"],#screen [data-tile="${id}"],#screen [data-wheel="${id}"]`);
+  if (hl) { hl.classList.add('pulse'); hl.scrollIntoView({ block: 'nearest' }); }
+}
+
+/* ---------- היפוך המצלמה ומסך מלא ---------- */
+function flip(fromQS) {
+  S.front = !S.front;
+  if (fromQS !== true && val('s_single') === 'On') S.scrLock = true; // תצוגה במסך אחד: מחליקים למעלה כדי לעבור למסך השני
+  $('#camRear').hidden = S.front; $('#camFront').hidden = !S.front;
+  (S.front ? $('#frontBezel') : $('#rearBezel')).appendChild($('#scrwrap'));
+  $('#screen').classList.toggle('sq', S.front);
+  $('#flip').querySelector('span').textContent = S.front ? 'היפוך לצד האחורי' : 'היפוך לצד הקדמי';
+  select(S.front ? 'front_screen' : 'rear_screen'); render();
+}
+function immersive(on) {
+  document.body.classList.toggle('imm', on); document.body.classList.toggle('noinfo', on);
+  $('#imm').querySelector('span').textContent = on ? 'יציאה ממסך מלא' : 'כניסה למצלמה (מסך מלא)';
+  try { if (on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {}); else if (!on && document.fullscreenElement) document.exitFullscreen().catch(() => {}); } catch (e) {}
+  $('#screen').focus({ preventScroll: true });
+  setTimeout(() => { if (S.screen === 'params') centerWheels(); }, 60);
+}
+document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && document.body.classList.contains('imm')) immersive(false); });
+
+/* ---------- הפעלה ---------- */
+function start() {
+  const sc = $('#screen');
+  sc.addEventListener('click', onTap);
+  initSwipe(sc);
+  document.querySelectorAll('[data-sw]').forEach(b => b.addEventListener('click', () => swipe(b.dataset.sw)));
+  document.querySelectorAll('.btnShutter').forEach(b => {
+    b.addEventListener('click', () => { if (diveHeld) { diveHeld = false; return; } shutter(); });
+    // לחיצה ארוכה של 5 שניות על לחצן הצילום: מצב צלילה (הלחצן מושבת, QS מצלם/מקליט)
+    b.addEventListener('pointerdown', () => { clearTimeout(diveT); diveT = setTimeout(() => { if (!S.on) return; diveHeld = true; S.dive = true; select('btn_shutter'); toast('מצב צלילה: לחצן הצילום מושבת, QS מצלם/מקליט', 'Scuba Diving mode'); }, 5000); });
+    b.addEventListener('pointerup', () => clearTimeout(diveT)); b.addEventListener('pointerleave', () => clearTimeout(diveT));
+  });
+  document.querySelectorAll('.btnQS').forEach(q => {
+    q.addEventListener('pointerdown', qsDown); q.addEventListener('pointerup', qsUp); q.addEventListener('pointerleave', () => clearTimeout(qsT));
+    q.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); qsUp(); } });
+  });
+  $('#flip').addEventListener('click', () => flip());
+  document.querySelectorAll('[data-info]').forEach(b => b.addEventListener('click', () => select(b.dataset.info)));
+  $('#imm').addEventListener('click', () => immersive(!document.body.classList.contains('imm')));
+  $('#infoT').addEventListener('click', () => document.body.classList.toggle('noinfo'));
+  Feed.mount($('#feed'), () => ({
+    mode: S.on ? S.mode : '', eis: S.mode === 'm_night' ? val('p_neis') : isVid() ? val('p_eis') : ['m_slow', 'm_tl'].includes(S.mode) ? 'Off' : 'RockSteady',
+    fov: S.mode === 'm_night' ? val('p_nfov') : S.mode === 'm_photo' ? val('p_pfov') : isVid() ? val('p_fov') : 'Wide',
+    zoom: val('lv_zoom'), ev: val('ia_ev'), color: val('ia_color'), recovery: val('ia_recovery') === 'On', film: val('ia_film'), wb: S.pro ? val('ia_wb') : 'Auto',
+    star: S.vals.aperture === 'ap_star', dim: S.screen !== 'live' || !!S.dark,
+  }));
+  $('#caps').addEventListener('change', e => { S.captions = e.target.checked; render(); });
+  $('#info').addEventListener('click', e => { const b = e.target.closest('[data-jump]'); if (b) showOnCamera(b.dataset.jump, b.dataset.ctx); });
+  $('#tree').addEventListener('click', e => { const b = e.target.closest('[data-show]'); if (b) showOnCamera(b.dataset.show, b.dataset.ctx); });
+  $('#q').addEventListener('input', e => filterTree(e.target.value));
+  document.addEventListener('keydown', e => {
+    if (e.target.matches('input')) return;
+    const k = { ArrowDown: 'down', ArrowUp: 'up', ArrowLeft: 'right', ArrowRight: 'left' }[e.key];
+    if (k && e.target.closest('#cam')) { e.preventDefault(); swipe(k); }
+    if (e.key === 'Escape') { if (document.body.classList.contains('imm')) immersive(false); else home(); }
+  });
+  new ResizeObserver(() => { if (S.screen === 'params') centerWheels(); }).observe(sc);
+  setInterval(() => {
+    if (!S.rec) return;
+    const t = document.querySelector('#ui .ov.rec .num'); if (t) t.textContent = recTime();
+    const m = parseInt(val('s_scroff')); // כיבוי מסך בזמן הקלטה
+    if (m && !S.dark && !S.scrOffDone && Date.now() - S.recStart >= m * 60000) { S.dark = true; S.scrOffDone = true; render(); }
+  }, 1000);
+  renderTree(); render(); renderInfo();
+}
+start();
+
+</script>
+
+</body>
+</html>

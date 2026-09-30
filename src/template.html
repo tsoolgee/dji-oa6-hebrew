@@ -1,0 +1,269 @@
+<title>אקשן 6 בעברית</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700;800&family=Saira+Extra+Condensed:wght@500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700;800&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* פריסה: הסימולטור הוא הגיבור, פאנל הסבר צמוד לצידו, ומתחת מפת התפריטים המלאה. עולם אחד כהה, כמו גוף המצלמה. */
+:root{
+  --ink:#0d1316;        /* רקע הדף, פחם כחלחל */
+  --slab:#151e23;       /* משטחים */
+  --line:#26343c;
+  --body:#34444e;       /* גוף המצלמה */
+  --paper:#e8eef0;      /* טקסט */
+  --muted:#8c9ca5;
+  --ui:#ffcc00;         /* צבע הבחירה בממשק המצלמה */
+  --rec:#ff3b30;
+  --ok:#5fd18b; --mid:#e8b44a; --low:#e2786a;
+  --f-display:"Secular One","Assistant",system-ui,sans-serif;
+  --f-body:"Assistant",system-ui,"Segoe UI",Arial,sans-serif;
+  --f-cam:"Barlow Semi Condensed","Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--ink);color:var(--paper);direction:rtl}
+body{font-family:var(--f-body);font-size:16px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+button:focus-visible,input:focus-visible{outline:2px solid var(--ui);outline-offset:2px}
+.wrap{max-width:1180px;margin-inline:auto}
+small{font-size:.72em}
+
+/* כותרת */
+header.top{display:flex;align-items:center;gap:24px;padding-block:28px 12px;flex-wrap:wrap}
+header.top img{width:min(210px,40vw);filter:drop-shadow(0 18px 24px rgb(0 0 0/.55))}
+header.top .t{min-width:0;flex:1 1 320px}
+header.top .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--muted);direction:ltr;text-align:right}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,5.6vw,58px);line-height:1.05;margin:4px 0 8px;text-wrap:balance}
+h1 span{color:var(--ui)}
+header.top p{margin:0;color:var(--muted);max-width:62ch}
+
+/* אזור הסימולטור */
+.stage{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:28px;align-items:start;margin-top:18px}
+@media (max-width:900px){.stage{grid-template-columns:1fr}}
+.simcol{min-width:0;display:flex;flex-direction:column;gap:14px}
+
+/* גוף המצלמה, מבט מאחור */
+.cam{position:relative;width:100%;aspect-ratio:72.8/47.2;border-radius:9% / 13.5%;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(160deg,#4b4b4b 0%,#3a3a3a 38%,#2a2a2a 100%);
+  box-shadow:inset 0 2px 1px rgb(255 255 255/.18),inset 0 -6px 14px rgb(0 0 0/.45),0 30px 50px -20px rgb(0 0 0/.8);
+  padding:9.7% 18% 9.7% 4%;direction:ltr}
+.cam::after{content:"";position:absolute;inset:1.4%;border-radius:8% / 12.5%;border:1px solid rgb(255 255 255/.06);pointer-events:none}
+.bezel{container-type:inline-size;position:relative;width:100%;height:100%;background:#050708;border-radius:3.5% / 6%;padding:2% 2%;box-shadow:inset 0 0 0 1px #000,0 0 0 1px rgb(255 255 255/.05)}
+#screen{position:relative;width:100%;height:100%;overflow:hidden;border-radius:2.4% / 4.2%;background:#000;container-type:inline-size;
+  font-family:var(--f-cam);color:#fff;user-select:none;touch-action:none;-webkit-user-select:none}
+.phys{position:absolute;background:linear-gradient(#3d4c56,#222c32);box-shadow:inset 0 1px 0 rgb(255 255 255/.2),0 3px 6px rgb(0 0 0/.5)}
+.phys:active{filter:brightness(1.35)}
+.plab{font-family:var(--f-mono)}
+.brand{position:absolute;bottom:1.2%;left:6%;font-family:var(--f-cam);font-weight:600;font-size:clamp(7px,1.1vw,11px);letter-spacing:.3em;color:rgb(255 255 255/.28)}
+.hwlab{position:absolute;font-size:12px;color:var(--muted);white-space:nowrap;font-family:var(--f-body);direction:rtl}
+.hwlab.s{left:60%;top:-10%}
+.hwlab.q{left:-2%;top:42%;transform:translateX(-100%) translateX(8px);writing-mode:vertical-rl}
+@media (max-width:600px){.hwlab.q{display:none}}
+
+
+/* שתי הפנים של המצלמה */
+.djilogo{position:absolute;right:7.5%;top:50%;transform:translateY(-50%);font-family:var(--f-display);font-size:clamp(14px,2.6vw,24px);letter-spacing:-.02em;color:rgb(255 255 255/.28)}
+.battline{position:absolute;right:20.5%;top:8%;bottom:8%;width:1px;background:rgb(0 0 0/.35);box-shadow:1px 0 0 rgb(255 255 255/.06)}
+.camholder{width:100%;max-width:680px;margin-inline:auto}
+.bezel{display:grid;place-items:center}
+#scrwrap{position:relative;width:100%;aspect-ratio:712/400;max-height:100%}
+.sqb #scrwrap{aspect-ratio:1}
+#feed{position:absolute;left:0;top:0;width:100%;height:100%;display:block;transition:top .2s,height .2s}
+#ui{position:absolute;inset:0}
+#screen.lb16 #feed{top:21.875%;height:56.25%}
+.sh{left:60%;top:-3.6%;width:15%;height:5.2%;border-radius:40% 40% 10% 10%/100% 100% 20% 20%;background:linear-gradient(#e14a3f,#8e1e17)!important}
+.shf{left:20%;top:-3.6%;width:15%;height:5.2%;border-radius:40% 40% 10% 10%/100% 100% 20% 20%;background:linear-gradient(#e14a3f,#8e1e17)!important}
+.qsr{left:-1.7%;top:22%;width:2.6%;height:17%;border-radius:40% 0 0 40%/20% 0 0 20%}
+.qsf{right:-1.7%;top:22%;width:2.6%;height:17%;border-radius:0 40% 40% 0/0 20% 20% 0}
+.cam.front{padding:0}
+.fbez{position:absolute;left:8%;top:15%;width:31%;aspect-ratio:1}
+.bezel.sqb{border-radius:11%;padding:5%;--k:1.75}
+.lens{position:absolute;left:46%;top:22%;height:56%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,#1d2b36 0 44%,#0b1015 45% 54%,#3c4a54 55% 57%,#161e24 58% 68%,#56656f 69% 71%,#252e35 72% 100%);
+  box-shadow:0 6px 14px rgb(0 0 0/.5),inset 0 2px 2px rgb(255 255 255/.2)}
+.lens i{position:absolute;inset:22%;border-radius:50%;background:radial-gradient(circle at 36% 32%,rgb(160 200 255/.55) 0 6%,transparent 14%),radial-gradient(circle at 50% 50%,#0c1b2b 0 30%,#050a10 31% 60%,#10202e 61% 100%)}
+.lens span{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);font-family:var(--f-mono);font-size:clamp(6px,1vw,10px);color:rgb(255 255 255/.45);white-space:nowrap}
+.ctsens{position:absolute;left:33%;top:79%;width:3%;aspect-ratio:1;border-radius:50%;background:#0b0f12;box-shadow:inset 0 0 0 1px rgb(255 255 255/.15)}
+.flogo{position:absolute;left:8.4%;bottom:8%;font-family:var(--f-cam);font-weight:600;font-size:clamp(7px,1.2vw,12px);letter-spacing:.3em;color:rgb(255 255 255/.35)}
+.tools button span{white-space:nowrap}
+#infoT{display:none}
+
+/* מסך מלא: "בתוך המצלמה" */
+body.imm{overflow:hidden}
+body.imm header.top,body.imm .mapsec,body.imm footer,body.imm .opts{display:none}
+body.imm .stage{position:fixed;inset:0;z-index:40;margin:0;background:#000;display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 28px) 16px calc(env(safe-area-inset-bottom,0px) + 8px)}
+body.imm .simcol{width:min(100%,calc((100dvh - 120px) * 1.542));gap:10px}
+body.imm .camholder{max-width:none}
+body.imm .hwlab{display:none}
+body.imm #infoT{display:flex}
+body.imm #info{position:fixed;left:16px;bottom:16px;top:auto;width:min(420px,calc(100% - 32px));max-height:42dvh;overflow:auto;z-index:45;background:rgb(21 30 35/.95)}
+body.imm.noinfo #info{display:none}
+
+/* ===== גוף המצלמה: כיול 2 לפי שרטוט עמ' 6 (אחוז מרוחב/גובה הגוף) ===== */
+.cam{border-radius:7% / 10.8%;padding:6% 4.5%}
+.cam::after{border-radius:6.3% / 9.7%}
+.bezel{padding:7.8% 8.2%;border-radius:4% / 6.3%}
+.sh{left:58%;width:18%}
+.shf{left:24%;width:18%}
+.qsr{left:-1.7%;top:17%;width:2.6%;height:31%}
+.qsf{right:-1.7%;top:17%;width:2.6%;height:31%;z-index:3}
+.hwlab.s{left:62%}
+.cam.front{padding:0;container-type:inline-size}
+.fbez{left:5%;top:6.5%;width:44%}
+.bezel.sqb{padding:10%;border-radius:8%}
+.lens{left:48.5%;top:12.5%;height:71%;z-index:2}
+.ctsens{left:37.5%;top:79.5%;width:11%;height:9.5%;aspect-ratio:auto;border-radius:999px}
+.fmic{position:absolute;left:34.5%;top:84%;width:1.6%;aspect-ratio:1;border-radius:50%;background:#000}
+.flogo{left:6%;bottom:11%;font-family:var(--f-cam);font-size:6.4cqw;font-weight:800;letter-spacing:.02em;color:rgb(255 255 255/.7)}
+.fsix{position:absolute;left:83%;bottom:6%;font-family:var(--f-display);font-weight:800;font-size:8cqw;line-height:1;color:rgb(255 255 255/.7)}
+@media (max-width:600px){.cam{padding:6% 4.5%}.bezel{padding:7.8% 8.2%}}
+
+/* מסך פתיחה וכפתור ••• */
+#screen .boot{position:absolute;inset:0;background:#000;display:grid;place-items:center;font-family:var(--f-body);font-weight:800;font-size:9cqw;letter-spacing:.06em;color:#fff}
+.qsedit .dots3{font-size:4cqw;letter-spacing:-.1em;line-height:1;color:#fff}
+.phys{background:linear-gradient(#444,#2a2a2a)}
+
+/* פקדי החלקה */
+.pad{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+.pad button{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--slab);border-radius:999px;padding:7px 14px;font-size:14px}
+.pad button:hover{border-color:var(--muted)}
+.pad .ic{width:16px;height:16px}
+.pad .crumb{font-size:13px;color:var(--muted);padding-inline:6px}
+.pad .crumb b{color:var(--paper);font-weight:600}
+.opts{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.opts label{display:flex;gap:6px;align-items:center;cursor:pointer}
+
+/* פאנל הסבר */
+#info{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);background:var(--slab);border:1px solid var(--line);border-radius:14px;padding:20px 22px;min-width:0}
+.ihead{display:flex;gap:14px;align-items:center}
+.iic{flex:none;width:52px;height:52px;border-radius:12px;background:#000;display:grid;place-items:center;color:#fff}
+.iic .ic{width:30px;height:30px}
+.ihead small{display:block;font-family:var(--f-cam);font-size:13px;color:var(--muted);text-align:right}
+.ihead h3{font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1.15;margin:0}
+#info p{margin:12px 0 0;max-width:60ch}
+#info .how,#info .def{font-size:14px;color:var(--muted)}
+#info .how span,#info .def span{display:inline-block;margin-inline-end:8px;color:var(--ui);font-weight:700}
+.iopts h4{margin:16px 0 6px;font-size:13px;letter-spacing:.04em;color:var(--muted);font-weight:700}
+.iopts ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.iopts li,.iopts li button{display:flex;flex-direction:column;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:15px;line-height:1.25;text-align:right}
+.iopts li:has(button){border:0;padding:0}
+.iopts li button:hover{border-color:var(--ui)}
+.iopts li span{font-family:var(--f-cam);font-size:11px;color:var(--muted)}
+.iopts li.cur{border-color:var(--ui);background:rgb(255 210 63/.08)}
+.conf{font-size:12px!important;display:inline-flex;align-items:center;gap:6px}
+.conf::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.conf.ok{color:var(--ok)}.conf.mid{color:var(--mid)}.conf.low{color:var(--low)}
+
+{{SCREENCSS}}
+
+/* מפת התפריטים */
+.mapsec{margin-top:56px}
+.maphead{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px}
+h2{font-family:var(--f-display);font-weight:400;font-size:clamp(26px,3.6vw,38px);margin:0;line-height:1.1}
+.maphead p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--slab);border-radius:10px;padding:8px 12px;width:min(100%,340px)}
+.search .ic{width:18px;height:18px;flex:none;color:var(--muted)}
+.search input{flex:1;min-width:0;background:none;border:0;color:var(--paper);font:inherit;font-size:16px}
+.search input:focus{outline:none}
+.search:focus-within{border-color:var(--ui)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:12px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:8px;height:8px;border-radius:50%}
+.tsec h3{font-family:var(--f-body);font-weight:800;font-size:15px;letter-spacing:.03em;color:var(--ui);margin:34px 0 8px}
+.titem{border-inline-start:2px solid var(--line);padding-inline-start:16px;margin-block:10px}
+.tsec>.titem{border:0;padding:0}
+.tkids{margin-top:8px}
+.titem.hide{display:none}
+.titem.hit>.trow .tlb b{background:rgb(255 210 63/.18);box-shadow:0 0 0 3px rgb(255 210 63/.18)}
+.trow{display:flex;align-items:center;gap:12px}
+.trow .tic{flex:none;width:38px;height:38px;border-radius:9px;background:#000;display:grid;place-items:center;color:#fff}
+.trow .tic .ic{width:22px;height:22px}
+.tlb{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+.tlb small{font-family:var(--f-cam);font-size:12.5px;color:var(--muted)}
+.tlb b{font-size:21px;font-weight:700}
+.tsec>.titem>.trow .tlb b{font-family:var(--f-display);font-weight:400;font-size:26px}
+.tconf{font-size:11.5px;border-radius:999px;padding:1px 9px;border:1px solid currentColor;white-space:nowrap}
+.tconf.mid{color:var(--mid)}.tconf.low{color:var(--low)}
+.tshow{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:3px 12px;color:var(--muted);white-space:nowrap}
+.tshow:hover{color:var(--ui);border-color:var(--ui)}
+.titem p{margin:4px 0 0 0;padding-inline-start:50px;color:#b7c4ca;font-size:15px;max-width:72ch}
+.topts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding-inline-start:50px}
+.topts span{display:flex;flex-direction:column;line-height:1.15;border:1px solid var(--line);border-radius:7px;padding:3px 9px;font-size:14.5px}
+.topts small{font-family:var(--f-cam);font-size:11px;color:var(--muted)}
+@media (max-width:520px){.titem p,.topts{padding-inline-start:0}.tlb b{font-size:18px}}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer p{margin:6px 0;max-width:80ch}
+.bezel{--k:1}
+@media (max-width:600px){.bezel{--k:1.3}.cam{padding:6% 4.5%}.bezel{padding:7.8% 8.2%}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <img src="{{PHOTO}}" alt="DJI Osmo Action 6, מבט מלפנים">
+  <div class="t">
+    <div class="eyebrow">DJI OSMO ACTION 6 · FW 01.05.08.03</div>
+    <h1>אקשן 6 <span>בעברית</span></h1>
+    <p>המסך של המצלמה, עם כל התפריטים ותתי־התפריטים. גוררים את המסך כמו במצלמה, לוחצים על הלחצנים, וכל פריט מופיע באנגלית כמו במצלמה ובתרגום לעברית.</p>
+  </div>
+</header>
+
+<div class="stage">
+  <div class="simcol">
+    <div id="cam" class="camholder">
+    <div class="cam" id="camRear">
+      <span class="hwlab s">לחצן הקלטה</span>
+      <button class="phys btnShutter sh" aria-label="לחצן צילום/הקלטה"></button>
+      <button class="phys btnQS qsr" aria-label="לחצן הפעלה / החלפה מהירה QS. לחיצה ארוכה מכבה"></button>
+      <span class="hwlab q">QS / הפעלה</span>
+      <div class="bezel" id="rearBezel"><div id="scrwrap"><div id="screen" tabindex="0" aria-label="מסך המצלמה. חצים במקלדת = החלקות"><canvas id="feed" aria-hidden="true"></canvas><div id="ui"></div></div>
+        <div id="toast" hidden></div><div id="flash" hidden></div></div></div>
+      
+    </div>
+    <div class="cam front" id="camFront" hidden>
+      <button class="phys btnShutter shf" aria-label="לחצן צילום/הקלטה"></button>
+      <button class="phys btnQS qsf" aria-label="לחצן הפעלה / החלפה מהירה QS"></button>
+      <div class="fbez"><div class="bezel sqb" id="frontBezel"></div></div>
+      <button class="lens" data-info="lens" aria-label="עדשה"><i></i></button>
+      <button class="ctsens" data-info="ct_sensor" aria-label="חיישן טמפרטורת צבע"></button>
+      <span class="fmic"></span><span class="flogo">ACTION</span><span class="fsix">6</span>
+    </div>
+    </div>
+    <div class="pad tools">
+      <button id="flip">{{I_FLIP}}<span>היפוך לצד הקדמי</span></button>
+      <button id="imm">{{I_FULL}}<span>כניסה למצלמה (מסך מלא)</span></button>
+      <button id="infoT">{{I_INFO}}<span>הצג / הסתר הסבר</span></button>
+    </div>
+    <div class="pad">
+      <button data-sw="down">{{I_DOWN}}החלקה למטה</button>
+      <button data-sw="up">{{I_UP}}החלקה למעלה</button>
+      <button data-sw="left">{{I_SIDE}}החלקה שמאלה</button>
+      <button data-sw="right">{{I_SIDE}}החלקה ימינה</button>
+      <span class="crumb">כעת: <b id="crumb"></b></span>
+    </div>
+    <div class="opts">
+      <label><input type="checkbox" id="caps" checked> תרגום לעברית על המסך (כבוי = בדיוק כמו במצלמה)</label>
+      <span>לחיצה ארוכה על QS = כיבוי/הדלקה · Esc = חזרה למסך הצילום</span>
+    </div>
+  </div>
+  <aside id="info" aria-live="polite"></aside>
+</div>
+
+<section class="mapsec">
+  <div class="maphead">
+    <div><h2>מפת התפריטים המלאה</h2><p><span id="count"></span> פריטים. "הצג" פותח את הפריט על מסך המצלמה.</p></div>
+    <label class="search">{{I_SEARCH}}<input id="q" type="search" placeholder="חיפוש: ייצוב, Bitrate, צמצם…" aria-label="חיפוש בתפריטים"></label>
+  </div>
+  <div class="legend"><span><i style="background:var(--ok)"></i>מקור רשמי של DJI (ללא סימון)</span><span><i style="background:var(--mid)"></i>ממדריכים וביקורות</span><span><i style="background:var(--low)"></i>לפי אקשן 5 פרו, לא אומת לאקשן 6</span></div>
+  <div id="tree"></div>
+</section>
+
+<footer>
+  <p>מקורות: מדריך המשתמש הרשמי של DJI (v1.0, נובמבר 2025), דף המפרט, הערות הגרסה עד קושחה 01.05.08.03, מרכז העזרה של DJI, ומדריכים של משתמשים. סדר הפריטים בתפריט ההגדרות עשוי להשתנות בין גרסאות קושחה.</p>
+  <p>הממשק המצויר כאן הוא שחזור לצורך לימוד, לא צילום מסך של המצלמה.</p>
+</footer>
+</div>
+<script>
+{{JS}}
+</script>
