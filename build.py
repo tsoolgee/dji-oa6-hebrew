@@ -18,7 +18,10 @@ t = (t.replace('{{PHOTO}}', IMG + 'camera-front.webp')
       .replace('{{I_INFO}}', svg('<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>'))
       .replace('{{JS}}', js))
 (R/'dist').mkdir(exist_ok=True)
-(R/'dist/artifact.html').write_text(t, encoding='utf-8')
+# ב-Artifact של claude.ai אסור לטעון תמונות מכתובת חיצונית, לכן שם התמונה מוטמעת מקובץ המאגר
+import base64
+art = t.replace(IMG + 'camera-front.webp', 'data:image/webp;base64,' + base64.b64encode((R/'images/camera-front.webp').read_bytes()).decode())
+(R/'dist/artifact.html').write_text(art, encoding='utf-8')
 full = '<!doctype html>\n<html lang="he" dir="rtl">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n</head>\n<body>\n' + t + '\n</body>\n</html>\n'
 (R/'dist/index.html').write_text(full, encoding='utf-8')
 print('ok', len(full)//1024, 'KB')
