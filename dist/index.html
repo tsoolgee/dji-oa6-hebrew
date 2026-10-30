@@ -2065,16 +2065,28 @@ function filterTree(q) {
     el.querySelectorAll('.titem').forEach(k => k.classList.remove('hide'));
   });
 }
+/* פריטים שבמצלמה נבחרים בבורר ערך (s36–s48) ולא ברשימה */
+const PICK_OF = { p_eisfov: 'eisfov', p_eis: 'eisfov', p_fov: 'eisfov', p_neisfov: 'neisfov', p_neis: 'neisfov', p_nfov: 'neisfov',
+  ia_exp: 'exposure', ia_shutter: 'exposure', ia_iso: 'exposure', ia_ev: 'exposure', ia_wb: 'wb', ia_color: 'color', ia_recovery: 'color',
+  ia_adjust: 'imgadj', ia_texture: 'imgadj', ia_nr: 'imgadj', ia_aperture: 'aperture', ap_auto: 'aperture', ap_large: 'aperture', ap_fixed: 'aperture', ap_star: 'aperture' };
 function showOnCamera(id, ctx) {
   if (!N[id]) return;
   S.on = true; S.stack = []; S.dark = false; S.modal = null; S.scrLock = false;
   const chain = [id]; let x = ctx || PARENT[id]; while (x) { chain.unshift(x); x = PARENT[x]; }
   const wantFront = ['front_screen', 'lens', 'ct_sensor'].includes(id), wantRear = ['rear_screen'].includes(id);
-  if ((wantFront && !S.front) || (wantRear && S.front)) flip(true);
+  if (wantFront !== !!S.front) flip(true); // כל פריט שאינו של המסך הקדמי מוצג על המסך האחורי
   if (chain[0] === 'usb') toast('החלון הזה קופץ כשמחברים את המצלמה למחשב בכבל', 'USB');
   S.screen = 'live';
   const push = k => { S.stack.push([S.screen, S.arg]); S.screen = k; };
-  if (MODES.includes(chain[0])) {
+  if (MODES.includes(id)) { S.stack = [['live']]; S.screen = 'modes'; S.custom = 0; S.mode = id; S.modePick = id; }
+  else if (PICK_OF[id]) {
+    const k = PICK_OF[id], m = MODES.includes(chain[0]) ? chain[0] : null;
+    if (m) S.mode = m;
+    if (['exposure', 'wb', 'imgadj'].includes(k) && N[id].pro !== 0) { S.pro = true; S.vals.ia_pro = 'On'; }
+    if (/^ap_/.test(id)) S.vals.aperture = id;
+    S.stack = m ? [['live'], ['params']] : [['live'], ['imgaudio']];
+    if (k === 'aperture') S.screen = 'aperture'; else { S.screen = 'pick'; S.arg = k; }
+  } else if (MODES.includes(chain[0])) {
     S.mode = chain[0];
     if (chain.length > 1) { S.stack = [['live']]; S.screen = 'params'; chain.slice(1).filter(k => N[k] && (N[k].kids || []).length).forEach(push); if (N[id].o && !(PSPEC[S.mode] || { w: [] }).w.includes(id) && S.screen !== 'params') { S.stack.push([S.screen]); S.screen = 'opts'; S.arg = id; } }
   } else if (chain[0] === 'cc') {
@@ -2083,8 +2095,9 @@ function showOnCamera(id, ctx) {
     if ((N[id].kids || []).length) push(id);
     else if (N[id].o && N[id].type === 'list') { S.stack.push([S.screen, S.arg]); S.screen = 'opts'; S.arg = id; }
   } else if (chain[0] === 'imgaudio') {
-    S.stack = [['live']]; S.screen = 'imgaudio';
+    S.stack = [['live']]; S.screen = 'imgaudio'; S.iaTab = ['ia_channel', 'ia_wind'].includes(id) ? 'aud' : 'img';
     if (N[id].pro) { S.pro = true; S.vals.ia_pro = 'On'; }
+    if (N[id].o && !IA_TILES[S.iaTab]().includes(id)) { S.stack.push(['imgaudio']); S.screen = 'opts'; S.arg = id; }
     if (chain.includes('ia_aperture')) { S.stack.push(['imgaudio']); S.screen = 'aperture'; }
   } else if (chain[0] === 'playback') { S.stack = [['live']]; S.screen = 'playback'; }
   else if (id === 'g_down') { S.stack = [['live']]; S.screen = 'cc'; S.ccPage = 0; }
@@ -2092,7 +2105,7 @@ function showOnCamera(id, ctx) {
   else if (id === 'g_side' || id === 'lv_mode') { S.stack = [['live']]; S.screen = 'modes'; S.modePick = curPick(); }
   select(id); render();
   $('#cam').scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth', block: 'center' });
-  const hl = document.querySelector(`#screen [data-sel="${id}"],#screen [data-row="${id}"],#screen [data-tile="${id}"],#screen [data-wheel="${id}"]`);
+  const hl = document.querySelector(`#screen [data-sel="${id}"],#screen [data-row="${id}"],#screen [data-tile="${id}"],#screen [data-wheel="${id}"],#screen [data-vw="${id}"],#screen [data-mode="${id}"],#screen [data-ia="${id}"],#screen [data-pk="${id}"].on`);
   if (hl) { hl.classList.add('pulse'); hl.scrollIntoView({ block: 'nearest' }); }
 }
 
