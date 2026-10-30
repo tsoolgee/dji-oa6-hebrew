@@ -1019,7 +1019,7 @@ node('ap_fixed', { en: 'Fixed (f/2.8)', he: 'קבוע (f/2.8)', icon: 'aperture'
 node('ap_star', { en: 'Starburst (f/4.0)', he: 'אפקט כוכב (f/4.0)', icon: 'star', type: 'action', d: 'קבוע על f/4.0: פנסים ונקודות אור יוצאים ככוכבים עם 6 קרניים. מיקוד מ-20 ס"מ.' });
 node('ia_color', { en: 'Color', he: 'פרופיל צבע', icon: 'color', type: 'list', conf: 'm', o: O(['Normal 10-bit', 'רגיל 10 ביט'], ['D-Log M 10-bit', 'D-Log M ‏10 ביט (לעריכת צבע)']), def: 'Normal 10-bit', d: 'רגיל: מוכן לשימוש. בווידאו ההקלטה תמיד ב-10 ביט (אין בחירה של 8 ביט כמו ב-Action 5 Pro). D-Log M: תמונה "שטוחה" שנראית דהויה, עם טווח דינמי רחב לעריכת צבע (DJI מספקת LUT). D-Log M זמין רק בווידאו, הילוך איטי והייפרלאפס, ומבטל גוון קולנועי ועדיפות לאיכות.' });
 node('ia_recovery', { en: 'Color Recovery', he: 'תצוגה מקדימה של הצבע', icon: 'color', type: 'toggle', conf: 'm', def: 'Off', d: 'רק ב-D-Log M: מציגה במסך איך ייראה הצבע אחרי תיקון, בלי לשנות את ההקלטה.' });
-node('ia_film', { en: 'Film Tone', he: 'גוון קולנועי', icon: 'film', type: 'list', conf: 'm', o: O(['Off', 'כבוי'], ['CC', 'CC (גוונים קרים)'], ['NC', 'NC (נגטיב קלאסי)'], ['TR', 'TR (גווני עור טבעיים)'], ['WT', 'WT (גוונים חמים, אדריכלות)'], ['FE', 'FE (עומק קולנועי)'], ['NV', 'NV (וינטג׳ ענברי)']), def: 'Off', d: 'פילטרים מובנים בסגנון סרט צילום, עם עוצמה מתכווננת. רק ב-16:9 עד 4K/60 או 4:3 עד 4K/30. לא זמין ב-8K, ב-D-Log M, ב-Custom וב-9:16. במצב תמונה יש גוונים משלו (JPEG בלבד, קושחה 01.02.05.21).' });
+node('ia_film', { en: 'Film Tone', he: 'גוון קולנועי', icon: 'film', type: 'list', conf: 'm', o: O(['Off', 'כבוי'], ['CC', 'CC (גוונים קרים)'], ['NC', 'NC (נגטיב קלאסי)'], ['TR', 'TR (גווני עור טבעיים)'], ['WT', 'WT (גוונים חמים, אדריכלות)'], ['FE', 'FE (עומק קולנועי)'], ['NV', 'NV (וינטג׳ ענברי)']), def: 'Off', d: 'פילטרים מובנים בסגנון סרט צילום, עם עוצמה מתכווננת. מקושחה 01.02.05.21 גם במצב תמונה. רק ב-16:9 עד 4K/60 או 4:3 עד 4K/30. לא זמין ב-8K, ב-D-Log M, ב-Custom וב-9:16. במצב תמונה יש גוונים משלו (JPEG בלבד, קושחה 01.02.05.21).' });
 node('ia_film_str', { en: 'Film Tone Intensity', he: 'עוצמת הגוון', icon: 'film', type: 'list', conf: 'm', o: O('0%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'), def: '50%', d: 'סליידר 0%–100% (ברירת מחדל 50%): כמה חזק הגוון הקולנועי. מופיע רק כשנבחר גוון.' });
 node('ia_quality', { en: 'Quality Priority', he: 'עדיפות לאיכות', icon: 'quality', type: 'toggle', def: 'Off', d: 'משפרת את איכות התמונה בווידאו. לא זמין ב-8K וב-D-Log M.' });
 node('ia_scenario', { en: 'Stabilization Scenario', he: 'תרחיש ייצוב', icon: 'eis', type: 'list', conf: 'm', o: O(['Daily', 'יומיומי'], ['Sports', 'ספורט']), def: 'Daily', d: 'מכוונן את הייצוב לסוג התנועה.' });
@@ -1044,7 +1044,7 @@ node('qs_screen', { en: 'Screen Switch', he: 'החלפת מסך (קדמי/אחו
 [['video', 'Video', 'וידאו'], ['photo', 'Photo', 'תמונה'], ['slow', 'Slow Motion', 'הילוך איטי'], ['tl', 'Timelapse', 'טיימלאפס'], ['hyper', 'Hyperlapse', 'הייפרלאפס'], ['night', 'SuperNight', 'לילה'], ['track', 'Subject Tracking', 'מעקב אחרי נושא'], ['custom', 'Custom Modes', 'מצבים מותאמים'], ['play', 'Playback', 'גלריה']]
   .forEach(([k, en, he]) => node('qs_m_' + k, { en, he, icon: k === 'play' ? 'play' : k === 'custom' ? 'custom' : N['m_' + k] ? N['m_' + k].icon : 'video', type: 'toggle', def: k === 'video' || k === 'photo' || k === 'slow' ? 'On' : 'Off', d: 'כלול/לא כלול בסבב של לחצן QS.' }));
 Object.assign(N.qs_m_custom, { conf: 'm', d: 'באקשן 6 כל מצב מותאם מופיע כשורה נפרדת בשמו (למשל Video 1), לא כמתג אחד.' });
-node('cc_gesture', { en: 'Gesture Control', he: 'שליטה בתנועות יד', icon: 'hand', type: 'toggle', def: 'Off', d: 'מרימים כף יד פתוחה מול המצלמה (עד 2 מטר, גם עם כפפות חמש אצבעות) כדי להתחיל/לעצור הקלטה או לצלם. אפשר לקבוע שהתנועה רק מתחילה הקלטה, כדי לא לעצור בטעות. עובד גם במצלמת רשת, בשידור חי ובפלט למסך חיצוני.' });
+node('cc_gesture', { en: 'Gesture Control', he: 'שליטה בתנועות יד', icon: 'hand', type: 'toggle', def: 'On', d: 'מופעל כברירת מחדל. מרימים כף יד פתוחה מול המצלמה (עד 2 מטר, גם עם כפפות חמש אצבעות) כדי להתחיל/לעצור הקלטה או לצלם. אפשר לקבוע שהתנועה רק מתחילה הקלטה, כדי לא לעצור בטעות. עובד גם במצלמת רשת, בשידור חי ובפלט למסך חיצוני.' });
 node('cc_settings', { en: 'Settings', he: 'הגדרות מערכת', icon: 'gear', type: 'page', d: 'תפריט ההגדרות הכללי (אייקון 4 במרכז הבקרה).', kids: [] });
 node('cc_orient', { en: 'Orientation Lock', he: 'נעילת כיוון מסך', icon: 'orient', type: 'toggle', def: 'Off', d: 'נועלת את הממשק בכיוון הנוכחי (לרוחב או לאורך) כדי שלא יסתובב.' });
 node('cc_lock', { en: 'Screen Lock', he: 'נעילת מסך', icon: 'lock', type: 'toggle', def: 'Off', d: 'נועלת את מסך המגע מפני נגיעות בטעות (למשל בכיס או במים). משחררים בהחלקה למעלה מתחתית המסך.' });
@@ -1523,7 +1523,9 @@ function scrPick(key) {
 
 /* ---------- לוח תמונה ושמע (צילומים s50, s38) ---------- */
 const IA_TILES = {
-  img: () => S.pro ? ['ia_exp', 'ia_wb', 'ia_color', 'ia_aperture', 'ia_scenario', 'ia_imgadj', 'ia_film', 'ia_quality'] : ['ia_ev', 'ia_aperture', 'ia_color', 'ia_film', 'ia_scenario', 'ia_quality'],
+  // לפי ה-FAQ של DJI: עדיפות לאיכות רק בווידאו; הדגשת מיקוד בלוח הזה, רק בווידאו (עם עדשת מאקרו)
+  img: () => (S.pro ? ['ia_exp', 'ia_wb', 'ia_color', 'ia_aperture', 'ia_scenario', 'ia_imgadj', 'ia_film', 'ia_quality', 'ia_peak'] : ['ia_ev', 'ia_aperture', 'ia_color', 'ia_film', 'ia_scenario', 'ia_quality', 'ia_peak'])
+    .filter(k => isVid() || !['ia_quality', 'ia_peak'].includes(k)),
   aud: () => ['ia_channel', 'ia_wind'],
 };
 const IA_LABEL = { ia_exp: ['Exposure', 'חשיפה'], ia_imgadj: ['Image Adjustment', 'התאמות תמונה'], ia_wind: ['Wind Noise Reduction', 'הפחתת רעשי רוח'], ia_scenario: ['Stabilization Scenario', 'תרחיש ייצוב'] };
@@ -1537,7 +1539,7 @@ function iaValue(k) {
 }
 function scrImg() {
   const tab = S.iaTab || 'img', tiles = IA_TILES[tab]().filter(k => N[k] || IA_LABEL[k]);
-  const t = k => { const [en, he] = IA_LABEL[k] || [N[k].en, N[k].he], off = k === 'ia_quality' && (resOf() === '8K' || dlogOn());
+  const t = k => { const [en, he] = IA_LABEL[k] || [N[k].en, N[k].he], off = (k === 'ia_quality' && (resOf() === '8K' || dlogOn())) || (k === 'ia_peak' && (parseInt(val('p_fps')) || 30) > 30);
     return `<button class="iat" ${off ? 'disabled' : ''} data-ia="${k}" data-sel="${N[k] ? k : 'imgaudio'}"><span class="iat-l">${lb2(en, he)}</span><span class="iat-v num">${iaValue(k)}</span></button>`; };
   return `<div class="imgp">
     <div class="imgp-top"><button class="iat-tab ${tab === 'img' ? 'on' : ''}" data-iatab="img" aria-label="תמונה">${ic('aperture')}</button><button class="iat-tab ${tab === 'aud' ? 'on' : ''}" data-iatab="aud" aria-label="שמע">${ic('mic')}</button>
@@ -2089,6 +2091,7 @@ function showOnCamera(id, ctx) {
     else if (N[id].o && N[id].type === 'list') { S.stack.push([S.screen, S.arg]); S.screen = 'opts'; S.arg = id; }
   } else if (chain[0] === 'imgaudio') {
     S.stack = [['live']]; S.screen = 'imgaudio'; S.iaTab = ['ia_channel', 'ia_wind'].includes(id) ? 'aud' : 'img';
+    if (['ia_peak', 'ia_quality'].includes(id) && !isVid()) { S.mode = 'm_video'; S.custom = 0; } // אריחים של וידאו בלבד
     if (N[id].pro) { S.pro = true; S.vals.ia_pro = 'On'; }
     if (N[id].o && !IA_TILES[S.iaTab]().includes(id)) { S.stack.push(['imgaudio']); S.screen = 'opts'; S.arg = id; }
     if (chain.includes('ia_aperture')) { S.stack.push(['imgaudio']); S.screen = 'aperture'; }

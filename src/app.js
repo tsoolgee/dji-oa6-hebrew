@@ -295,7 +295,9 @@ function scrPick(key) {
 
 /* ---------- לוח תמונה ושמע (צילומים s50, s38) ---------- */
 const IA_TILES = {
-  img: () => S.pro ? ['ia_exp', 'ia_wb', 'ia_color', 'ia_aperture', 'ia_scenario', 'ia_imgadj', 'ia_film', 'ia_quality'] : ['ia_ev', 'ia_aperture', 'ia_color', 'ia_film', 'ia_scenario', 'ia_quality'],
+  // לפי ה-FAQ של DJI: עדיפות לאיכות רק בווידאו; הדגשת מיקוד בלוח הזה, רק בווידאו (עם עדשת מאקרו)
+  img: () => (S.pro ? ['ia_exp', 'ia_wb', 'ia_color', 'ia_aperture', 'ia_scenario', 'ia_imgadj', 'ia_film', 'ia_quality', 'ia_peak'] : ['ia_ev', 'ia_aperture', 'ia_color', 'ia_film', 'ia_scenario', 'ia_quality', 'ia_peak'])
+    .filter(k => isVid() || !['ia_quality', 'ia_peak'].includes(k)),
   aud: () => ['ia_channel', 'ia_wind'],
 };
 const IA_LABEL = { ia_exp: ['Exposure', 'חשיפה'], ia_imgadj: ['Image Adjustment', 'התאמות תמונה'], ia_wind: ['Wind Noise Reduction', 'הפחתת רעשי רוח'], ia_scenario: ['Stabilization Scenario', 'תרחיש ייצוב'] };
@@ -309,7 +311,7 @@ function iaValue(k) {
 }
 function scrImg() {
   const tab = S.iaTab || 'img', tiles = IA_TILES[tab]().filter(k => N[k] || IA_LABEL[k]);
-  const t = k => { const [en, he] = IA_LABEL[k] || [N[k].en, N[k].he], off = k === 'ia_quality' && (resOf() === '8K' || dlogOn());
+  const t = k => { const [en, he] = IA_LABEL[k] || [N[k].en, N[k].he], off = (k === 'ia_quality' && (resOf() === '8K' || dlogOn())) || (k === 'ia_peak' && (parseInt(val('p_fps')) || 30) > 30);
     return `<button class="iat" ${off ? 'disabled' : ''} data-ia="${k}" data-sel="${N[k] ? k : 'imgaudio'}"><span class="iat-l">${lb2(en, he)}</span><span class="iat-v num">${iaValue(k)}</span></button>`; };
   return `<div class="imgp">
     <div class="imgp-top"><button class="iat-tab ${tab === 'img' ? 'on' : ''}" data-iatab="img" aria-label="תמונה">${ic('aperture')}</button><button class="iat-tab ${tab === 'aud' ? 'on' : ''}" data-iatab="aud" aria-label="שמע">${ic('mic')}</button>
@@ -861,6 +863,7 @@ function showOnCamera(id, ctx) {
     else if (N[id].o && N[id].type === 'list') { S.stack.push([S.screen, S.arg]); S.screen = 'opts'; S.arg = id; }
   } else if (chain[0] === 'imgaudio') {
     S.stack = [['live']]; S.screen = 'imgaudio'; S.iaTab = ['ia_channel', 'ia_wind'].includes(id) ? 'aud' : 'img';
+    if (['ia_peak', 'ia_quality'].includes(id) && !isVid()) { S.mode = 'm_video'; S.custom = 0; } // אריחים של וידאו בלבד
     if (N[id].pro) { S.pro = true; S.vals.ia_pro = 'On'; }
     if (N[id].o && !IA_TILES[S.iaTab]().includes(id)) { S.stack.push(['imgaudio']); S.screen = 'opts'; S.arg = id; }
     if (chain.includes('ia_aperture')) { S.stack.push(['imgaudio']); S.screen = 'aperture'; }
